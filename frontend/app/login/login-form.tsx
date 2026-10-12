@@ -1,13 +1,22 @@
 'use client';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/browser';
-import styles from './login.module.css';
 
 function FieldError({ text }: { text: string }) {
   return (
-    <span style={{ color: '#f87171', fontSize: '0.8rem', marginTop: '0.4rem', display: 'block' }}>
+    <span
+      style={{
+        color: 'var(--color-error)',
+        fontSize: '0.8rem',
+        marginTop: '0.4rem',
+        display: 'block',
+      }}
+    >
       {text}
     </span>
   );
@@ -75,36 +84,50 @@ export default function LoginForm({ next }: { next: string }) {
 
   if (mode === 'forgot') {
     return (
-      <form className={styles.form} noValidate onSubmit={handleForgot}>
-        <div className={styles.field}>
-          <label className={styles.label} htmlFor="forgot-email">Email Address</label>
-          <input
+      <form className="max-w-[420px] flex flex-col gap-6" noValidate onSubmit={handleForgot}>
+        <div className="flex flex-col gap-2">
+          <Label
+            unstyled
+            className="font-condensed text-[0.75rem] tracking-label uppercase text-gold"
+            htmlFor="forgot-email"
+          >
+            Email Address
+          </Label>
+          <Input
+            unstyled
             id="forgot-email"
             name="email"
             type="email"
             placeholder="EMAIL ADDRESS"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className={styles.input}
+            className="bg-charcoal [border:1px_solid_var(--border)] text-cream py-4 px-5 font-condensed text-[0.95rem] tracking-[0.05em] w-full [transition:border-color_0.2s] placeholder:text-muted focus:[outline:none] focus:border-gold"
             required
           />
         </div>
 
-        <button type="submit" className="btn-gold" disabled={status === 'submitting'}>
+        <Button
+          variant="unstyled"
+          type="submit"
+          className="btn-gold"
+          disabled={status === 'submitting'}
+        >
           {status === 'submitting' ? 'Sending…' : 'Send Reset Link'}
-        </button>
+        </Button>
 
-        <button
+        <Button
+          variant="unstyled"
           type="button"
-          className={styles.forgot}
-          onClick={() => {
+          className="[align-self:flex-start] font-condensed text-[0.85rem] tracking-[0.05em] text-muted [background:none] [border:none] p-0 cursor-pointer [transition:color_0.2s] [&:hover]:text-gold"
+          onClick={(event) => {
+            event.preventDefault();
             setMode('login');
             setStatus('idle');
             setMessage('');
           }}
         >
           Back to login
-        </button>
+        </Button>
 
         {message && (
           <p
@@ -113,7 +136,7 @@ export default function LoginForm({ next }: { next: string }) {
             style={{
               fontSize: '0.9rem',
               lineHeight: 1.6,
-              color: status === 'error' ? '#f87171' : '#4ade80',
+              color: status === 'error' ? 'var(--color-error)' : 'var(--color-success)',
             }}
           >
             {message}
@@ -124,52 +147,73 @@ export default function LoginForm({ next }: { next: string }) {
   }
 
   return (
-    <form className={styles.form} noValidate onSubmit={handleLogin}>
-      <div className={styles.field}>
-        <label className={styles.label} htmlFor="email">Email Address</label>
-        <input
+    <form className="max-w-[420px] flex flex-col gap-6" noValidate onSubmit={handleLogin}>
+      <div className="flex flex-col gap-2">
+        <Label
+          unstyled
+          className="font-condensed text-[0.75rem] tracking-label uppercase text-gold"
+          htmlFor="email"
+        >
+          Email Address
+        </Label>
+        <Input
+          unstyled
           id="email"
           name="email"
           type="email"
           placeholder="EMAIL ADDRESS"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className={styles.input}
+          className="bg-charcoal [border:1px_solid_var(--border)] text-cream py-4 px-5 font-condensed text-[0.95rem] tracking-[0.05em] w-full [transition:border-color_0.2s] placeholder:text-muted focus:[outline:none] focus:border-gold"
           aria-invalid={status === 'error'}
           required
         />
       </div>
 
-      <div className={styles.field}>
-        <label className={styles.label} htmlFor="password">Password</label>
-        <input
+      <div className="flex flex-col gap-2">
+        <Label
+          unstyled
+          className="font-condensed text-[0.75rem] tracking-label uppercase text-gold"
+          htmlFor="password"
+        >
+          Password
+        </Label>
+        <Input
+          unstyled
           id="password"
           name="password"
           type="password"
           placeholder="PASSWORD"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className={styles.input}
+          className="bg-charcoal [border:1px_solid_var(--border)] text-cream py-4 px-5 font-condensed text-[0.95rem] tracking-[0.05em] w-full [transition:border-color_0.2s] placeholder:text-muted focus:[outline:none] focus:border-gold"
           aria-invalid={status === 'error'}
           required
         />
       </div>
 
-      <button type="submit" className="btn-gold" disabled={status === 'submitting'}>
+      <Button
+        variant="unstyled"
+        type="submit"
+        className="btn-gold"
+        disabled={status === 'submitting'}
+      >
         {status === 'submitting' ? 'Signing In…' : 'Sign In'}
-      </button>
+      </Button>
 
-      <button
+      <Button
+        variant="unstyled"
         type="button"
-        className={styles.forgot}
-        onClick={() => {
+        className="[align-self:flex-start] font-condensed text-[0.85rem] tracking-[0.05em] text-muted [background:none] [border:none] p-0 cursor-pointer [transition:color_0.2s] [&:hover]:text-gold"
+        onClick={(event) => {
+          event.preventDefault();
           setMode('forgot');
           setStatus('idle');
           setMessage('');
         }}
       >
         Forgot password?
-      </button>
+      </Button>
 
       {message && status === 'error' && <FieldError text={message} />}
     </form>

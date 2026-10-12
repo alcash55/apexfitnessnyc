@@ -42,5 +42,10 @@ export function formatDate(isoDate: string | null | undefined): string {
   if (!isoDate) return '—';
   const d = new Date(`${isoDate}T00:00:00Z`);
   if (Number.isNaN(d.getTime())) return isoDate;
-  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+  return d.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    timeZone: 'UTC',
+  });
 }

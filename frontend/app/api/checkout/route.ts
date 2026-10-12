@@ -71,7 +71,7 @@ export async function POST(request: NextRequest) {
     console.error('[checkout] session creation failed:', err);
     return NextResponse.json(
       { error: 'We could not start checkout. Please try again or contact us.' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

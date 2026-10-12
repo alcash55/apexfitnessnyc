@@ -29,10 +29,7 @@ export async function POST(request: NextRequest) {
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json(
-      { success: false, error: 'Invalid request body.' },
-      { status: 400 }
-    );
+    return NextResponse.json({ success: false, error: 'Invalid request body.' }, { status: 400 });
   }
 
   // Honeypot: real users never fill a hidden field. Bots usually do.
@@ -55,17 +52,19 @@ export async function POST(request: NextRequest) {
   if (Object.keys(fieldErrors).length > 0) {
     return NextResponse.json(
       { success: false, error: 'Please check the highlighted fields.', fieldErrors },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
   try {
-    const { error } = await getDb().from('contacts').insert({
-      first_name: firstName,
-      last_name: lastName,
-      phone: phone || null,
-      email,
-    });
+    const { error } = await getDb()
+      .from('contacts')
+      .insert({
+        first_name: firstName,
+        last_name: lastName,
+        phone: phone || null,
+        email,
+      });
 
     if (error) throw error;
 
@@ -88,7 +87,7 @@ export async function POST(request: NextRequest) {
         error:
           'Something went wrong on our end. Please email us directly and we will get right back to you.',
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

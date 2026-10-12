@@ -74,7 +74,14 @@ describe('GET /api/admin/expenses', () => {
     getSessionClaimsMock.mockResolvedValue(ADMIN_CLAIMS);
     verifyIsAdminMock.mockResolvedValue(true);
     const rows = [
-      { id: '1', expense_date: '2026-09-01', amount_cents: 5000, category: 'rent', description: null, created_at: '2026-09-01T00:00:00Z' },
+      {
+        id: '1',
+        expense_date: '2026-09-01',
+        amount_cents: 5000,
+        category: 'rent',
+        description: null,
+        created_at: '2026-09-01T00:00:00Z',
+      },
     ];
     orderFn.mockResolvedValue({ data: rows, error: null });
 
@@ -91,7 +98,10 @@ describe('GET /api/admin/expenses', () => {
   it('returns a generic 500 and never leaks the db error when the list query fails', async () => {
     getSessionClaimsMock.mockResolvedValue(ADMIN_CLAIMS);
     verifyIsAdminMock.mockResolvedValue(true);
-    orderFn.mockResolvedValue({ data: null, error: { message: 'connection refused: internal-host:5432' } });
+    orderFn.mockResolvedValue({
+      data: null,
+      error: { message: 'connection refused: internal-host:5432' },
+    });
 
     const res = await GET();
     const data = await res.json();
@@ -192,7 +202,7 @@ describe('POST /api/admin/expenses', () => {
         amount_cents: 5000,
         category: 'rent',
         description: 'Monthly rent',
-      })
+      }),
     );
     const data = await res.json();
 
@@ -211,7 +221,10 @@ describe('POST /api/admin/expenses', () => {
   it('returns a generic 500 and never leaks the db error when insert fails', async () => {
     getSessionClaimsMock.mockResolvedValue(ADMIN_CLAIMS);
     verifyIsAdminMock.mockResolvedValue(true);
-    singleFn.mockResolvedValue({ data: null, error: { message: 'connection refused: internal-host:5432' } });
+    singleFn.mockResolvedValue({
+      data: null,
+      error: { message: 'connection refused: internal-host:5432' },
+    });
 
     const res = await POST(makeRequest({ expense_date: '2026-09-01', amount_cents: 5000 }));
     const data = await res.json();

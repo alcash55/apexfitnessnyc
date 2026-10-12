@@ -22,7 +22,7 @@ export async function GET() {
     let query = getDb()
       .from('clients')
       .select(
-        'id,first_name,last_name,email,auth_user_id,offerings:current_offering_id(name),nutrition_plans:current_nutrition_plan_id(name)'
+        'id,first_name,last_name,email,auth_user_id,offerings:current_offering_id(name),nutrition_plans:current_nutrition_plan_id(name)',
       );
 
     query = query.order('last_name', { ascending: true });
@@ -35,7 +35,7 @@ export async function GET() {
     console.error('[admin/clients] list failed:', err);
     return NextResponse.json(
       { error: 'Something went wrong on our end. Please try again shortly.' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

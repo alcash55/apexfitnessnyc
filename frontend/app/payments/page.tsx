@@ -1,15 +1,26 @@
+import { pageMetadata } from '@/lib/metadata';
+import {
+  Table,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+} from '@/components/ui/table';
 import Link from 'next/link';
 import { getSessionClaims } from '@/lib/auth';
 import { getDb } from '@/lib/supabaseAdmin';
 import { PLANS, formatDollars } from '@/lib/plans';
 import PayButton from './pay-button';
 
-export const dynamic = 'force-dynamic';
+export const metadata = pageMetadata({
+  title: 'Payments | ApexFitnessNYC',
+  description: 'Manage your APEX program payments and review your payment history.',
+  path: '/payments',
+  privatePage: true,
+});
 
-export const metadata = {
-  title: 'Payments | APEX',
-  robots: { index: false, follow: false },
-};
+export const dynamic = 'force-dynamic';
 
 type PaymentRow = {
   id: string;
@@ -19,7 +30,7 @@ type PaymentRow = {
 };
 
 const labelStyle: React.CSSProperties = {
-  fontFamily: "'Barlow Condensed', sans-serif",
+  fontFamily: 'var(--font-condensed)',
   letterSpacing: '0.1em',
   textTransform: 'uppercase',
   color: 'var(--gold)',
@@ -49,7 +60,11 @@ export default async function PaymentsPage({
           <div className="section-label">Payments</div>
           <h2 className="section-h2">Sign In Required</h2>
           <p className="section-sub">You need to be signed in to view this page.</p>
-          <Link href="/login" className="btn-gold" style={{ marginTop: '2rem', display: 'inline-block' }}>
+          <Link
+            href="/login"
+            className="btn-gold"
+            style={{ marginTop: '2rem', display: 'inline-block' }}
+          >
             Sign In
           </Link>
         </div>
@@ -64,10 +79,14 @@ export default async function PaymentsPage({
           <div className="section-label">Payments</div>
           <h2 className="section-h2">No Client Profile Linked</h2>
           <p className="section-sub">
-            This account isn&apos;t linked to a client profile, so there&apos;s nothing to bill here.
-            If that&apos;s unexpected, get in touch and we&apos;ll sort it out.
+            This account isn&apos;t linked to a client profile, so there&apos;s nothing to bill
+            here. If that&apos;s unexpected, get in touch and we&apos;ll sort it out.
           </p>
-          <Link href="/contact" className="btn-gold" style={{ marginTop: '2rem', display: 'inline-block' }}>
+          <Link
+            href="/contact"
+            className="btn-gold"
+            style={{ marginTop: '2rem', display: 'inline-block' }}
+          >
             Contact Us
           </Link>
         </div>
@@ -93,8 +112,8 @@ export default async function PaymentsPage({
   const offeringName =
     (client?.offerings as { name?: string } | { name?: string }[] | null | undefined) instanceof
     Array
-      ? (client?.offerings as { name?: string }[])[0]?.name ?? null
-      : (client?.offerings as { name?: string } | null)?.name ?? null;
+      ? ((client?.offerings as { name?: string }[])[0]?.name ?? null)
+      : ((client?.offerings as { name?: string } | null)?.name ?? null);
 
   const paymentRows = (payments ?? []) as PaymentRow[];
 
@@ -102,8 +121,12 @@ export default async function PaymentsPage({
     <div className="section" style={{ minHeight: 'calc(100vh - 72px)' }}>
       <div className="section-inner">
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <div className="section-label" style={{ justifyContent: 'center' }}>Payments</div>
-          <h2 className="section-h2" style={{ margin: '0.5rem 0' }}>Your Account</h2>
+          <div className="section-label" style={{ justifyContent: 'center' }}>
+            Payments
+          </div>
+          <h2 className="section-h2" style={{ margin: '0.5rem 0' }}>
+            Your Account
+          </h2>
           <p className="section-sub" style={{ margin: '0 auto', maxWidth: 600 }}>
             Current program, one-time payments, and your full payment history.
           </p>
@@ -112,7 +135,12 @@ export default async function PaymentsPage({
         {paid === '1' && (
           <p
             role="status"
-            style={{ textAlign: 'center', marginBottom: '2rem', color: '#4ade80', fontSize: '0.9rem' }}
+            style={{
+              textAlign: 'center',
+              marginBottom: '2rem',
+              color: 'var(--color-success)',
+              fontSize: '0.9rem',
+            }}
           >
             Payment received. Thank you — a receipt is on its way to your email.
           </p>
@@ -120,7 +148,12 @@ export default async function PaymentsPage({
         {checkout === 'cancelled' && (
           <p
             role="status"
-            style={{ textAlign: 'center', marginBottom: '2rem', color: 'var(--muted)', fontSize: '0.9rem' }}
+            style={{
+              textAlign: 'center',
+              marginBottom: '2rem',
+              color: 'var(--muted)',
+              fontSize: '0.9rem',
+            }}
           >
             Checkout cancelled. Nothing was charged.
           </p>
@@ -129,8 +162,10 @@ export default async function PaymentsPage({
         {/* Current program */}
         <div
           style={{
-            background: 'var(--charcoal)', border: '1px solid var(--border)',
-            padding: '2rem 2.5rem', marginBottom: '3rem',
+            background: 'var(--charcoal)',
+            border: '1px solid var(--border)',
+            padding: '2rem 2.5rem',
+            marginBottom: '3rem',
           }}
         >
           <h3 style={{ ...labelStyle, marginBottom: '0.75rem' }}>Current Program</h3>
@@ -143,15 +178,19 @@ export default async function PaymentsPage({
         <div style={{ marginBottom: '4rem' }}>
           <h3
             style={{
-              fontFamily: "'Bebas Neue', sans-serif", fontSize: '1.8rem', color: 'var(--cream)',
-              marginBottom: '1.5rem', letterSpacing: '0.03em',
+              fontFamily: 'var(--font-display)',
+              fontSize: '1.8rem',
+              color: 'var(--cream)',
+              marginBottom: '1.5rem',
+              letterSpacing: '0.03em',
             }}
           >
             Make a Payment
           </h3>
           <div
             style={{
-              display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
               gap: '1.5rem',
             }}
           >
@@ -161,13 +200,17 @@ export default async function PaymentsPage({
                 style={{
                   background: 'var(--charcoal)',
                   border: plan.highlight ? '2px solid var(--gold)' : '1px solid var(--border)',
-                  padding: '2rem', display: 'flex', flexDirection: 'column',
+                  padding: '2rem',
+                  display: 'flex',
+                  flexDirection: 'column',
                 }}
               >
                 <h4
                   style={{
-                    fontFamily: "'Bebas Neue', sans-serif", fontSize: '1.6rem',
-                    color: plan.highlight ? 'var(--gold)' : 'var(--cream)', marginBottom: '0.5rem',
+                    fontFamily: 'var(--font-display)',
+                    fontSize: '1.6rem',
+                    color: plan.highlight ? 'var(--gold)' : 'var(--cream)',
+                    marginBottom: '0.5rem',
                   }}
                 >
                   {plan.name}
@@ -175,7 +218,15 @@ export default async function PaymentsPage({
                 <p style={{ color: 'var(--cream)', fontSize: '1.5rem', marginBottom: '1rem' }}>
                   ${formatDollars(plan.amount)}
                 </p>
-                <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '1.5rem', flex: 1 }}>
+                <p
+                  style={{
+                    color: 'var(--muted)',
+                    fontSize: '0.85rem',
+                    lineHeight: 1.6,
+                    marginBottom: '1.5rem',
+                    flex: 1,
+                  }}
+                >
                   {plan.desc}
                 </p>
                 <PayButton planId={plan.id} highlight={plan.highlight} />
@@ -188,8 +239,11 @@ export default async function PaymentsPage({
         <div>
           <h3
             style={{
-              fontFamily: "'Bebas Neue', sans-serif", fontSize: '1.8rem', color: 'var(--cream)',
-              marginBottom: '1.5rem', letterSpacing: '0.03em',
+              fontFamily: 'var(--font-display)',
+              fontSize: '1.8rem',
+              color: 'var(--cream)',
+              marginBottom: '1.5rem',
+              letterSpacing: '0.03em',
             }}
           >
             Payment History
@@ -199,30 +253,58 @@ export default async function PaymentsPage({
             <p style={{ color: 'var(--muted)', fontSize: '0.9rem' }}>No payments on file yet.</p>
           ) : (
             <div style={{ border: '1px solid var(--border)', overflowX: 'auto' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                <thead>
-                  <tr style={{ borderBottom: '1px solid var(--border)' }}>
-                    <th style={{ textAlign: 'left', padding: '1rem', ...labelStyle }}>Date</th>
-                    <th style={{ textAlign: 'left', padding: '1rem', ...labelStyle }}>Amount</th>
-                    <th style={{ textAlign: 'left', padding: '1rem', ...labelStyle }}>Note</th>
-                  </tr>
-                </thead>
-                <tbody>
+              <Table unstyled style={{ width: '100%', borderCollapse: 'collapse' }}>
+                <TableHeader unstyled>
+                  <TableRow unstyled style={{ borderBottom: '1px solid var(--border)' }}>
+                    <TableHead
+                      unstyled
+                      style={{ textAlign: 'left', padding: '1rem', ...labelStyle }}
+                    >
+                      Date
+                    </TableHead>
+                    <TableHead
+                      unstyled
+                      style={{ textAlign: 'left', padding: '1rem', ...labelStyle }}
+                    >
+                      Amount
+                    </TableHead>
+                    <TableHead
+                      unstyled
+                      style={{ textAlign: 'left', padding: '1rem', ...labelStyle }}
+                    >
+                      Note
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody unstyled>
                   {paymentRows.map((row) => (
-                    <tr key={row.id} style={{ borderBottom: '1px solid var(--border)' }}>
-                      <td style={{ padding: '1rem', color: 'var(--cream)', fontSize: '0.9rem' }}>
+                    <TableRow
+                      unstyled
+                      key={row.id}
+                      style={{ borderBottom: '1px solid var(--border)' }}
+                    >
+                      <TableCell
+                        unstyled
+                        style={{ padding: '1rem', color: 'var(--cream)', fontSize: '0.9rem' }}
+                      >
                         {row.payment_date}
-                      </td>
-                      <td style={{ padding: '1rem', color: 'var(--cream)', fontSize: '0.9rem' }}>
+                      </TableCell>
+                      <TableCell
+                        unstyled
+                        style={{ padding: '1rem', color: 'var(--cream)', fontSize: '0.9rem' }}
+                      >
                         ${formatDollars(row.amount_cents)}
-                      </td>
-                      <td style={{ padding: '1rem', color: 'var(--muted)', fontSize: '0.9rem' }}>
+                      </TableCell>
+                      <TableCell
+                        unstyled
+                        style={{ padding: '1rem', color: 'var(--muted)', fontSize: '0.9rem' }}
+                      >
                         {row.note ?? '—'}
-                      </td>
-                    </tr>
+                      </TableCell>
+                    </TableRow>
                   ))}
-                </tbody>
-              </table>
+                </TableBody>
+              </Table>
             </div>
           )}
         </div>

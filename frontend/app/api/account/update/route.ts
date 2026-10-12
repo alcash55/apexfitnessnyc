@@ -30,8 +30,8 @@ export async function POST(request: NextRequest) {
 
   if (!claims.client_id) {
     return NextResponse.json(
-      { success: false, error: 'Your login isn\'t linked to a client profile yet.' },
-      { status: 409 }
+      { success: false, error: "Your login isn't linked to a client profile yet." },
+      { status: 409 },
     );
   }
 
@@ -40,10 +40,7 @@ export async function POST(request: NextRequest) {
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json(
-      { success: false, error: 'Invalid request body.' },
-      { status: 400 }
-    );
+    return NextResponse.json({ success: false, error: 'Invalid request body.' }, { status: 400 });
   }
 
   const firstName = clean(body.firstName, 100);
@@ -58,7 +55,7 @@ export async function POST(request: NextRequest) {
   if (Object.keys(fieldErrors).length > 0) {
     return NextResponse.json(
       { success: false, error: 'Please check the highlighted fields.', fieldErrors },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -83,7 +80,7 @@ export async function POST(request: NextRequest) {
         success: false,
         error: 'Something went wrong on our end. Please try again shortly.',
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

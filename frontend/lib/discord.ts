@@ -18,7 +18,7 @@ export async function notifyDiscord(lead: ContactLead): Promise<void> {
   const webhookUrl = process.env.DISCORD_CONTACT_WEBHOOK_URL;
   if (!webhookUrl) {
     throw new Error(
-      'DISCORD_CONTACT_WEBHOOK_URL is not set. Add it in Vercel → Settings → Environment Variables.'
+      'DISCORD_CONTACT_WEBHOOK_URL is not set. Add it in Vercel → Settings → Environment Variables.',
     );
   }
 

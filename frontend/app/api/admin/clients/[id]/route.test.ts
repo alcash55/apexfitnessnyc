@@ -5,7 +5,7 @@ const maybeSingleMock = vi.fn();
 const selectAfterUpdateMock = vi.fn(() => ({ maybeSingle: maybeSingleMock }));
 const eqMock = vi.fn(() => ({ maybeSingle: maybeSingleMock, select: selectAfterUpdateMock }));
 const selectMock = vi.fn(() => ({ eq: eqMock }));
-const updateMock = vi.fn(() => ({ eq: eqMock }));
+const updateMock = vi.fn((_data: unknown) => ({ eq: eqMock }));
 const fromMock = vi.fn(() => ({ select: selectMock, update: updateMock }));
 
 vi.mock('@/lib/supabaseAdmin', () => ({
@@ -53,7 +53,11 @@ describe('/api/admin/clients/[id]', () => {
     });
 
     it('returns 404 when not an admin, without touching the db', async () => {
-      vi.mocked(getSessionClaims).mockResolvedValue({ sub: 'u1', is_admin: false, client_id: null });
+      vi.mocked(getSessionClaims).mockResolvedValue({
+        sub: 'u1',
+        is_admin: false,
+        client_id: null,
+      });
       vi.mocked(verifyIsAdmin).mockResolvedValue(false);
 
       const res = await GET(makeRequest(), { params: Promise.resolve({ id: 'c1' }) });
@@ -105,7 +109,11 @@ describe('/api/admin/clients/[id]', () => {
     });
 
     it('returns 404 when not an admin, without touching the db', async () => {
-      vi.mocked(getSessionClaims).mockResolvedValue({ sub: 'u1', is_admin: false, client_id: null });
+      vi.mocked(getSessionClaims).mockResolvedValue({
+        sub: 'u1',
+        is_admin: false,
+        client_id: null,
+      });
       vi.mocked(verifyIsAdmin).mockResolvedValue(false);
 
       const res = await PATCH(makeRequest(validBody), ctx);
@@ -117,7 +125,10 @@ describe('/api/admin/clients/[id]', () => {
       vi.mocked(getSessionClaims).mockResolvedValue({ sub: 'a1', is_admin: true, client_id: null });
       vi.mocked(verifyIsAdmin).mockResolvedValue(true);
 
-      const res = await PATCH(makeRequest({ first_name: '', last_name: '', email: 'ada@example.com' }), ctx);
+      const res = await PATCH(
+        makeRequest({ first_name: '', last_name: '', email: 'ada@example.com' }),
+        ctx,
+      );
       const data = await res.json();
 
       expect(res.status).toBe(400);

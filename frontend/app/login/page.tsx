@@ -1,13 +1,16 @@
+import { pageMetadata } from '@/lib/metadata';
 import { redirect } from 'next/navigation';
 import { getSessionClaims } from '@/lib/auth';
 import LoginForm from './login-form';
 
-export const dynamic = 'force-dynamic';
+export const metadata = pageMetadata({
+  title: 'Login | ApexFitnessNYC',
+  description: 'Sign in to your APEX account or request a password reset.',
+  path: '/login',
+  privatePage: true,
+});
 
-export const metadata = {
-  title: 'Login | APEX',
-  robots: { index: false, follow: false },
-};
+export const dynamic = 'force-dynamic';
 
 /**
  * Server component: decides whether to even show the form. There is

@@ -1,9 +1,26 @@
+import { pageMetadata } from '@/lib/metadata';
+import {
+  Table,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+} from '@/components/ui/table';
+import { ArrowRight } from 'lucide-react';
 import type { CSSProperties } from 'react';
 import Link from 'next/link';
 import { getSessionClaims } from '@/lib/auth';
 import { getDb } from '@/lib/supabaseAdmin';
 import { formatDollars } from '@/lib/plans';
 import { formatDate, formatJsonbEntries } from './format';
+
+export const metadata = pageMetadata({
+  title: 'Dashboard | ApexFitnessNYC',
+  description: 'View your APEX training program, nutrition plan, and progress.',
+  path: '/dashboard',
+  privatePage: true,
+});
 
 type ClientRow = {
   first_name: string;
@@ -75,7 +92,11 @@ export default async function DashboardPage() {
 
   const [offeringResult, nutritionPlanResult, metricsResult, paymentsResult] = await Promise.all([
     client.current_offering_id
-      ? db.from('offerings').select('name').eq('id', client.current_offering_id).maybeSingle<{ name: string }>()
+      ? db
+          .from('offerings')
+          .select('name')
+          .eq('id', client.current_offering_id)
+          .maybeSingle<{ name: string }>()
       : Promise.resolve({ data: null }),
     client.current_nutrition_plan_id
       ? db
@@ -86,7 +107,9 @@ export default async function DashboardPage() {
       : Promise.resolve({ data: null }),
     db
       .from('health_metrics')
-      .select('id, recorded_date, weight, body_fat_percent, testosterone_level, blood_oxygenation, macros, endurance, dietary_restrictions, one_rep_max')
+      .select(
+        'id, recorded_date, weight, body_fat_percent, testosterone_level, blood_oxygenation, macros, endurance, dietary_restrictions, one_rep_max',
+      )
       .eq('client_id', claims.client_id)
       .order('recorded_date', { ascending: false })
       .limit(8)
@@ -127,7 +150,9 @@ export default async function DashboardPage() {
             {/* Same rule as lib/libraryAccess.ts: an active program unlocks the library. */}
             {client.current_offering_id && (
               <div style={{ marginTop: '1.5rem' }}>
-                <Link href="/library" className="btn-gold">Open Exercise Library</Link>
+                <Link href="/library" className="btn-gold">
+                  Open Exercise Library
+                </Link>
               </div>
             )}
           </div>
@@ -170,26 +195,50 @@ export default async function DashboardPage() {
             </div>
           ) : (
             <div style={{ ...cardStyle, padding: 0, overflowX: 'auto' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: "'Barlow Condensed', sans-serif" }}>
-                <thead>
-                  <tr>
-                    <th style={thStyle}>Date</th>
-                    <th style={thStyle}>Amount</th>
-                    <th style={thStyle}>Note</th>
-                  </tr>
-                </thead>
-                <tbody>
+              <Table
+                unstyled
+                style={{
+                  width: '100%',
+                  borderCollapse: 'collapse',
+                  fontFamily: 'var(--font-condensed)',
+                }}
+              >
+                <TableHeader unstyled>
+                  <TableRow unstyled>
+                    <TableHead unstyled style={thStyle}>
+                      Date
+                    </TableHead>
+                    <TableHead unstyled style={thStyle}>
+                      Amount
+                    </TableHead>
+                    <TableHead unstyled style={thStyle}>
+                      Note
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody unstyled>
                   {payments.map((p) => (
-                    <tr key={p.id} style={{ borderBottom: '1px solid var(--border)' }}>
-                      <td style={tdStyle}>{formatDate(p.payment_date)}</td>
-                      <td style={{ ...tdStyle, color: 'var(--gold)', fontWeight: 700 }}>
+                    <TableRow
+                      unstyled
+                      key={p.id}
+                      style={{ borderBottom: '1px solid var(--border)' }}
+                    >
+                      <TableCell unstyled style={tdStyle}>
+                        {formatDate(p.payment_date)}
+                      </TableCell>
+                      <TableCell
+                        unstyled
+                        style={{ ...tdStyle, color: 'var(--gold)', fontWeight: 700 }}
+                      >
                         ${formatDollars(p.amount_cents)}
-                      </td>
-                      <td style={tdStyle}>{p.note ?? '—'}</td>
-                    </tr>
+                      </TableCell>
+                      <TableCell unstyled style={tdStyle}>
+                        {p.note ?? '—'}
+                      </TableCell>
+                    </TableRow>
                   ))}
-                </tbody>
-              </table>
+                </TableBody>
+              </Table>
             </div>
           )}
         </section>
@@ -204,7 +253,7 @@ function SectionHeading({ label, title }: { label: string; title: string }) {
       <div className="section-label">{label}</div>
       <h3
         style={{
-          fontFamily: "'Bebas Neue', sans-serif",
+          fontFamily: 'var(--font-display)',
           fontSize: '1.75rem',
           color: 'var(--cream)',
           letterSpacing: '0.03em',
@@ -236,16 +285,38 @@ function HealthMetricCard({ metric }: { metric: HealthMetricRow }) {
 
   return (
     <div style={cardStyle}>
-      <p style={{ color: 'var(--gold)', fontSize: '0.85rem', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '1rem' }}>
+      <p
+        style={{
+          color: 'var(--gold)',
+          fontSize: '0.85rem',
+          letterSpacing: '0.1em',
+          textTransform: 'uppercase',
+          marginBottom: '1rem',
+        }}
+      >
         {formatDate(metric.recorded_date)}
       </p>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem', marginBottom: metric.dietary_restrictions ? '1rem' : 0 }}>
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '2rem',
+          marginBottom: metric.dietary_restrictions ? '1rem' : 0,
+        }}
+      >
         {plainFields
           .filter(([, value]) => value !== null && value !== undefined)
           .map(([label, value]) => (
             <div key={label}>
-              <div style={{ color: 'var(--muted)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+              <div
+                style={{
+                  color: 'var(--muted)',
+                  fontSize: '0.75rem',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.08em',
+                }}
+              >
                 {label}
               </div>
               <div style={{ color: 'var(--cream)', fontSize: '1.1rem' }}>{value}</div>
@@ -264,11 +335,24 @@ function HealthMetricCard({ metric }: { metric: HealthMetricRow }) {
         if (entries.length === 0) return null;
 
         return (
-          <div key={label} style={{ marginTop: '1rem', borderTop: '1px solid var(--border)', paddingTop: '1rem' }}>
-            <div style={{ color: 'var(--muted)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.5rem' }}>
+          <div
+            key={label}
+            style={{ marginTop: '1rem', borderTop: '1px solid var(--border)', paddingTop: '1rem' }}
+          >
+            <div
+              style={{
+                color: 'var(--muted)',
+                fontSize: '0.75rem',
+                textTransform: 'uppercase',
+                letterSpacing: '0.08em',
+                marginBottom: '0.5rem',
+              }}
+            >
               {label}
             </div>
-            <ul style={{ listStyle: 'none', display: 'flex', flexWrap: 'wrap', gap: '0.5rem 1.5rem' }}>
+            <ul
+              style={{ listStyle: 'none', display: 'flex', flexWrap: 'wrap', gap: '0.5rem 1.5rem' }}
+            >
               {entries.map((e) => (
                 <li key={e.label} style={{ color: 'var(--cream)', fontSize: '0.9rem' }}>
                   <span style={{ color: 'var(--muted)' }}>{e.label}:</span> {e.value}
@@ -287,11 +371,14 @@ function UnlinkedNotice({ message }: { message: string }) {
     <div className="section" style={{ minHeight: 'calc(100vh - 72px)' }}>
       <div className="section-inner" style={{ maxWidth: 700 }}>
         <div className="section-label">Members</div>
-        <h2 id="dashboard" className="section-h2">Member Portal</h2>
+        <h2 id="dashboard" className="section-h2">
+          Member Portal
+        </h2>
         <p className="section-sub">{message}</p>
         <div style={{ marginTop: '2rem' }}>
           <Link className="btn-gold" href="/contact">
-            Contact Us →
+            Contact Us{' '}
+            <ArrowRight size={16} className="inline-block align-middle" aria-hidden="true" />
           </Link>
         </div>
       </div>

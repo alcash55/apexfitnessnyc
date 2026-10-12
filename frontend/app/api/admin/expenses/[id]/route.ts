@@ -16,7 +16,7 @@ export const dynamic = 'force-dynamic';
  */
 export async function DELETE(
   _request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const claims = await getSessionClaims();
 
@@ -45,7 +45,7 @@ export async function DELETE(
     console.error('[admin/expenses/:id] delete failed:', err);
     return NextResponse.json(
       { success: false, error: 'Something went wrong on our end. Please try again shortly.' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -13,10 +13,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  * resulting auth identity to this client's row (auth_user_id + email are
  * only ever written together here, so they can never drift apart).
  */
-export async function POST(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
+export async function POST(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const claims = await getSessionClaims();
 
   if (!claims || !(await verifyIsAdmin(claims.sub))) {
@@ -46,7 +43,7 @@ export async function POST(
       console.error('[admin/clients/invite] inviteUserByEmail failed:', error);
       return NextResponse.json(
         { error: 'Could not send invite. The email may already be in use.' },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -62,7 +59,7 @@ export async function POST(
     console.error('[admin/clients/invite] failed:', err);
     return NextResponse.json(
       { error: 'Something went wrong on our end. Please try again shortly.' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

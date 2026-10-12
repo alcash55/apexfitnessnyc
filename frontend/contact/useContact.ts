@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 type Form = {
   firstName: string;
@@ -9,20 +9,21 @@ type Form = {
 
 const useContact = () => {
   // Use process.env.NEXT_PUBLIC_BASE_URL if you are using Next.js App Router ('use client')
-  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || process.env.REACT_APP_BASE_URL || 'http://localhost:8081';
+  const BASE_URL =
+    process.env.NEXT_PUBLIC_BASE_URL || process.env.REACT_APP_BASE_URL || 'http://localhost:8081';
 
   // Keep only one single source of truth for your state
   const [form, setForm] = useState<Form>({
     firstName: '',
     lastName: '',
     phone: '',
-    email: ''
+    email: '',
   });
 
   const validate = (): boolean => {
     // Basic validation check: ensure required fields are not empty strings
     if (!form.firstName || !form.lastName || !form.email) {
-      console.error("Missing required fields");
+      console.error('Missing required fields');
       return false; // Validation failed
     }
     return true; // Validation passed
@@ -37,26 +38,26 @@ const useContact = () => {
     }
 
     try {
-      console.log("Sending message:", form);
+      console.log('Sending message:', form);
 
       const response = await fetch(`${BASE_URL}/api/v1/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(form)
+        body: JSON.stringify(form),
       });
 
       if (response.ok) {
-        console.log("Message successfully sent");
+        console.log('Message successfully sent');
         // Reset form state here after successful submit
         setForm({ firstName: '', lastName: '', phone: '', email: '' });
         return;
       }
 
-      console.error("Server responded with an error:", response.status);
+      console.error('Server responded with an error:', response.status);
     } catch (e) {
-      console.error("Network error during submission:", e);
+      console.error('Network error during submission:', e);
     }
   };
 
@@ -64,7 +65,7 @@ const useContact = () => {
   return {
     form,
     setForm,
-    submit
+    submit,
   };
 };
 

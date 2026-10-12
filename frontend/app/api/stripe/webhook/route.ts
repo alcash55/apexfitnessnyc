@@ -58,15 +58,14 @@ export async function POST(request: NextRequest) {
               requires_booking: session.metadata?.requires_booking === 'true',
               amount_total: session.amount_total ?? 0,
               currency: session.currency ?? 'usd',
-              customer_email:
-                session.customer_details?.email ?? session.customer_email ?? null,
+              customer_email: session.customer_details?.email ?? session.customer_email ?? null,
               customer_name: session.customer_details?.name ?? null,
               customer_phone: session.customer_details?.phone ?? null,
               status: 'paid',
             },
             // Stripe can deliver the same event more than once. Upserting on the
             // session id makes replays harmless.
-            { onConflict: 'stripe_session_id' }
+            { onConflict: 'stripe_session_id' },
           );
 
         if (error) throw error;
@@ -77,14 +76,16 @@ export async function POST(request: NextRequest) {
         // branch is purely additive — the orders upsert above always runs the
         // same way regardless.
         if (session.metadata?.client_id) {
-          const { error: paymentError } = await getDb().from('training_payments').insert({
-            client_id: session.metadata.client_id,
-            payment_date: new Date().toISOString().slice(0, 10),
-            amount_cents: session.amount_total,
-            note: session.metadata?.plan_name
-              ? `Payment for ${session.metadata.plan_name}`
-              : null,
-          });
+          const { error: paymentError } = await getDb()
+            .from('training_payments')
+            .insert({
+              client_id: session.metadata.client_id,
+              payment_date: new Date().toISOString().slice(0, 10),
+              amount_cents: session.amount_total,
+              note: session.metadata?.plan_name
+                ? `Payment for ${session.metadata.plan_name}`
+                : null,
+            });
 
           if (paymentError) throw paymentError;
           console.log('[webhook] recorded training_payment for client', session.metadata.client_id);

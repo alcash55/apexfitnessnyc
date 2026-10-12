@@ -1,3 +1,6 @@
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { ArrowRight } from 'lucide-react';
 const TRAINING_PHASES = [
   {
     phase: 'Month 1',
@@ -20,13 +23,13 @@ const TRAINING_PHASES = [
 ];
 
 const SAMPLE_WEEK = [
-  { day: 'Monday', focus: 'Lower Power', },
-  { day: 'Tuesday', focus: 'Upper Push', },
-  { day: 'Wednesday', focus: 'Active Recovery', },
-  { day: 'Thursday', focus: 'Upper Pull', },
-  { day: 'Friday', focus: 'MetCon', },
-  { day: 'Saturday', focus: 'Accessory', },
-  { day: 'Sunday', focus: 'Rest', },
+  { day: 'Monday', focus: 'Lower Power' },
+  { day: 'Tuesday', focus: 'Upper Push' },
+  { day: 'Wednesday', focus: 'Active Recovery' },
+  { day: 'Thursday', focus: 'Upper Pull' },
+  { day: 'Friday', focus: 'MetCon' },
+  { day: 'Saturday', focus: 'Accessory' },
+  { day: 'Sunday', focus: 'Rest' },
 ];
 
 export default function TrainingPage() {
@@ -42,7 +45,7 @@ export default function TrainingPage() {
           <h1
             id="hero"
             style={{
-              fontFamily: "'Bebas Neue', sans-serif",
+              fontFamily: 'var(--font-display)',
               fontSize: 'clamp(3.5rem, 7vw, 6.5rem)',
               lineHeight: 0.92,
               letterSpacing: '0.03em',
@@ -65,17 +68,21 @@ export default function TrainingPage() {
               marginBottom: '2.5rem',
             }}
           >
-            The APEX training system is a 3-month, phase-based protocol engineered around male
-            aging physiology. Every session accounts for your hormones, joint health, and recovery
+            The APEX training system is a 3-month, phase-based protocol engineered around male aging
+            physiology. Every session accounts for your hormones, joint health, and recovery
             capacity. It's built for your body, not an athlete half your age.
           </p>
           <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-            <a className="btn-gold" href="/pricing">
-              Start Your Protocol
-            </a>
-            <a className="btn-outline" href="/about-me">
-              Meet the Founder
-            </a>
+            <Button asChild variant="unstyled">
+              <a className="btn-gold" href="/pricing">
+                Start Your Protocol
+              </a>
+            </Button>
+            <Button asChild variant="unstyled">
+              <a className="btn-outline" href="/about-me">
+                Meet the Founder
+              </a>
+            </Button>
           </div>
         </div>
       </section>
@@ -84,7 +91,9 @@ export default function TrainingPage() {
       <section className="section" style={{ background: 'var(--charcoal)' }}>
         <div className="section-inner">
           <div className="section-label">The System</div>
-          <h2 id="three-phases" className="section-h2">Three Phases. One Protocol.</h2>
+          <h2 id="three-phases" className="section-h2">
+            Three Phases. One Protocol.
+          </h2>
           <p className="section-sub" style={{ marginBottom: '3rem' }}>
             Each phase builds directly on the last. There is no skipping ahead and no wasted weeks.
           </p>
@@ -96,7 +105,8 @@ export default function TrainingPage() {
             }}
           >
             {TRAINING_PHASES.map((block) => (
-              <div
+              <Card
+                unstyled
                 key={block.phase}
                 style={{
                   background: 'var(--card)',
@@ -106,7 +116,7 @@ export default function TrainingPage() {
               >
                 <div
                   style={{
-                    fontFamily: "'Barlow Condensed', sans-serif",
+                    fontFamily: 'var(--font-condensed)',
                     fontSize: '0.72rem',
                     letterSpacing: '0.22em',
                     textTransform: 'uppercase',
@@ -118,7 +128,7 @@ export default function TrainingPage() {
                 </div>
                 <h3
                   style={{
-                    fontFamily: "'Barlow Condensed', sans-serif",
+                    fontFamily: 'var(--font-condensed)',
                     fontWeight: 700,
                     fontSize: '1rem',
                     color: 'var(--cream)',
@@ -132,7 +142,7 @@ export default function TrainingPage() {
                 <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.75 }}>
                   {block.detail}
                 </p>
-              </div>
+              </Card>
             ))}
           </div>
         </div>
@@ -161,7 +171,7 @@ export default function TrainingPage() {
               >
                 <div
                   style={{
-                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontFamily: "var(--font-display)",
                     fontSize: '1.25rem',
                     color: 'var(--gold)',
                     lineHeight: 1,
@@ -171,7 +181,7 @@ export default function TrainingPage() {
                 </div>
                 <div
                   style={{
-                    fontFamily: "'Barlow Condensed', sans-serif",
+                    fontFamily: "var(--font-condensed)",
                     fontWeight: 700,
                     fontSize: '0.82rem',
                     letterSpacing: '0.1em',
@@ -207,12 +217,17 @@ export default function TrainingPage() {
             The program is waiting. Your biology is ready. The only thing left is the decision.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a className="btn-gold" href="/pricing">
-              Choose Your Protocol →
-            </a>
-            <a className="btn-outline" href="/#why-40-is-different">
-              See The Method
-            </a>
+            <Button asChild variant="unstyled">
+              <a className="btn-gold" href="/pricing">
+                Choose Your Protocol{' '}
+                <ArrowRight size={16} className="inline-block align-middle" aria-hidden="true" />
+              </a>
+            </Button>
+            <Button asChild variant="unstyled">
+              <a className="btn-outline" href="/#why-40-is-different">
+                See The Method
+              </a>
+            </Button>
           </div>
         </div>
       </section>

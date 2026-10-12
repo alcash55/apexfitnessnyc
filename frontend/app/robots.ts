@@ -1,9 +1,7 @@
 import type { MetadataRoute } from 'next';
 
-// `output: export` (STATIC_EXPORT builds) requires every route to be
-// explicitly static — metadata route handlers default to dynamic rendering
-// otherwise, and the build fails outright ("dynamic ... not configured on
-// route /robots.txt with output: export").
+// Only /robots.txt is static so it can be included in STATIC_EXPORT builds.
+// This setting does not affect page titles, descriptions, or route metadata.
 export const dynamic = 'force-static';
 
 export default function robots(): MetadataRoute.Robots {
