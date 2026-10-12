@@ -24,8 +24,8 @@ export default function CheckoutCancelledPage() {
           billed and no account was created.
         </p>
         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link href="/pricing" className="btn-gold">
-            Back to Pricing
+          <Link href="/programs" className="btn-gold">
+            Back to Programs
           </Link>
           <Link href="/contact" style={{ color: 'var(--gold)', alignSelf: 'center' }}>
             Talk to a coach first

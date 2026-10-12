@@ -163,7 +163,7 @@ jobs:
         uses: alcash55/ac-composite-actions/accessibility/axe-check@main
         with:
           BASE_URL: http://localhost:4173
-          ROUTES: "/ /about /about-me /training /pricing /contact /privacy /terms /checkout/cancelled"
+          ROUTES: "/ /about /about-me /training /programs /contact /privacy /terms /checkout/cancelled"
 
       # Same reasoning as spellcheck-check above: axe-check only reports
       # AXE_VIOLATIONS, it never fails its own step.
@@ -172,7 +172,7 @@ jobs:
       # step above) meant this action errored out before producing any
       # results on every run until now, so this check never actually ran to
       # completion before. Now that it does, it surfaces real, pre-existing,
-      # site-wide issues (color-contrast on var(--muted) text, present on
+      # site-wide issues (color-contrast on var(--mu ted) text, present on
       # every route including ones this repo hasn't touched in months) —
       # real design debt, but not a regression from whatever change is in
       # the diff that happens to trip this check first. Non-blocking until a

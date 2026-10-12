@@ -102,7 +102,7 @@ export default function AboutPage() {
               that actually respects your biology.
             </p>
             <Button asChild variant="unstyled">
-              <a className="btn-gold" href="/pricing">
+              <a className="btn-gold" href="/programs">
                 Start Your Protocol{' '}
                 <ArrowRight size={16} className="inline-block align-middle" aria-hidden="true" />
               </a>
@@ -393,7 +393,7 @@ export default function AboutPage() {
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Button asChild variant="unstyled">
-              <a className="btn-gold" href="/pricing">
+              <a className="btn-gold" href="/programs">
                 Choose Your Protocol{' '}
                 <ArrowRight size={16} className="inline-block align-middle" aria-hidden="true" />
               </a>

@@ -4,7 +4,7 @@ const routes = [
   ['/', 'ApexFitnessNYC | Personal Training for Men 40+ in NYC'],
   ['/apexway', 'The Apex Way | ApexFitnessNYC'],
   ['/training', 'Training | ApexFitnessNYC'],
-  ['/pricing', 'Pricing | ApexFitnessNYC'],
+  ['/programs', 'Programs | ApexFitnessNYC'],
   ['/contact', 'Contact | ApexFitnessNYC'],
   ['/about-me', 'About Your Coach | ApexFitnessNYC'],
   ['/links', 'Links | ApexFitnessNYC'],
@@ -56,12 +56,12 @@ test('navigation replaces metadata without a full reload', async ({ page }) => {
   await page.evaluate(() => {
     document.documentElement.dataset.navigationMarker = 'retained';
   });
-  await page.locator('nav').getByRole('link', { name: 'Pricing', exact: true }).click();
-  await expect(page).toHaveURL(/\/pricing$/);
-  await expect(page).toHaveTitle('Pricing | ApexFitnessNYC');
+  await page.locator('nav').getByRole('link', { name: 'Programs', exact: true }).click();
+  await expect(page).toHaveURL(/\/programs$/);
+  await expect(page).toHaveTitle('Programs | ApexFitnessNYC');
   await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
     'content',
-    'Pricing | ApexFitnessNYC',
+    'Programs | ApexFitnessNYC',
   );
   await expect(page.locator('title')).toHaveCount(1);
   await expect(page.locator('html')).toHaveAttribute('data-navigation-marker', 'retained');

@@ -34,7 +34,7 @@ import { ArrowRight } from 'lucide-react';
 <section className="bg-charcoal px-gutter py-section">
   <div className="mx-auto max-w-content">
     <h2 className="font-display text-section text-cream">Personal training</h2>
-    <a className="btn-gold" href="/pricing">
+    <a className="btn-gold" href="/programs">
       View programs <ArrowRight size={16} aria-hidden="true" />
     </a>
   </div>
@@ -101,4 +101,4 @@ To check metadata on an already-running server at localhost:3000 instead of star
 npm run test:e2e:metadata:live
 ```
 
-The selected favicon is option 5, the performance barbell A. Its source is `design/favicon-concepts/05-performance-barbell.png`. `app/favicon.ico` contains 16, 32, and 48 pixel exports, and `app/icon.png` provides a 256 pixel PNG. Next.js adds their icon links automatically.
+Production builds use `tsconfig.build.json`, which excludes development and Playwright caches. The isolated Playwright server uses `tsconfig.playwright.json` and checks only its own generated route types. Both extend the shared application compiler settings in `tsconfig.json`. This prevents stale types for renamed routes from breaking an unrelated build.

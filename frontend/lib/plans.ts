@@ -1,7 +1,7 @@
 /**
  * Canonical plan catalogue.
  *
- * This is the single source of truth for what things cost. The pricing page
+ * This is the single source of truth for what things cost. The programs page
  * renders from it, and the checkout API prices from it.
  *
  * SECURITY: the browser only ever sends us a plan `id`. The amount charged is

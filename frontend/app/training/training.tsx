@@ -74,7 +74,7 @@ export default function TrainingPage() {
           </p>
           <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
             <Button asChild variant="unstyled">
-              <a className="btn-gold" href="/pricing">
+              <a className="btn-gold" href="/programs">
                 Start Your Protocol
               </a>
             </Button>
@@ -218,7 +218,7 @@ export default function TrainingPage() {
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Button asChild variant="unstyled">
-              <a className="btn-gold" href="/pricing">
+              <a className="btn-gold" href="/programs">
                 Choose Your Protocol{' '}
                 <ArrowRight size={16} className="inline-block align-middle" aria-hidden="true" />
               </a>

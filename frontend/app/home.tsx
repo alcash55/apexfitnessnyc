@@ -234,7 +234,7 @@ export default function Home() {
           </p>
           <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
             <Button asChild variant="unstyled">
-              <a className="btn-gold" href="/pricing">
+              <a className="btn-gold" href="/programs">
                 Start Your Transformation
               </a>
             </Button>
@@ -664,7 +664,7 @@ export default function Home() {
           </div>
           <div style={{ textAlign: 'center', marginTop: '3rem' }}>
             <Button asChild variant="unstyled">
-              <a className="btn-gold" href="/pricing">
+              <a className="btn-gold" href="/programs">
                 Choose Your Protocol
               </a>
             </Button>

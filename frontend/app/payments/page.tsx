@@ -39,7 +39,7 @@ const labelStyle: React.CSSProperties = {
 
 /**
  * Authenticated client payments page: current program, a "Pay Now" flow
- * against the same plan catalogue as the public /pricing page, and this
+ * against the same plan catalogue as the public /programs page, and this
  * client's payment history. Protected by middleware.ts (any authenticated
  * user reaches here), but a signed-in account without a linked client
  * profile (claims.client_id === null) gets a clear message instead of a
