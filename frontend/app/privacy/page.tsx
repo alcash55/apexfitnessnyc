@@ -1,7 +1,11 @@
-export const metadata = {
-  title: 'Privacy Policy | APEX Human Performance',
-};
+import { pageMetadata } from '@/lib/metadata';
 
+export const metadata = pageMetadata({
+  title: 'Privacy Policy | ApexFitnessNYC',
+  description:
+    'Learn how APEX collects, uses, and protects your personal information and how to exercise your privacy rights.',
+  path: '/privacy',
+});
 const updated = 'June 23, 2026';
 
 export default function PrivacyPage() {

@@ -1,7 +1,15 @@
+import { pageMetadata } from '@/lib/metadata';
 import Link from 'next/link';
 import { getSessionClaims } from '@/lib/auth';
 import { getDb } from '@/lib/supabaseAdmin';
 import AccountForm from './account-form';
+
+export const metadata = pageMetadata({
+  title: 'Account | ApexFitnessNYC',
+  description: 'Review and update your APEX account profile and contact details.',
+  path: '/account',
+  privatePage: true,
+});
 
 export const dynamic = 'force-dynamic';
 

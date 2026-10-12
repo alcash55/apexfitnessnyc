@@ -1,5 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const externalBaseURL = process.env.PLAYWRIGHT_BASE_URL;
 const executablePath = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH;
 
 export default defineConfig({
@@ -13,7 +14,7 @@ export default defineConfig({
   reporter: [['list'], ['html', { open: 'never' }]],
   snapshotPathTemplate: '{testDir}/__screenshots__/{projectName}/{arg}{ext}',
   use: {
-    baseURL: 'http://127.0.0.1:3100',
+    baseURL: externalBaseURL || 'http://127.0.0.1:3100',
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     reducedMotion: 'reduce',
@@ -28,16 +29,18 @@ export default defineConfig({
       },
     },
   ],
-  webServer: {
-    command: 'npm run dev -- --webpack --hostname 127.0.0.1 --port 3100',
-    url: 'http://127.0.0.1:3100',
-    reuseExistingServer: false,
-    timeout: 120_000,
-    env: {
-      PLAYWRIGHT_TEST: 'true',
-      STATIC_EXPORT: 'false',
-      NEXT_PUBLIC_SUPABASE_URL: '',
-      NEXT_PUBLIC_SUPABASE_ANON_KEY: '',
-    },
-  },
+  webServer: externalBaseURL
+    ? undefined
+    : {
+        command: 'npm run dev -- --hostname 127.0.0.1 --port 3100',
+        url: 'http://127.0.0.1:3100',
+        reuseExistingServer: false,
+        timeout: 120_000,
+        env: {
+          PLAYWRIGHT_TEST: 'true',
+          STATIC_EXPORT: 'false',
+          NEXT_PUBLIC_SUPABASE_URL: '',
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: '',
+        },
+      },
 });

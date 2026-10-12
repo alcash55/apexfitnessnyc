@@ -1,4 +1,12 @@
+import { pageMetadata } from '@/lib/metadata';
 import DeleteAccountForm from './delete-form';
+
+export const metadata = pageMetadata({
+  title: 'Delete Account | ApexFitnessNYC',
+  description: 'Manage the permanent deactivation of your APEX account.',
+  path: '/account/delete',
+  privatePage: true,
+});
 
 export default function DeleteAccountPage() {
   return (

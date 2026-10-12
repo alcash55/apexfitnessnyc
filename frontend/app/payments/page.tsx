@@ -1,3 +1,4 @@
+import { pageMetadata } from '@/lib/metadata';
 import {
   Table,
   TableHeader,
@@ -12,12 +13,14 @@ import { getDb } from '@/lib/supabaseAdmin';
 import { PLANS, formatDollars } from '@/lib/plans';
 import PayButton from './pay-button';
 
-export const dynamic = 'force-dynamic';
+export const metadata = pageMetadata({
+  title: 'Payments | ApexFitnessNYC',
+  description: 'Manage your APEX program payments and review your payment history.',
+  path: '/payments',
+  privatePage: true,
+});
 
-export const metadata = {
-  title: 'Payments | APEX',
-  robots: { index: false, follow: false },
-};
+export const dynamic = 'force-dynamic';
 
 type PaymentRow = {
   id: string;

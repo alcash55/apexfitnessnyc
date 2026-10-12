@@ -1,9 +1,13 @@
+import { pageMetadata } from '@/lib/metadata';
 import Link from 'next/link';
 
-export const metadata = {
-  title: 'Checkout Cancelled | APEX',
-  robots: { index: false, follow: false },
-};
+export const metadata = pageMetadata({
+  title: 'Checkout Cancelled | ApexFitnessNYC',
+  description:
+    'Your APEX checkout was cancelled. Review programs or contact your coach to continue.',
+  path: '/checkout/cancelled',
+  privatePage: true,
+});
 
 export default function CheckoutCancelledPage() {
   return (

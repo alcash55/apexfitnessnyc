@@ -1,10 +1,12 @@
+import { pageMetadata } from '@/lib/metadata';
 import Link from 'next/link';
 
-export const metadata = {
-  title: 'Terms of Service | APEX Human Performance',
+export const metadata = pageMetadata({
+  title: 'Terms of Service | ApexFitnessNYC',
   description:
     'The terms governing use of the APEX Human Performance website and coaching services.',
-};
+  path: '/terms',
+});
 
 const updated = 'August 17, 2026';
 

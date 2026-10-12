@@ -1,3 +1,4 @@
+import { pageMetadata } from '@/lib/metadata';
 import {
   Table,
   TableHeader,
@@ -12,6 +13,13 @@ import { getDb } from '@/lib/supabaseAdmin';
 import { formatDollars } from '@/lib/plans';
 import ExpenseForm from './expense-form';
 import ExpenseRowActions from './expense-row-actions';
+
+export const metadata = pageMetadata({
+  title: 'Expenses | ApexFitnessNYC',
+  description: 'Manage APEX business expenses and expense records.',
+  path: '/admin/expenses',
+  privatePage: true,
+});
 
 export const dynamic = 'force-dynamic';
 

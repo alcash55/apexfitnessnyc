@@ -1,15 +1,18 @@
+import { pageMetadata } from '@/lib/metadata';
 import Link from 'next/link';
 import { getSessionClaims } from '@/lib/auth';
 import { getLibraryAccess, type LibraryAccess } from '@/lib/libraryAccess';
 import { getExercises, getPatternDescriptions } from '@/lib/exercises';
 import ExerciseLibrary from './ExerciseLibrary';
 
-export const dynamic = 'force-dynamic';
+export const metadata = pageMetadata({
+  title: 'Exercise Library | ApexFitnessNYC',
+  description: 'Browse exercise demonstrations and guidance for your APEX training program.',
+  path: '/library',
+  privatePage: true,
+});
 
-export const metadata = {
-  title: 'Exercise Library | APEX',
-  robots: { index: false, follow: false },
-};
+export const dynamic = 'force-dynamic';
 
 const LOCKED_MESSAGES: Record<Exclude<LibraryAccess, 'allowed'>, string> = {
   'signed-out': 'Sign in to your APEX account to open the exercise library.',

@@ -1,3 +1,4 @@
+import { pageMetadata } from '@/lib/metadata';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
@@ -12,6 +13,13 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getSessionClaims, isAdminClaims } from '@/lib/auth';
 import { getDb } from '@/lib/supabaseAdmin';
+
+export const metadata = pageMetadata({
+  title: 'Client Administration | ApexFitnessNYC',
+  description: 'Manage APEX clients and their program enrollments.',
+  path: '/admin',
+  privatePage: true,
+});
 
 export const dynamic = 'force-dynamic';
 

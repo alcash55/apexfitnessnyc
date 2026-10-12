@@ -1,3 +1,4 @@
+import { pageMetadata } from '@/lib/metadata';
 import {
   Table,
   TableHeader,
@@ -13,6 +14,13 @@ import { getSessionClaims } from '@/lib/auth';
 import { getDb } from '@/lib/supabaseAdmin';
 import { formatDollars } from '@/lib/plans';
 import { formatDate, formatJsonbEntries } from './format';
+
+export const metadata = pageMetadata({
+  title: 'Dashboard | ApexFitnessNYC',
+  description: 'View your APEX training program, nutrition plan, and progress.',
+  path: '/dashboard',
+  privatePage: true,
+});
 
 type ClientRow = {
   first_name: string;

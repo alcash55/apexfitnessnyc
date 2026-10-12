@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { SITE_URL, HOME_TITLE, HOME_DESCRIPTION } from '@/lib/metadata';
 import { Bebas_Neue, Barlow_Condensed, Inter } from 'next/font/google';
 import './globals.css';
 import Nav from '../components/Nav';
@@ -9,27 +10,17 @@ const bebasNeue = Bebas_Neue({ weight: '400', subsets: ['latin'], variable: '--f
 const barlowCondensed = Barlow_Condensed({
   weight: ['300', '400', '700'],
   style: ['normal', 'italic'],
+  // Several weights and italics are only used later or on other pages.
+  preload: false,
   subsets: ['latin'],
   variable: '--font-barlow',
 });
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://apexfitness.fit';
-const SITE_TITLE = 'ApexFitnessNYC | Personal Training for Men 40+ in NYC';
-const SITE_DESCRIPTION =
-  'Precision personal training, hormone-optimized nutrition, and a 90-day transformation system for men 40+, in-person in New York City or online coaching nationwide.';
-
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: SITE_TITLE,
-  description: SITE_DESCRIPTION,
-  openGraph: {
-    title: SITE_TITLE,
-    description: SITE_DESCRIPTION,
-    url: SITE_URL,
-    siteName: 'ApexFitnessNYC',
-    type: 'website',
-  },
+  title: HOME_TITLE,
+  description: HOME_DESCRIPTION,
 };
 
 const jsonLd = {

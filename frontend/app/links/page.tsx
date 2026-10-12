@@ -1,5 +1,12 @@
+import { pageMetadata } from '@/lib/metadata';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+
+export const metadata = pageMetadata({
+  title: 'Links | ApexFitnessNYC',
+  description: 'Find APEX coaching, contact information, and social media links in one place.',
+  path: '/links',
+});
 
 export default function LinksPage() {
   return (

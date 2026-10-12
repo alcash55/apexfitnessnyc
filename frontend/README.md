@@ -16,7 +16,7 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You can edit the homepage UI in `app/home.tsx`; `app/page.tsx` is its server wrapper. The page auto-updates as you edit the file.
 
 This project uses `next/font` to load Bebas Neue for display text, Barlow Condensed for labels and buttons, and Inter for body text.
 
@@ -86,3 +86,19 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Page metadata
+
+Each `app/**/page.tsx` exports route-specific Next.js metadata using `pageMetadata` from `lib/metadata.ts`. Keep titles, descriptions, canonical URLs, and social previews together in the page export. The root layout supplies the metadata base URL from `NEXT_PUBLIC_SITE_URL`, with `https://apexfitness.fit` as the default. Account, admin, and checkout pages are marked `noindex, nofollow`. Client details use a generic title to keep personal information out of metadata.
+
+Interactive homepage and Apex Way content lives in `app/home.tsx` and `app/apexway/apexway.tsx`, leaving the page wrappers as server components that can export metadata. `e2e/metadata.spec.ts` checks public route tags and updates during client navigation.
+
+The dev server uses Webpack. On WSL Windows-mounted workspaces, Next.js polls for source changes every second because filesystem notifications can be missed. This keeps route metadata, styles, and icons current during development.
+
+To check metadata on an already-running server at localhost:3000 instead of starting the isolated test server, use this command on Windows, macOS, or Linux:
+
+```bash
+npm run test:e2e:metadata:live
+```
+
+The selected favicon is option 5, the performance barbell A. Its source is `design/favicon-concepts/05-performance-barbell.png`. `app/favicon.ico` contains 16, 32, and 48 pixel exports, and `app/icon.png` provides a 256 pixel PNG. Next.js adds their icon links automatically.

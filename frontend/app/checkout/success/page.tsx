@@ -1,12 +1,15 @@
+import { pageMetadata } from '@/lib/metadata';
 import Link from 'next/link';
 import { getStripe } from '@/lib/stripe';
 
-export const dynamic = 'force-dynamic';
+export const metadata = pageMetadata({
+  title: 'Payment Confirmed | ApexFitnessNYC',
+  description: 'Review your APEX checkout confirmation and next steps.',
+  path: '/checkout/success',
+  privatePage: true,
+});
 
-export const metadata = {
-  title: 'Payment Confirmed | APEX',
-  robots: { index: false, follow: false },
-};
+export const dynamic = 'force-dynamic';
 
 /**
  * Post-checkout confirmation.

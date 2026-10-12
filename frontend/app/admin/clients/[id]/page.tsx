@@ -1,3 +1,4 @@
+import { pageMetadata } from '@/lib/metadata';
 import {
   Table,
   TableHeader,
@@ -15,6 +16,12 @@ import { formatDollars } from '@/lib/plans';
 import InviteForm from './invite-form';
 import RevokeButton from './revoke-button';
 import PurgeForm from './purge-form';
+
+export const metadata = pageMetadata({
+  title: 'Client Details | ApexFitnessNYC',
+  description: 'Review and manage an APEX client profile, programs, and account access.',
+  privatePage: true,
+});
 
 export const dynamic = 'force-dynamic';
 
