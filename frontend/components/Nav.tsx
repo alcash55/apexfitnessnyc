@@ -46,7 +46,7 @@ export default function Nav({ isAuthenticated, isAdmin }: NavProps) {
             <Link href="/training">Training</Link>
           </li>
           <li>
-            <Link href="/pricing">Pricing</Link>
+            <Link href="/pricing">Programs</Link>
           </li>
           <li>
             <Link href="/contact">Contact</Link>
