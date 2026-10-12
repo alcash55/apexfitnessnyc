@@ -66,8 +66,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <div className="noise" />
-        <div id="cursor" suppressHydrationWarning />
-        <div id="cursor-ring" suppressHydrationWarning />
 
         <Nav isAuthenticated={isAuthenticated} isAdmin={isAdmin} />
 
@@ -83,13 +81,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <main style={{ flex: 1, paddingTop: '72px' }}>{children}</main>
           <Footer />
         </div>
-
-        {/* ── Floating chat button ── */}
-        {/* <button className="chat-btn" aria-label="Open chat">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-          </svg>
-        </button> */}
       </body>
     </html>
   );

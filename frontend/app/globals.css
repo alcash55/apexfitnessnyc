@@ -54,39 +54,6 @@ button {
   background-size: 200px 200px;
 }
 
-/* ── Custom cursor ─────────────────────────────────── */
-#cursor {
-  position: fixed;
-  width: 8px;
-  height: 8px;
-  background: var(--gold);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s;
-}
-#cursor-ring {
-  position: fixed;
-  width: 32px;
-  height: 32px;
-  border: 1px solid rgba(200, 168, 75, 0.5);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition:
-    transform 0.12s,
-    width 0.2s,
-    height 0.2s;
-}
-@media (pointer: coarse), (hover: none) {
-  #cursor,
-  #cursor-ring {
-    display: none;
-  }
-}
-
 /* ── Shared brand logo ─────────────────────────────── */
 .nav-logo {
   font-family: 'Bebas Neue', sans-serif;
