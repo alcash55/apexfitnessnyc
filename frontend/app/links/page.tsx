@@ -1,6 +1,6 @@
-import { pageMetadata } from '@/lib/metadata';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { pageMetadata } from '@/lib/metadata';
 
 export const metadata = pageMetadata({
   title: 'Links | ApexFitnessNYC',
@@ -42,7 +42,7 @@ export default function LinksPage() {
           <Link className="btn-outline" href="/" style={{ justifyContent: 'center' }}>
             Visit the Website
           </Link>
-          <Link className="btn-gold" href="/pricing" style={{ justifyContent: 'center' }}>
+          <Link className="btn-gold" href="/programs" style={{ justifyContent: 'center' }}>
             Get Started — View the Program
           </Link>
           <Link className="btn-outline" href="/contact" style={{ justifyContent: 'center' }}>

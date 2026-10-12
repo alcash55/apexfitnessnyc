@@ -1,11 +1,11 @@
 import { pageMetadata } from '@/lib/metadata';
-import PricingPage from './pricing';
+import ProgramsPage from './programs';
 
 export const metadata = pageMetadata({
-  title: 'Pricing | ApexFitnessNYC',
+  title: 'Programs | ApexFitnessNYC',
   description:
-    'Compare APEX personal training and online coaching programs, pricing, and what each plan includes.',
-  path: '/pricing',
+    'Compare APEX personal training and online coaching programs, see what each plan includes.',
+  path: '/programs',
 });
 
-export default PricingPage;
+export default ProgramsPage;

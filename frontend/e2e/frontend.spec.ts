@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 test('public pages keep their appearance', async ({ page }) => {
-  for (const route of ['contact', 'login', 'pricing', 'training', 'about-me', 'apexway']) {
+  for (const route of ['contact', 'login', 'programs', 'training', 'about-me', 'apexway']) {
     const response = await page.goto(`/${route}`);
     expect(response?.status()).toBe(200);
     await page.evaluate(() => document.fonts.ready);
@@ -57,8 +57,8 @@ test('mobile navigation opens, closes, and follows a link', async ({ page }) => 
     'false',
   );
   await page.getByRole('button', { name: 'Toggle navigation' }).click();
-  await page.getByRole('dialog').getByRole('link', { name: 'Pricing', exact: true }).click();
-  await expect(page).toHaveURL(/\/pricing$/);
+  await page.getByRole('dialog').getByRole('link', { name: 'Programs', exact: true }).click();
+  await expect(page).toHaveURL(/\/programs$/);
   await page.getByRole('button', { name: 'Toggle navigation' }).click();
   await page.keyboard.press('Escape');
   await expect(page.getByRole('button', { name: 'Toggle navigation' })).toHaveAttribute(

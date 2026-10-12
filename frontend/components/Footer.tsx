@@ -42,7 +42,7 @@ export default function Footer() {
               <Link href="/training">Training</Link>
             </li>
             <li>
-              <Link href="/pricing">Pricing</Link>
+              <Link href="/programs">Programs</Link>
             </li>
             <li>
               <Link href="/contact">Contact</Link>
@@ -63,7 +63,7 @@ export default function Footer() {
               <Link href="/training">Online Coaching</Link>
             </li>
             <li>
-              <Link href="/pricing">View Pricing</Link>
+              <Link href="/programs">View Programs</Link>
             </li>
           </ul>
         </div>
@@ -95,7 +95,7 @@ export default function Footer() {
         <p>© 2026 APEX Human Performance. All rights reserved. New York City.</p>
         <div className="flex gap-6 [&_a:hover]:text-cream">
           <Link href="/contact">Contact</Link>
-          <Link href="/pricing">Get Started</Link>
+          <Link href="/programs">Get Started</Link>
           <Link href="/terms">Terms of Service</Link>
           <Link href="/privacy">Privacy Policy</Link>
         </div>

@@ -23,7 +23,7 @@ const addOnPlans = ADD_ON_PLAN_IDS.map((id) => PLANS.find((p) => p.id === id)).f
   (p): p is NonNullable<typeof p> => p !== undefined,
 );
 
-export default function PricingPage() {
+export default function ProgramsPage() {
   return (
     <div className="section" style={{ minHeight: 'calc(100vh - 72px)' }}>
       <div className="section-inner">

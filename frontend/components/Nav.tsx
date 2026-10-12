@@ -46,7 +46,7 @@ export default function Nav({ isAuthenticated, isAdmin }: NavProps) {
             <Link href="/training">Training</Link>
           </li>
           <li>
-            <Link href="/pricing">Programs</Link>
+            <Link href="/programs">Programs</Link>
           </li>
           <li>
             <Link href="/contact">Contact</Link>
@@ -75,7 +75,7 @@ export default function Nav({ isAuthenticated, isAdmin }: NavProps) {
           <Button asChild variant="unstyled">
             <Link
               className={`font-condensed font-bold tracking-[0.1em] uppercase text-[0.85rem] py-[0.6rem] px-[1.4rem] rounded-[3px] [transition:all_0.2s] [border:none] bg-gold text-black [&:hover]:opacity-[0.88]`}
-              href="/pricing"
+              href="/programs"
             >
               Start Now
             </Link>
@@ -131,8 +131,8 @@ export default function Nav({ isAuthenticated, isAdmin }: NavProps) {
               </Link>
             </li>
             <li>
-              <Link href="/pricing" onClick={() => setOpen(false)}>
-                Pricing
+              <Link href="/programs" onClick={() => setOpen(false)}>
+                Programs
               </Link>
             </li>
             <li>
@@ -172,7 +172,7 @@ export default function Nav({ isAuthenticated, isAdmin }: NavProps) {
           <Button asChild variant="unstyled">
             <Link
               className="font-condensed font-bold tracking-button uppercase text-[1rem] py-4 px-12 bg-gold text-black [border:none] [transition:opacity_0.2s] [&:hover]:opacity-[0.88]"
-              href="/pricing"
+              href="/programs"
               onClick={() => setOpen(false)}
             >
               Start Now

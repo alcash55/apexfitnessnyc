@@ -72,7 +72,7 @@ export async function POST(request: NextRequest) {
         console.log('[webhook] recorded order for session', session.id);
 
         // Authenticated-client purchases (via /payments, /api/payments/checkout)
-        // carry client_id in metadata; anonymous /pricing purchases don't. This
+        // carry client_id in metadata; anonymous /programs purchases don't. This
         // branch is purely additive — the orders upsert above always runs the
         // same way regardless.
         if (session.metadata?.client_id) {

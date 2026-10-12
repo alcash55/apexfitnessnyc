@@ -136,7 +136,7 @@ export default function AboutMePage() {
               once had.
             </p>
             {/* <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '2rem' }}>
-              <a className="btn-gold" href="/pricing">
+              <a className="btn-gold" href="/programs">
                 Start Your Protocol
               </a>
               <a className="btn-outline" href="/about">

@@ -33,7 +33,7 @@ describe('Supabase auth config', () => {
     vi.stubEnv('NEXT_PUBLIC_SUPABASE_ANON_KEY', '');
     vi.spyOn(console, 'error').mockImplementation(() => {});
 
-    const { response, claims } = await updateSession(new NextRequest('http://localhost/pricing'));
+    const { response, claims } = await updateSession(new NextRequest('http://localhost/programs'));
 
     expect(claims).toBeNull();
     expect(response.status).toBe(200);
