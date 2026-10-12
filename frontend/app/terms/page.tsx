@@ -25,7 +25,7 @@ export default function TermsPage() {
         >
           <p>
             These Terms govern your use of this website and any coaching, training, or nutrition
-            services you purchase through it (the &quot;Service&quot;), operated by [COMPANY NAME]
+            services you purchase through it (the &quot;Service&quot;), operated by Apex Fitness
             (&quot;APEX,&quot; &quot;we,&quot; &quot;us&quot;). By using the site or purchasing a
             program, you agree to these Terms.
           </p>
@@ -35,7 +35,7 @@ export default function TermsPage() {
           </h3>
           <p>
             <strong style={{ color: 'var(--cream)' }}>
-              APEX provides fitness coaching, not medical care.
+              APEX Fitness provides fitness coaching, not medical care.
             </strong>{' '}
             We are not physicians, dietitians, physical therapists, or licensed healthcare
             providers, and nothing we provide is medical advice, diagnosis, or treatment. Our
@@ -199,7 +199,7 @@ export default function TermsPage() {
 
 const sectionHeading: React.CSSProperties = {
   color: 'var(--cream)',
-  fontFamily: "'Barlow Condensed', sans-serif",
+  fontFamily: 'var(--font-condensed)',
   letterSpacing: '0.04em',
   fontSize: '1.15rem',
   marginTop: '2.5rem',

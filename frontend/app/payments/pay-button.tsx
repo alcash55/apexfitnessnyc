@@ -1,4 +1,5 @@
 'use client';
+import { Button } from '@/components/ui/button';
 
 import { useState } from 'react';
 
@@ -50,7 +51,8 @@ export default function PayButton({
 
   return (
     <div>
-      <button
+      <Button
+        variant="unstyled"
         onClick={startCheckout}
         disabled={loading}
         aria-busy={loading}
@@ -62,7 +64,7 @@ export default function PayButton({
           opacity: loading ? 0.6 : 1,
           background: highlight ? 'var(--gold)' : 'rgba(200,168,75,0.1)',
           color: highlight ? 'var(--black)' : 'var(--gold)',
-          fontFamily: "'Barlow Condensed', sans-serif",
+          fontFamily: 'var(--font-condensed)',
           fontWeight: 700,
           letterSpacing: '0.15em',
           textTransform: 'uppercase',
@@ -71,10 +73,13 @@ export default function PayButton({
         }}
       >
         {loading ? 'Redirecting…' : label}
-      </button>
+      </Button>
 
       {error && (
-        <p role="alert" style={{ color: '#f87171', fontSize: '0.8rem', marginTop: '0.6rem' }}>
+        <p
+          role="alert"
+          style={{ color: 'var(--color-error)', fontSize: '0.8rem', marginTop: '0.6rem' }}
+        >
           {error}
         </p>
       )}

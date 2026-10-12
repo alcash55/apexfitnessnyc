@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
 export default function LinksPage() {
@@ -20,20 +21,22 @@ export default function LinksPage() {
           NYC Personal Training &amp; Online Coaching for Men 40+
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <a
-            className="btn-outline"
-            href="https://www.instagram.com/apex.fitnessnyc"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ justifyContent: 'center' }}
-          >
-            Instagram
-          </a>
+          <Button asChild variant="unstyled">
+            <a
+              className="btn-outline"
+              href="https://www.instagram.com/apex.fitnessnyc"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ justifyContent: 'center' }}
+            >
+              Instagram
+            </a>
+          </Button>
           <Link className="btn-outline" href="/" style={{ justifyContent: 'center' }}>
             Visit the Website
           </Link>
           <Link className="btn-gold" href="/pricing" style={{ justifyContent: 'center' }}>
-            Get Started — View Pricing
+            Get Started — View the Program
           </Link>
           <Link className="btn-outline" href="/contact" style={{ justifyContent: 'center' }}>
             Contact

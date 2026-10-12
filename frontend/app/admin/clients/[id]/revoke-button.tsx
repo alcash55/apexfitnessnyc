@@ -1,8 +1,8 @@
 'use client';
+import { Button } from '@/components/ui/button';
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from './detail.module.css';
 
 export default function RevokeButton({ clientId }: { clientId: string }) {
   const router = useRouter();
@@ -40,16 +40,17 @@ export default function RevokeButton({ clientId }: { clientId: string }) {
   }
 
   return (
-    <div className={styles.actionForm}>
-      <button
+    <div className="flex items-center gap-3 flex-wrap">
+      <Button
+        variant="unstyled"
         type="button"
         className="btn-outline"
         onClick={handleRevoke}
         disabled={status === 'submitting'}
       >
         {status === 'submitting' ? 'Deactivating…' : 'Deactivate Portal Access'}
-      </button>
-      {message && <span className={styles.errorText}>{message}</span>}
+      </Button>
+      {message && <span className="text-error text-[0.85rem]">{message}</span>}
     </div>
   );
 }

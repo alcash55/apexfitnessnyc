@@ -1,3 +1,12 @@
+import {
+  Table,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+} from '@/components/ui/table';
+import { ArrowRight } from 'lucide-react';
 import type { CSSProperties } from 'react';
 import Link from 'next/link';
 import { getSessionClaims } from '@/lib/auth';
@@ -178,32 +187,50 @@ export default async function DashboardPage() {
             </div>
           ) : (
             <div style={{ ...cardStyle, padding: 0, overflowX: 'auto' }}>
-              <table
+              <Table
+                unstyled
                 style={{
                   width: '100%',
                   borderCollapse: 'collapse',
-                  fontFamily: "'Barlow Condensed', sans-serif",
+                  fontFamily: 'var(--font-condensed)',
                 }}
               >
-                <thead>
-                  <tr>
-                    <th style={thStyle}>Date</th>
-                    <th style={thStyle}>Amount</th>
-                    <th style={thStyle}>Note</th>
-                  </tr>
-                </thead>
-                <tbody>
+                <TableHeader unstyled>
+                  <TableRow unstyled>
+                    <TableHead unstyled style={thStyle}>
+                      Date
+                    </TableHead>
+                    <TableHead unstyled style={thStyle}>
+                      Amount
+                    </TableHead>
+                    <TableHead unstyled style={thStyle}>
+                      Note
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody unstyled>
                   {payments.map((p) => (
-                    <tr key={p.id} style={{ borderBottom: '1px solid var(--border)' }}>
-                      <td style={tdStyle}>{formatDate(p.payment_date)}</td>
-                      <td style={{ ...tdStyle, color: 'var(--gold)', fontWeight: 700 }}>
+                    <TableRow
+                      unstyled
+                      key={p.id}
+                      style={{ borderBottom: '1px solid var(--border)' }}
+                    >
+                      <TableCell unstyled style={tdStyle}>
+                        {formatDate(p.payment_date)}
+                      </TableCell>
+                      <TableCell
+                        unstyled
+                        style={{ ...tdStyle, color: 'var(--gold)', fontWeight: 700 }}
+                      >
                         ${formatDollars(p.amount_cents)}
-                      </td>
-                      <td style={tdStyle}>{p.note ?? '—'}</td>
-                    </tr>
+                      </TableCell>
+                      <TableCell unstyled style={tdStyle}>
+                        {p.note ?? '—'}
+                      </TableCell>
+                    </TableRow>
                   ))}
-                </tbody>
-              </table>
+                </TableBody>
+              </Table>
             </div>
           )}
         </section>
@@ -218,7 +245,7 @@ function SectionHeading({ label, title }: { label: string; title: string }) {
       <div className="section-label">{label}</div>
       <h3
         style={{
-          fontFamily: "'Bebas Neue', sans-serif",
+          fontFamily: 'var(--font-display)',
           fontSize: '1.75rem',
           color: 'var(--cream)',
           letterSpacing: '0.03em',
@@ -342,7 +369,8 @@ function UnlinkedNotice({ message }: { message: string }) {
         <p className="section-sub">{message}</p>
         <div style={{ marginTop: '2rem' }}>
           <Link className="btn-gold" href="/contact">
-            Contact Us →
+            Contact Us{' '}
+            <ArrowRight size={16} className="inline-block align-middle" aria-hidden="true" />
           </Link>
         </div>
       </div>

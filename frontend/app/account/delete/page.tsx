@@ -1,5 +1,4 @@
 import DeleteAccountForm from './delete-form';
-import styles from '../account.module.css';
 
 export default function DeleteAccountPage() {
   return (
@@ -11,7 +10,10 @@ export default function DeleteAccountPage() {
           This deactivates your login — it is permanent and cannot be undone from here.
         </p>
 
-        <div className={styles.dangerBox} style={{ marginTop: 0 }}>
+        <div
+          className="mt-16 p-8 [border:1px_solid_rgba(248,_113,_113,_0.3)] max-w-[860px] [&_h3]:font-condensed [&_h3]:tracking-[0.1em] [&_h3]:uppercase [&_h3]:text-error [&_h3]:text-[1rem] [&_h3]:mb-4 [&_p]:text-muted [&_p]:text-[0.9rem] [&_p]:leading-[1.6] [&_p]:mb-3"
+          style={{ marginTop: 0 }}
+        >
           <h3>What happens</h3>
           <p>You will be signed out immediately and will no longer be able to log in.</p>
           <p>

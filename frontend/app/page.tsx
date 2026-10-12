@@ -1,5 +1,23 @@
 'use client';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from '@/components/ui/accordion';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import {
+  Table,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+} from '@/components/ui/table';
 import { useEffect, useRef, useState } from 'react';
+import { ChevronDown, Minus, Plus } from 'lucide-react';
 
 const TICKER_ITEMS = [
   '90-Day Transformation System',
@@ -174,7 +192,7 @@ export default function Home() {
         <div style={{ maxWidth: 1300, margin: '0 auto', width: '100%' }}>
           <p
             style={{
-              fontFamily: "'Barlow Condensed', sans-serif",
+              fontFamily: 'var(--font-condensed)',
               fontSize: '0.8rem',
               letterSpacing: '0.25em',
               textTransform: 'uppercase',
@@ -187,7 +205,7 @@ export default function Home() {
           <h1
             id="hero"
             style={{
-              fontFamily: "'Bebas Neue', sans-serif",
+              fontFamily: 'var(--font-display)',
               fontSize: 'clamp(4rem, 10vw, 9rem)',
               lineHeight: 0.9,
               color: 'var(--cream)',
@@ -215,17 +233,22 @@ export default function Home() {
             <em style={{ color: 'var(--gold)', fontStyle: 'normal' }}>.</em>
           </p>
           <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-            <a className="btn-gold" href="/pricing">
-              Start Your Transformation
-            </a>
-            <a className="btn-outline" href="/training">
-              See Real Results
-            </a>
+            <Button asChild variant="unstyled">
+              <a className="btn-gold" href="/pricing">
+                Start Your Transformation
+              </a>
+            </Button>
+            <Button asChild variant="unstyled">
+              <a className="btn-outline" href="/training">
+                See Real Results
+              </a>
+            </Button>
           </div>
         </div>
         <a
           href="#ticker"
           aria-label="Scroll to the next section"
+          className="animate-scroll-hint"
           style={{
             position: 'absolute',
             bottom: '2.5rem',
@@ -233,25 +256,14 @@ export default function Home() {
             display: 'flex',
             alignItems: 'center',
             gap: '0.5rem',
-            fontFamily: "'Barlow Condensed', sans-serif",
+            fontFamily: 'var(--font-condensed)',
             fontSize: '0.75rem',
             letterSpacing: '0.15em',
             textTransform: 'uppercase',
             color: 'var(--muted)',
-            animation: 'bounce 2s infinite',
           }}
         >
-          <svg
-            aria-hidden="true"
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <polyline points="6 9 12 15 18 9" />
-          </svg>
+          <ChevronDown size={14} aria-hidden="true" />
         </a>
       </section>
 
@@ -278,8 +290,6 @@ export default function Home() {
             }}
           >
             {[
-              // { val: 90, suffix: 'd', label: 'Transformation Window', sub: 'Guaranteed visible results or full refund' },
-              // { val:, suffix: '+', label: 'NYC Members', sub: 'Men who chose to finish what they started' },
               {
                 val: 97,
                 suffix: '%',
@@ -296,7 +306,7 @@ export default function Home() {
               <div key={i}>
                 <div
                   style={{
-                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontFamily: 'var(--font-display)',
                     fontSize: 'clamp(2.5rem, 4vw, 3.5rem)',
                     color: 'var(--gold)',
                     lineHeight: 1,
@@ -306,7 +316,7 @@ export default function Home() {
                 </div>
                 <div
                   style={{
-                    fontFamily: "'Barlow Condensed', sans-serif",
+                    fontFamily: 'var(--font-condensed)',
                     fontWeight: 700,
                     letterSpacing: '0.08em',
                     textTransform: 'uppercase',
@@ -353,7 +363,7 @@ export default function Home() {
               >
                 <span
                   style={{
-                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontFamily: 'var(--font-display)',
                     fontSize: '2.5rem',
                     color: 'var(--gold)',
                     opacity: 0.6,
@@ -365,7 +375,7 @@ export default function Home() {
                 <div>
                   <h3
                     style={{
-                      fontFamily: "'Barlow Condensed', sans-serif",
+                      fontFamily: 'var(--font-condensed)',
                       fontWeight: 700,
                       fontSize: '1.1rem',
                       letterSpacing: '0.06em',
@@ -406,7 +416,8 @@ export default function Home() {
               { label: 'Members Who Renew', val: '89%', sub: '' },
               { label: 'Recommend to a Friend', val: '96%', sub: '' },
             ].map((m, i) => (
-              <div
+              <Card
+                unstyled
                 key={i}
                 style={{
                   background: 'var(--card)',
@@ -416,7 +427,7 @@ export default function Home() {
               >
                 <div
                   style={{
-                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontFamily: 'var(--font-display)',
                     fontSize: '2.2rem',
                     color: 'var(--gold)',
                     lineHeight: 1,
@@ -426,7 +437,7 @@ export default function Home() {
                 </div>
                 <div
                   style={{
-                    fontFamily: "'Barlow Condensed', sans-serif",
+                    fontFamily: 'var(--font-condensed)',
                     fontWeight: 700,
                     letterSpacing: '0.06em',
                     textTransform: 'uppercase',
@@ -438,12 +449,9 @@ export default function Home() {
                   {m.label}
                 </div>
                 {m.sub && <div style={{ color: 'var(--muted)', fontSize: '0.78rem' }}>{m.sub}</div>}
-              </div>
+              </Card>
             ))}
           </div>
-          {/* <p style={{ color: 'var(--muted)', fontSize: '0.75rem', marginTop: '1.5rem' }}>
-            Data from 2,400+ APEX member cohort, 2025. Testosterone data from 90-day bloodwork comparison (n=312 Elite tier members).
-          </p> */}
         </div>
       </section>
 
@@ -460,85 +468,92 @@ export default function Home() {
             APEX workouts protect joints, maximize testosterone-boosting compound movements, and
             scale with your recovery capacity. Every exercise is video-guided and coach-reviewed.
           </p>
-          <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
-            {MONTHS.map((m, i) => (
-              <button
-                key={i}
-                onClick={() => setActiveMonth(i)}
-                style={{
-                  fontFamily: "'Barlow Condensed', sans-serif",
-                  fontWeight: 700,
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
-                  fontSize: '0.82rem',
-                  padding: '0.6rem 1.4rem',
-                  border: activeMonth === i ? '2px solid var(--gold)' : '1px solid var(--border)',
-                  background: activeMonth === i ? 'var(--gold-dim)' : 'transparent',
-                  color: activeMonth === i ? 'var(--gold)' : 'var(--muted)',
-                  transition: 'all 0.2s',
-                }}
-              >
-                {m.label}
-              </button>
-            ))}
-          </div>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-              gap: '1rem',
-            }}
+          <Tabs
+            unstyled
+            value={String(activeMonth)}
+            onValueChange={(value) => setActiveMonth(Number(value))}
           >
-            {MONTHS[activeMonth].days.map((d, i) => (
-              <div
-                key={i}
-                style={{
-                  background: 'var(--card)',
-                  border: '1px solid var(--border)',
-                  padding: '1.5rem',
-                }}
-              >
-                <div
+            <TabsList
+              unstyled
+              style={{ display: 'flex', gap: '0.5rem', marginBottom: '2rem', flexWrap: 'wrap' }}
+            >
+              {MONTHS.map((m, i) => (
+                <TabsTrigger
+                  unstyled
+                  value={String(i)}
+                  key={i}
                   style={{
-                    fontFamily: "'Barlow Condensed', sans-serif",
-                    fontSize: '0.7rem',
-                    letterSpacing: '0.2em',
-                    textTransform: 'uppercase',
-                    color: 'var(--gold)',
-                    marginBottom: '0.4rem',
-                  }}
-                >
-                  {d.day}
-                </div>
-                <div
-                  style={{
-                    fontFamily: "'Barlow Condensed', sans-serif",
+                    fontFamily: 'var(--font-condensed)',
                     fontWeight: 700,
-                    fontSize: '0.95rem',
-                    color: 'var(--cream)',
-                    marginBottom: '1rem',
-                    lineHeight: 1.3,
+                    letterSpacing: '0.1em',
+                    textTransform: 'uppercase',
+                    fontSize: '0.82rem',
+                    padding: '0.6rem 1.4rem',
+                    border: activeMonth === i ? '2px solid var(--gold)' : '1px solid var(--border)',
+                    background: activeMonth === i ? 'var(--gold-dim)' : 'transparent',
+                    color: activeMonth === i ? 'var(--gold)' : 'var(--muted)',
+                    transition: 'all 0.2s',
                   }}
                 >
-                  {d.title}
-                </div>
-                <ul
+                  {m.label}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+            <TabsContent
+              unstyled
+              value={String(activeMonth)}
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+                gap: '1rem',
+              }}
+            >
+              {MONTHS[activeMonth].days.map((d, i) => (
+                <Card
+                  unstyled
+                  key={i}
                   style={{
-                    listStyle: 'none',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '0.4rem',
+                    background: 'var(--card)',
+                    border: '1px solid var(--border)',
+                    padding: '1.5rem',
                   }}
                 >
-                  {/* {d.exercises.map((ex, j) => (
-                    <li key={j} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', color: 'var(--muted)', fontSize: '0.82rem' }}>
-                      <span style={{ color: 'var(--gold)', marginTop: '2px', flexShrink: 0 }}>›</span>{ex}
-                    </li>
-                  ))} */}
-                </ul>
-              </div>
-            ))}
-          </div>
+                  <div
+                    style={{
+                      fontFamily: 'var(--font-condensed)',
+                      fontSize: '0.7rem',
+                      letterSpacing: '0.2em',
+                      textTransform: 'uppercase',
+                      color: 'var(--gold)',
+                      marginBottom: '0.4rem',
+                    }}
+                  >
+                    {d.day}
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: 'var(--font-condensed)',
+                      fontWeight: 700,
+                      fontSize: '0.95rem',
+                      color: 'var(--cream)',
+                      marginBottom: '1rem',
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {d.title}
+                  </div>
+                  <ul
+                    style={{
+                      listStyle: 'none',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '0.4rem',
+                    }}
+                  ></ul>
+                </Card>
+              ))}
+            </TabsContent>
+          </Tabs>
         </div>
       </section>
 
@@ -554,16 +569,18 @@ export default function Home() {
             at the data.
           </p>
           <div style={{ overflowX: 'auto' }}>
-            <table
+            <Table
+              unstyled
               style={{
                 width: '100%',
                 borderCollapse: 'collapse',
-                fontFamily: "'Barlow Condensed', sans-serif",
+                fontFamily: 'var(--font-condensed)',
               }}
             >
-              <thead>
-                <tr>
-                  <th
+              <TableHeader unstyled>
+                <TableRow unstyled>
+                  <TableHead
+                    unstyled
                     style={{
                       padding: '1rem 1.5rem',
                       textAlign: 'left',
@@ -575,8 +592,9 @@ export default function Home() {
                     }}
                   >
                     Feature
-                  </th>
-                  <th
+                  </TableHead>
+                  <TableHead
+                    unstyled
                     style={{
                       padding: '1rem 1.5rem',
                       textAlign: 'center',
@@ -589,8 +607,9 @@ export default function Home() {
                     }}
                   >
                     APEX Health
-                  </th>
-                  <th
+                  </TableHead>
+                  <TableHead
+                    unstyled
                     style={{
                       padding: '1rem 1.5rem',
                       textAlign: 'center',
@@ -602,18 +621,20 @@ export default function Home() {
                     }}
                   >
                     Competitors
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody unstyled>
                 {COMPARE.map((row, i) => (
-                  <tr key={i} style={{ borderBottom: '1px solid var(--border)' }}>
-                    <td
+                  <TableRow unstyled key={i} style={{ borderBottom: '1px solid var(--border)' }}>
+                    <TableCell
+                      unstyled
                       style={{ padding: '1rem 1.5rem', color: 'var(--cream)', fontSize: '0.9rem' }}
                     >
                       {row.feature}
-                    </td>
-                    <td
+                    </TableCell>
+                    <TableCell
+                      unstyled
                       style={{
                         padding: '1rem 1.5rem',
                         textAlign: 'center',
@@ -624,8 +645,9 @@ export default function Home() {
                       }}
                     >
                       {row.apex}
-                    </td>
-                    <td
+                    </TableCell>
+                    <TableCell
+                      unstyled
                       style={{
                         padding: '1rem 1.5rem',
                         textAlign: 'center',
@@ -634,16 +656,18 @@ export default function Home() {
                       }}
                     >
                       {row.competitors}
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           </div>
           <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-            <a className="btn-gold" href="/pricing">
-              Choose Your Protocol
-            </a>
+            <Button asChild variant="unstyled">
+              <a className="btn-gold" href="/pricing">
+                Choose Your Protocol
+              </a>
+            </Button>
           </div>
         </div>
       </section>
@@ -655,63 +679,72 @@ export default function Home() {
           <h2 id="faq" className="section-h2" style={{ marginBottom: '3rem' }}>
             Why APEX?
           </h2>
-          {FAQS.map((faq, i) => (
-            <div key={i} style={{ borderBottom: '1px solid var(--border)' }}>
-              <button
-                onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                style={{
-                  width: '100%',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  padding: '1.5rem 0',
-                  background: 'transparent',
-                  border: 'none',
-                  textAlign: 'left',
-                  color: 'var(--cream)',
-                  fontFamily: "'Barlow Condensed', sans-serif",
-                  fontWeight: 700,
-                  fontSize: '1.05rem',
-                  letterSpacing: '0.04em',
-                  cursor: 'pointer',
-                }}
+          <Accordion
+            type="single"
+            collapsible
+            value={openFaq === null ? '' : String(openFaq)}
+            onValueChange={(value) => setOpenFaq(value === '' ? null : Number(value))}
+          >
+            {FAQS.map((faq, i) => (
+              <AccordionItem
+                unstyled
+                value={String(i)}
+                key={i}
+                style={{ borderBottom: '1px solid var(--border)' }}
               >
-                {faq.q}
-                <span
+                <AccordionTrigger
+                  unstyled
                   style={{
-                    color: 'var(--gold)',
-                    fontSize: '1.4rem',
-                    lineHeight: 1,
-                    flexShrink: 0,
-                    marginLeft: '1rem',
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: '1.5rem 0',
+                    background: 'transparent',
+                    border: 'none',
+                    textAlign: 'left',
+                    color: 'var(--cream)',
+                    fontFamily: 'var(--font-condensed)',
+                    fontWeight: 700,
+                    fontSize: '1.05rem',
+                    letterSpacing: '0.04em',
+                    cursor: 'pointer',
                   }}
                 >
-                  {openFaq === i ? '−' : '+'}
-                </span>
-              </button>
-              {openFaq === i && (
-                <p
-                  style={{
-                    color: 'var(--muted)',
-                    lineHeight: 1.7,
-                    paddingBottom: '1.5rem',
-                    fontSize: '0.95rem',
-                  }}
-                >
-                  {faq.a}
-                </p>
-              )}
-            </div>
-          ))}
+                  {faq.q}
+                  <span
+                    style={{
+                      color: 'var(--gold)',
+                      fontSize: '1.4rem',
+                      lineHeight: 1,
+                      flexShrink: 0,
+                      marginLeft: '1rem',
+                    }}
+                  >
+                    {openFaq === i ? (
+                      <Minus size={22} aria-hidden="true" />
+                    ) : (
+                      <Plus size={22} aria-hidden="true" />
+                    )}
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent unstyled>
+                  <p
+                    style={{
+                      color: 'var(--muted)',
+                      lineHeight: 1.7,
+                      paddingBottom: '1.5rem',
+                      fontSize: '0.95rem',
+                    }}
+                  >
+                    {faq.a}
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
-
-      <style>{`
-        @keyframes bounce {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(6px); }
-        }
-      `}</style>
     </>
   );
 }

@@ -1,3 +1,4 @@
+import { Card } from '@/components/ui/card';
 const FOUNDER_TIMELINE = [
   {
     year: 'UofM',
@@ -113,7 +114,7 @@ export default function AboutMePage() {
             <h1
               id="hero"
               style={{
-                fontFamily: "'Bebas Neue', sans-serif",
+                fontFamily: 'var(--font-display)',
                 fontSize: 'clamp(3.5rem, 7vw, 6.5rem)',
                 lineHeight: 0.92,
                 letterSpacing: '0.03em',
@@ -153,7 +154,7 @@ export default function AboutMePage() {
           >
             <div
               style={{
-                fontFamily: "'Barlow Condensed', sans-serif",
+                fontFamily: 'var(--font-condensed)',
                 letterSpacing: '0.18em',
                 textTransform: 'uppercase',
                 color: 'var(--gold)',
@@ -212,7 +213,7 @@ export default function AboutMePage() {
               >
                 <div
                   style={{
-                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontFamily: 'var(--font-display)',
                     fontSize: '2rem',
                     color: 'var(--gold)',
                     lineHeight: 1,
@@ -223,7 +224,7 @@ export default function AboutMePage() {
                 <div>
                   <h3
                     style={{
-                      fontFamily: "'Barlow Condensed', sans-serif",
+                      fontFamily: 'var(--font-condensed)',
                       fontSize: '1rem',
                       letterSpacing: '0.08em',
                       textTransform: 'uppercase',
@@ -267,7 +268,7 @@ export default function AboutMePage() {
             >
               <div
                 style={{
-                  fontFamily: "'Barlow Condensed', sans-serif",
+                  fontFamily: 'var(--font-condensed)',
                   fontSize: '0.75rem',
                   letterSpacing: '0.18em',
                   textTransform: 'uppercase',
@@ -301,7 +302,7 @@ export default function AboutMePage() {
             >
               <div
                 style={{
-                  fontFamily: "'Barlow Condensed', sans-serif",
+                  fontFamily: 'var(--font-condensed)',
                   fontSize: '0.75rem',
                   letterSpacing: '0.18em',
                   textTransform: 'uppercase',
@@ -349,7 +350,8 @@ export default function AboutMePage() {
             }}
           >
             {TRAINING_BLOCKS.map((block) => (
-              <div
+              <Card
+                unstyled
                 key={block.phase}
                 style={{
                   background: 'var(--card)',
@@ -359,7 +361,7 @@ export default function AboutMePage() {
               >
                 <div
                   style={{
-                    fontFamily: "'Barlow Condensed', sans-serif",
+                    fontFamily: 'var(--font-condensed)',
                     fontSize: '0.72rem',
                     letterSpacing: '0.18em',
                     textTransform: 'uppercase',
@@ -371,7 +373,7 @@ export default function AboutMePage() {
                 </div>
                 <h3
                   style={{
-                    fontFamily: "'Barlow Condensed', sans-serif",
+                    fontFamily: 'var(--font-condensed)',
                     fontSize: '1rem',
                     letterSpacing: '0.06em',
                     textTransform: 'uppercase',
@@ -382,7 +384,7 @@ export default function AboutMePage() {
                   {block.title}
                 </h3>
                 <p style={{ color: 'var(--muted)', lineHeight: 1.75 }}>{block.detail}</p>
-              </div>
+              </Card>
             ))}
           </div>
 
@@ -404,7 +406,7 @@ export default function AboutMePage() {
             >
               <div
                 style={{
-                  fontFamily: "'Barlow Condensed', sans-serif",
+                  fontFamily: "var(--font-condensed)",
                   fontSize: '0.82rem',
                   letterSpacing: '0.18em',
                   textTransform: 'uppercase',
@@ -422,7 +424,7 @@ export default function AboutMePage() {
                 width: '100%',
                 borderCollapse: 'collapse',
                 minWidth: 760,
-                fontFamily: "'Barlow Condensed', sans-serif",
+                fontFamily: "var(--font-condensed)",
               }}
             >
               <thead>

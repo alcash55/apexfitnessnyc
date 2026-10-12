@@ -1,8 +1,17 @@
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import {
+  Table,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+} from '@/components/ui/table';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getSessionClaims, isAdminClaims } from '@/lib/auth';
 import { getDb } from '@/lib/supabaseAdmin';
-import styles from './admin.module.css';
 
 export const dynamic = 'force-dynamic';
 
@@ -60,60 +69,76 @@ export default async function AdminClientsPage({
           {clients.length} client{clients.length === 1 ? '' : 's'} on file.
         </p>
 
-        <form method="get" className={styles.searchForm}>
-          <input
+        <form method="get" className="flex items-center gap-4 mb-8 flex-wrap">
+          <Input
+            unstyled
             type="text"
             name="q"
             defaultValue={query}
             placeholder="Search by name or email…"
-            className={styles.searchInput}
+            className="bg-charcoal [border:1px_solid_var(--border)] text-cream py-[0.85rem] px-5 font-condensed text-[0.95rem] tracking-[0.05em] min-w-[280px] placeholder:text-muted focus:[outline:none] focus:border-gold compact-down:min-w-0 compact-down:w-full"
           />
-          <button type="submit" className="btn-outline">
+          <Button variant="unstyled" type="submit" className="btn-outline">
             Search
-          </button>
+          </Button>
           {query && (
-            <Link href="/admin" className={styles.clearLink}>
+            <Link
+              href="/admin"
+              className="text-muted text-[0.85rem] tracking-[0.1em] uppercase [&:hover]:text-gold"
+            >
               Clear
             </Link>
           )}
         </form>
 
         {error ? (
-          <p className={styles.errorText}>We couldn&apos;t load clients right now.</p>
+          <p className="text-error text-[0.9rem]">We couldn&apos;t load clients right now.</p>
         ) : clients.length === 0 ? (
           <p className="section-sub">No clients match your search.</p>
         ) : (
-          <div className={styles.tableWrap}>
-            <table className={styles.table}>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Offering</th>
-                  <th>Nutrition Plan</th>
-                  <th>Portal Access</th>
-                </tr>
-              </thead>
-              <tbody>
+          <div className="overflow-x-auto [border:1px_solid_var(--border)]">
+            <Table
+              unstyled
+              className="w-full border-collapse text-[0.9rem] [&_th]:text-left [&_th]:font-condensed [&_th]:text-[0.75rem] [&_th]:tracking-button [&_th]:uppercase [&_th]:text-gold [&_th]:py-4 [&_th]:px-5 [&_th]:[border-bottom:1px_solid_var(--border)] [&_th]:bg-charcoal [&_th]:whitespace-nowrap [&_td]:py-4 [&_td]:px-5 [&_td]:[border-bottom:1px_solid_var(--border)] [&_td]:text-text [&_td]:whitespace-nowrap [&_tr:last-child_td]:[border-bottom:none] [&_tr:hover_td]:[background:rgba(200,_168,_75,_0.04)]"
+            >
+              <TableHeader unstyled>
+                <TableRow unstyled>
+                  <TableHead unstyled>Name</TableHead>
+                  <TableHead unstyled>Email</TableHead>
+                  <TableHead unstyled>Offering</TableHead>
+                  <TableHead unstyled>Nutrition Plan</TableHead>
+                  <TableHead unstyled>Portal Access</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody unstyled>
                 {clients.map((c) => (
-                  <tr key={c.id}>
-                    <td>
-                      <Link href={`/admin/clients/${c.id}`} className={styles.rowLink}>
+                  <TableRow unstyled key={c.id}>
+                    <TableCell unstyled>
+                      <Link
+                        href={`/admin/clients/${c.id}`}
+                        className="text-cream font-medium [&:hover]:text-gold"
+                      >
                         {c.first_name} {c.last_name}
                       </Link>
-                    </td>
-                    <td>{c.email}</td>
-                    <td>{c.offerings?.name ?? '—'}</td>
-                    <td>{c.nutrition_plans?.name ?? '—'}</td>
-                    <td>
-                      <span className={c.auth_user_id ? styles.badgeLinked : styles.badgeUnlinked}>
+                    </TableCell>
+                    <TableCell unstyled>{c.email}</TableCell>
+                    <TableCell unstyled>{c.offerings?.name ?? '—'}</TableCell>
+                    <TableCell unstyled>{c.nutrition_plans?.name ?? '—'}</TableCell>
+                    <TableCell unstyled>
+                      <span
+                        className={
+                          c.auth_user_id
+                            ? 'inline-block py-1 px-3 text-[0.75rem] tracking-logo uppercase font-condensed text-success [border:1px_solid_rgba(74,_222,_128,_0.3)]'
+                            : 'inline-block py-1 px-3 text-[0.75rem] tracking-logo uppercase font-condensed text-muted [border:1px_solid_var(--border)]'
+                        }
+                      >
                         {c.auth_user_id ? 'Linked' : 'Not linked'}
                       </span>
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           </div>
         )}
       </div>

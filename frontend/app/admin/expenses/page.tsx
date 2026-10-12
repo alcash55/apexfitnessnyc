@@ -1,10 +1,17 @@
+import {
+  Table,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+} from '@/components/ui/table';
 import { notFound } from 'next/navigation';
 import { getSessionClaims, isAdminClaims } from '@/lib/auth';
 import { getDb } from '@/lib/supabaseAdmin';
 import { formatDollars } from '@/lib/plans';
 import ExpenseForm from './expense-form';
 import ExpenseRowActions from './expense-row-actions';
-import styles from './expenses.module.css';
 
 export const dynamic = 'force-dynamic';
 
@@ -38,7 +45,7 @@ export default async function ExpensesPage() {
   return (
     <div className="section" style={{ minHeight: 'calc(100vh - 72px)' }}>
       <div className="section-inner">
-        <div className={styles.header}>
+        <div className="max-w-[600px] mb-12">
           <div className="section-label">Admin</div>
           <h2 className="section-h2">Business Expenses</h2>
           <p className="section-sub">
@@ -49,38 +56,43 @@ export default async function ExpensesPage() {
 
         <ExpenseForm />
 
-        <div className={styles.tableWrap}>
+        <div className="max-w-[1100px] overflow-x-auto [border:1px_solid_var(--border)]">
           {error ? (
-            <div className={styles.empty}>
+            <div className="p-10 text-center text-muted">
               We couldn&apos;t load expenses right now. Please try again shortly.
             </div>
           ) : !expenses || expenses.length === 0 ? (
-            <div className={styles.empty}>No expenses recorded yet.</div>
+            <div className="p-10 text-center text-muted">No expenses recorded yet.</div>
           ) : (
-            <table className={styles.table}>
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Amount</th>
-                  <th>Category</th>
-                  <th>Description</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
+            <Table
+              unstyled
+              className="w-full border-collapse font-condensed [&_th]:text-left [&_th]:text-[0.7rem] [&_th]:tracking-button [&_th]:uppercase [&_th]:text-gold [&_th]:py-4 [&_th]:px-5 [&_th]:bg-charcoal [&_th]:[border-bottom:1px_solid_var(--border)] [&_th]:whitespace-nowrap [&_td]:py-4 [&_td]:px-5 [&_td]:[border-bottom:1px_solid_var(--border)] [&_td]:text-text [&_td]:text-[0.95rem] [&_td]:whitespace-nowrap [&_tbody_tr:last-child_td]:[border-bottom:none]"
+            >
+              <TableHeader unstyled>
+                <TableRow unstyled>
+                  <TableHead unstyled>Date</TableHead>
+                  <TableHead unstyled>Amount</TableHead>
+                  <TableHead unstyled>Category</TableHead>
+                  <TableHead unstyled>Description</TableHead>
+                  <TableHead unstyled></TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody unstyled>
                 {expenses.map((row) => (
-                  <tr key={row.id}>
-                    <td>{row.expense_date}</td>
-                    <td className={styles.amount}>${formatDollars(row.amount_cents)}</td>
-                    <td>{row.category || '—'}</td>
-                    <td>{row.description || '—'}</td>
-                    <td>
+                  <TableRow unstyled key={row.id}>
+                    <TableCell unstyled>{row.expense_date}</TableCell>
+                    <TableCell unstyled className="text-cream tabular-nums">
+                      ${formatDollars(row.amount_cents)}
+                    </TableCell>
+                    <TableCell unstyled>{row.category || '—'}</TableCell>
+                    <TableCell unstyled>{row.description || '—'}</TableCell>
+                    <TableCell unstyled>
                       <ExpenseRowActions id={row.id} />
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           )}
         </div>
       </div>

@@ -1,3 +1,4 @@
+import { Check } from 'lucide-react';
 import Link from 'next/link';
 import { PLANS } from '@/lib/plans';
 
@@ -62,7 +63,7 @@ export default function PricingPage() {
             >
               <div
                 style={{
-                  fontFamily: "'Barlow Condensed', sans-serif",
+                  fontFamily: 'var(--font-condensed)',
                   fontSize: '0.75rem',
                   letterSpacing: '0.2em',
                   textTransform: 'uppercase',
@@ -74,7 +75,7 @@ export default function PricingPage() {
               </div>
               <h3
                 style={{
-                  fontFamily: "'Bebas Neue', sans-serif",
+                  fontFamily: 'var(--font-display)',
                   fontSize: '2.5rem',
                   color: 'var(--cream)',
                   marginBottom: '1rem',
@@ -110,7 +111,7 @@ export default function PricingPage() {
                       color: 'var(--cream)',
                     }}
                   >
-                    <span style={{ color: 'var(--gold)', fontSize: '0.8rem' }}>✓</span>
+                    <Check size={13} className="shrink-0 text-gold" aria-hidden="true" />
                     {f}
                   </li>
                 ))}
@@ -149,7 +150,7 @@ export default function PricingPage() {
             >
               <h3
                 style={{
-                  fontFamily: "'Bebas Neue', sans-serif",
+                  fontFamily: 'var(--font-display)',
                   fontSize: '2.5rem',
                   color: 'var(--cream)',
                   marginBottom: '1rem',
@@ -185,7 +186,7 @@ export default function PricingPage() {
                       color: 'var(--cream)',
                     }}
                   >
-                    <span style={{ color: 'var(--gold)', fontSize: '0.8rem' }}>✓</span>
+                    <Check size={13} className="shrink-0 text-gold" aria-hidden="true" />
                     {f}
                   </li>
                 ))}

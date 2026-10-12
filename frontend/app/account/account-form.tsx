@@ -1,7 +1,9 @@
 'use client';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 import { useState } from 'react';
-import styles from './account.module.css';
 
 type Profile = {
   first_name: string;
@@ -22,7 +24,14 @@ type Status = 'idle' | 'submitting' | 'success' | 'error';
 
 function FieldError({ text }: { text: string }) {
   return (
-    <span style={{ color: '#f87171', fontSize: '0.8rem', marginTop: '0.4rem', display: 'block' }}>
+    <span
+      style={{
+        color: 'var(--color-error)',
+        fontSize: '0.8rem',
+        marginTop: '0.4rem',
+        display: 'block',
+      }}
+    >
       {text}
     </span>
   );
@@ -75,35 +84,45 @@ export default function AccountForm({ profile }: { profile: Profile }) {
   }
 
   return (
-    <form className={styles.form} noValidate onSubmit={handleSubmit}>
-      <div className={styles.row}>
-        <div className={styles.field}>
-          <label className={styles.label} htmlFor="firstName">
+    <form className="max-w-[860px] flex flex-col gap-8" noValidate onSubmit={handleSubmit}>
+      <div className="grid grid-cols-[1fr_1fr] gap-8 mobile-down:grid-cols-[1fr] mobile-down:gap-6">
+        <div className="flex flex-col gap-2">
+          <Label
+            unstyled
+            className="font-condensed text-[0.75rem] tracking-label uppercase text-gold"
+            htmlFor="firstName"
+          >
             First Name
-          </label>
-          <input
+          </Label>
+          <Input
+            unstyled
             id="firstName"
             name="firstName"
             type="text"
             value={form.firstName}
             onChange={handleChange}
-            className={styles.input}
+            className="bg-charcoal [border:1px_solid_var(--border)] text-cream py-4 px-5 font-condensed text-[0.95rem] tracking-[0.05em] w-full [transition:border-color_0.2s] placeholder:text-muted focus:[outline:none] focus:border-gold disabled:text-muted disabled:cursor-not-allowed"
             aria-invalid={!!fieldErrors.firstName}
             required
           />
           {fieldErrors.firstName && <FieldError text={fieldErrors.firstName} />}
         </div>
-        <div className={styles.field}>
-          <label className={styles.label} htmlFor="lastName">
+        <div className="flex flex-col gap-2">
+          <Label
+            unstyled
+            className="font-condensed text-[0.75rem] tracking-label uppercase text-gold"
+            htmlFor="lastName"
+          >
             Last Name
-          </label>
-          <input
+          </Label>
+          <Input
+            unstyled
             id="lastName"
             name="lastName"
             type="text"
             value={form.lastName}
             onChange={handleChange}
-            className={styles.input}
+            className="bg-charcoal [border:1px_solid_var(--border)] text-cream py-4 px-5 font-condensed text-[0.95rem] tracking-[0.05em] w-full [transition:border-color_0.2s] placeholder:text-muted focus:[outline:none] focus:border-gold disabled:text-muted disabled:cursor-not-allowed"
             aria-invalid={!!fieldErrors.lastName}
             required
           />
@@ -111,59 +130,81 @@ export default function AccountForm({ profile }: { profile: Profile }) {
         </div>
       </div>
 
-      <div className={styles.row}>
-        <div className={styles.field}>
-          <label className={styles.label} htmlFor="phone">
+      <div className="grid grid-cols-[1fr_1fr] gap-8 mobile-down:grid-cols-[1fr] mobile-down:gap-6">
+        <div className="flex flex-col gap-2">
+          <Label
+            unstyled
+            className="font-condensed text-[0.75rem] tracking-label uppercase text-gold"
+            htmlFor="phone"
+          >
             Phone Number
-          </label>
-          <input
+          </Label>
+          <Input
+            unstyled
             id="phone"
             name="phone"
             type="tel"
             value={form.phone}
             onChange={handleChange}
-            className={styles.input}
+            className="bg-charcoal [border:1px_solid_var(--border)] text-cream py-4 px-5 font-condensed text-[0.95rem] tracking-[0.05em] w-full [transition:border-color_0.2s] placeholder:text-muted focus:[outline:none] focus:border-gold disabled:text-muted disabled:cursor-not-allowed"
             aria-invalid={!!fieldErrors.phone}
           />
           {fieldErrors.phone && <FieldError text={fieldErrors.phone} />}
         </div>
-        <div className={styles.field}>
-          <label className={styles.label} htmlFor="email">
+        <div className="flex flex-col gap-2">
+          <Label
+            unstyled
+            className="font-condensed text-[0.75rem] tracking-label uppercase text-gold"
+            htmlFor="email"
+          >
             Email Address
-          </label>
-          <input
+          </Label>
+          <Input
+            unstyled
             id="email"
             name="email"
             type="email"
             value={profile.email}
-            className={styles.input}
+            className="bg-charcoal [border:1px_solid_var(--border)] text-cream py-4 px-5 font-condensed text-[0.95rem] tracking-[0.05em] w-full [transition:border-color_0.2s] placeholder:text-muted focus:[outline:none] focus:border-gold disabled:text-muted disabled:cursor-not-allowed"
             disabled
             readOnly
           />
-          <span className={styles.hint}>Contact us to change the email on your login.</span>
+          <span className="text-muted text-[0.8rem]">
+            Contact us to change the email on your login.
+          </span>
         </div>
       </div>
 
-      <div className={styles.field}>
-        <label className={styles.label} htmlFor="address">
+      <div className="flex flex-col gap-2">
+        <Label
+          unstyled
+          className="font-condensed text-[0.75rem] tracking-label uppercase text-gold"
+          htmlFor="address"
+        >
           Address
-        </label>
-        <input
+        </Label>
+        <Input
+          unstyled
           id="address"
           name="address"
           type="text"
           value={form.address}
           onChange={handleChange}
-          className={styles.input}
+          className="bg-charcoal [border:1px_solid_var(--border)] text-cream py-4 px-5 font-condensed text-[0.95rem] tracking-[0.05em] w-full [transition:border-color_0.2s] placeholder:text-muted focus:[outline:none] focus:border-gold disabled:text-muted disabled:cursor-not-allowed"
           aria-invalid={!!fieldErrors.address}
         />
         {fieldErrors.address && <FieldError text={fieldErrors.address} />}
       </div>
 
-      <div className={styles.actions}>
-        <button type="submit" className="btn-gold" disabled={status === 'submitting'}>
+      <div className="flex items-center gap-6">
+        <Button
+          variant="unstyled"
+          type="submit"
+          className="btn-gold"
+          disabled={status === 'submitting'}
+        >
           {status === 'submitting' ? 'Saving…' : 'Save Changes'}
-        </button>
+        </Button>
 
         {message && (
           <p
@@ -172,7 +213,7 @@ export default function AccountForm({ profile }: { profile: Profile }) {
             style={{
               fontSize: '0.9rem',
               lineHeight: 1.6,
-              color: status === 'success' ? '#4ade80' : '#f87171',
+              color: status === 'success' ? 'var(--color-success)' : 'var(--color-error)',
             }}
           >
             {message}

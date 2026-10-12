@@ -1,3 +1,11 @@
+import {
+  Table,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+} from '@/components/ui/table';
 import Link from 'next/link';
 import { getSessionClaims } from '@/lib/auth';
 import { getDb } from '@/lib/supabaseAdmin';
@@ -19,7 +27,7 @@ type PaymentRow = {
 };
 
 const labelStyle: React.CSSProperties = {
-  fontFamily: "'Barlow Condensed', sans-serif",
+  fontFamily: 'var(--font-condensed)',
   letterSpacing: '0.1em',
   textTransform: 'uppercase',
   color: 'var(--gold)',
@@ -127,7 +135,7 @@ export default async function PaymentsPage({
             style={{
               textAlign: 'center',
               marginBottom: '2rem',
-              color: '#4ade80',
+              color: 'var(--color-success)',
               fontSize: '0.9rem',
             }}
           >
@@ -167,7 +175,7 @@ export default async function PaymentsPage({
         <div style={{ marginBottom: '4rem' }}>
           <h3
             style={{
-              fontFamily: "'Bebas Neue', sans-serif",
+              fontFamily: 'var(--font-display)',
               fontSize: '1.8rem',
               color: 'var(--cream)',
               marginBottom: '1.5rem',
@@ -196,7 +204,7 @@ export default async function PaymentsPage({
               >
                 <h4
                   style={{
-                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontFamily: 'var(--font-display)',
                     fontSize: '1.6rem',
                     color: plan.highlight ? 'var(--gold)' : 'var(--cream)',
                     marginBottom: '0.5rem',
@@ -228,7 +236,7 @@ export default async function PaymentsPage({
         <div>
           <h3
             style={{
-              fontFamily: "'Bebas Neue', sans-serif",
+              fontFamily: 'var(--font-display)',
               fontSize: '1.8rem',
               color: 'var(--cream)',
               marginBottom: '1.5rem',
@@ -242,30 +250,58 @@ export default async function PaymentsPage({
             <p style={{ color: 'var(--muted)', fontSize: '0.9rem' }}>No payments on file yet.</p>
           ) : (
             <div style={{ border: '1px solid var(--border)', overflowX: 'auto' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                <thead>
-                  <tr style={{ borderBottom: '1px solid var(--border)' }}>
-                    <th style={{ textAlign: 'left', padding: '1rem', ...labelStyle }}>Date</th>
-                    <th style={{ textAlign: 'left', padding: '1rem', ...labelStyle }}>Amount</th>
-                    <th style={{ textAlign: 'left', padding: '1rem', ...labelStyle }}>Note</th>
-                  </tr>
-                </thead>
-                <tbody>
+              <Table unstyled style={{ width: '100%', borderCollapse: 'collapse' }}>
+                <TableHeader unstyled>
+                  <TableRow unstyled style={{ borderBottom: '1px solid var(--border)' }}>
+                    <TableHead
+                      unstyled
+                      style={{ textAlign: 'left', padding: '1rem', ...labelStyle }}
+                    >
+                      Date
+                    </TableHead>
+                    <TableHead
+                      unstyled
+                      style={{ textAlign: 'left', padding: '1rem', ...labelStyle }}
+                    >
+                      Amount
+                    </TableHead>
+                    <TableHead
+                      unstyled
+                      style={{ textAlign: 'left', padding: '1rem', ...labelStyle }}
+                    >
+                      Note
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody unstyled>
                   {paymentRows.map((row) => (
-                    <tr key={row.id} style={{ borderBottom: '1px solid var(--border)' }}>
-                      <td style={{ padding: '1rem', color: 'var(--cream)', fontSize: '0.9rem' }}>
+                    <TableRow
+                      unstyled
+                      key={row.id}
+                      style={{ borderBottom: '1px solid var(--border)' }}
+                    >
+                      <TableCell
+                        unstyled
+                        style={{ padding: '1rem', color: 'var(--cream)', fontSize: '0.9rem' }}
+                      >
                         {row.payment_date}
-                      </td>
-                      <td style={{ padding: '1rem', color: 'var(--cream)', fontSize: '0.9rem' }}>
+                      </TableCell>
+                      <TableCell
+                        unstyled
+                        style={{ padding: '1rem', color: 'var(--cream)', fontSize: '0.9rem' }}
+                      >
                         ${formatDollars(row.amount_cents)}
-                      </td>
-                      <td style={{ padding: '1rem', color: 'var(--muted)', fontSize: '0.9rem' }}>
+                      </TableCell>
+                      <TableCell
+                        unstyled
+                        style={{ padding: '1rem', color: 'var(--muted)', fontSize: '0.9rem' }}
+                      >
                         {row.note ?? '—'}
-                      </td>
-                    </tr>
+                      </TableCell>
+                    </TableRow>
                   ))}
-                </tbody>
-              </table>
+                </TableBody>
+              </Table>
             </div>
           )}
         </div>

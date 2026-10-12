@@ -1,216 +1,199 @@
-:root {
-  --gold: #c8a84b;
-  --gold-dim: rgba(200, 168, 75, 0.15);
-  --black: #050810;
-  --charcoal: #0e1520;
-  --card: #111827;
-  --border: rgba(255, 255, 255, 0.07);
-  --cream: #f0ebe0;
-  --muted: rgba(
-    240,
-    235,
-    224,
-    0.58
-  ); /* 0.58 keeps >=4.5:1 contrast (WCAG AA) on every dark surface */
-  --text: rgba(240, 235, 224, 0.85);
-}
+@layer theme, base, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import '../styles/apex-theme.css';
+@import 'tailwindcss/utilities.css' layer(utilities);
+@import 'tw-animate-css';
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background: var(--black);
-  color: var(--text);
-  font-family: 'Inter', system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-button {
-  cursor: pointer;
-  font-family: inherit;
-}
-
-/* ── Noise overlay ─────────────────────────────────── */
-.noise {
-  pointer-events: none;
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-size: 200px 200px;
-}
-
-/* ── Shared brand logo ─────────────────────────────── */
-.nav-logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.9rem;
-  letter-spacing: 0.08em;
-  color: var(--cream);
-}
-
-/* ── Sections ──────────────────────────────────────── */
-.section {
-  padding: 7rem 5vw;
-  position: relative;
-  z-index: 1;
-}
-h1[id],
-h2[id],
-h3[id],
-h4[id] {
-  scroll-margin-top: 90px;
-}
-.section-inner {
-  max-width: 1300px;
-  margin: 0 auto;
-}
-.section-label {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 1rem;
-}
-.section-label::before {
-  content: '';
-  display: block;
-  width: 24px;
-  height: 1px;
-  background: var(--gold);
-}
-.section-h2 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  color: var(--cream);
-  letter-spacing: 0.03em;
-  line-height: 1;
-  margin-bottom: 1rem;
-}
-.section-sub {
-  color: var(--muted);
-  font-size: 1rem;
-  line-height: 1.7;
-  max-width: 560px;
-}
-
-/* ── Buttons ───────────────────────────────────────── */
-.btn-gold {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: var(--gold);
-  color: var(--black);
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  font-size: 1rem;
-  padding: 1rem 2.5rem;
-  border: none;
-  transition: opacity 0.2s;
-}
-.btn-gold:hover {
-  opacity: 0.88;
-}
-.btn-outline {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: transparent;
-  color: var(--cream);
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-size: 1rem;
-  padding: 1rem 2.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition:
-    border-color 0.2s,
-    color 0.2s;
-}
-.btn-outline:hover {
-  border-color: var(--gold);
-  color: var(--gold);
-}
-
-/* ── Ticker ────────────────────────────────────────── */
-.ticker-wrap {
-  overflow: hidden;
-  background: var(--gold);
-  padding: 0.6rem 0;
-  position: relative;
-  z-index: 1;
-}
-.ticker-track {
-  display: flex;
-  gap: 3rem;
-  width: max-content;
-  animation: ticker 28s linear infinite;
-}
-@keyframes ticker {
-  from {
-    transform: translateX(0);
+/* Retain the existing reset so forms and headings keep their current defaults. */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
-  to {
-    transform: translateX(-50%);
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    @apply font-body;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  button {
+    cursor: pointer;
+    font-family: inherit;
   }
 }
-.ticker-item {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  font-size: 0.82rem;
-  color: var(--black);
-  white-space: nowrap;
-}
-.ticker-dot {
-  width: 4px;
-  height: 4px;
-  background: var(--black);
-  border-radius: 50%;
-}
 
-/* ── Chat widget ───────────────────────────────────── */
-.chat-btn {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  z-index: 9999;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: none;
-  background: var(--gold);
-  color: var(--black);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 20px rgba(200, 168, 75, 0.4);
-  transition: transform 0.3s;
-}
-.chat-btn:hover {
-  transform: scale(1.08);
+@layer components {
+  /* ── Noise overlay ─────────────────────────────────── */
+  .noise {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+  }
+
+  /* ── Shared brand logo ─────────────────────────────── */
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.9rem;
+    letter-spacing: var(--tracking-logo);
+    color: var(--cream);
+  }
+
+  /* ── Sections ──────────────────────────────────────── */
+  .section {
+    @apply relative z-1 px-gutter py-section;
+  }
+  h1[id],
+  h2[id],
+  h3[id],
+  h4[id] {
+    scroll-margin-top: 90px;
+  }
+  .section-inner {
+    @apply mx-auto max-w-content;
+  }
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-condensed);
+    font-size: 0.75rem;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--gold);
+  }
+  .section-h2 {
+    font-family: var(--font-display);
+    font-size: var(--text-section);
+    color: var(--cream);
+    letter-spacing: 0.03em;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .section-sub {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: var(--container-copy);
+  }
+
+  /* ── Buttons ───────────────────────────────────────── */
+  .btn-gold {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--gold);
+    color: var(--black);
+    font-family: var(--font-condensed);
+    font-weight: 700;
+    letter-spacing: var(--tracking-button);
+    text-transform: uppercase;
+    font-size: 1rem;
+    padding: 1rem 2.5rem;
+    border: none;
+    transition: opacity 0.2s;
+  }
+  .btn-gold:hover {
+    opacity: 0.88;
+  }
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: var(--cream);
+    font-family: var(--font-condensed);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 1rem;
+    padding: 1rem 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition:
+      border-color 0.2s,
+      color 0.2s;
+  }
+  .btn-outline:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  /* ── Ticker ────────────────────────────────────────── */
+  .ticker-wrap {
+    overflow: hidden;
+    background: var(--gold);
+    padding: 0.6rem 0;
+    position: relative;
+    z-index: 1;
+  }
+  .ticker-track {
+    display: flex;
+    gap: 3rem;
+    width: max-content;
+    animation: var(--animate-ticker);
+  }
+  .ticker-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-condensed);
+    font-weight: 700;
+    letter-spacing: var(--tracking-button);
+    text-transform: uppercase;
+    font-size: 0.82rem;
+    color: var(--black);
+    white-space: nowrap;
+  }
+  .ticker-dot {
+    width: 4px;
+    height: 4px;
+    background: var(--black);
+    border-radius: 50%;
+  }
+
+  /* ── Chat widget ───────────────────────────────────── */
+  .chat-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 9999;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    background: var(--gold);
+    color: var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-gold);
+    transition: transform 0.3s;
+  }
+  .chat-btn:hover {
+    transform: scale(1.08);
+  }
 }

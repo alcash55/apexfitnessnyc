@@ -1,5 +1,7 @@
 'use client';
-import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { ArrowRight, ChartColumn, Dna, Shield, Zap } from 'lucide-react';
 
 const CREDENTIALS = [
   {
@@ -26,45 +28,28 @@ const CREDENTIALS = [
 
 const PHILOSOPHY = [
   {
-    icon: '⚡',
+    icon: Zap,
     title: 'Precision Over Volume',
     body: 'More is not better. The right stimulus, at the right time, with the right recovery: that is the equation. Every APEX session is engineered for maximum hormonal return with zero wasted effort.',
   },
   {
-    icon: '🧬',
+    icon: Dna,
     title: 'Biology-First Programming',
     body: 'Your physiology at 55 is not a limitation. It is a specification sheet. APEX is written to that spec. It is not adapted from a program designed for a 22-year-old who can recover overnight.',
   },
   {
-    icon: '📊',
+    icon: ChartColumn,
     title: 'Data Drives Decisions',
     body: 'Subjective feel is not a protocol. APEX tracks body composition, strength output, and recovery markers. The Agentic Engine then synthesizes that data into your next optimized training block.',
   },
   {
-    icon: '🛡️',
+    icon: Shield,
     title: 'Joint Longevity Is Non-Negotiable',
     body: 'You cannot build the body you want if your knees, shoulders, or lower back are always compromised. APEX uses trap bar variations, controlled eccentrics, and mandatory mobility work to make you bulletproof for the long game.',
   },
 ];
 
-// Agentic AI Dashboard data
-// const NEURAL_MATRIX = [
-//   { week: 'W1', movement: 'Trap Bar Deadlift', target: '4×6 @ 185 lbs', actual: '4×6 @ 185 lbs', aiNext: '4×6 @ 195 lbs', status: 'ON TARGET' },
-//   { week: 'W1', movement: 'Weighted Pull-Ups', target: '4×6 @ BW+25', actual: '3×6 @ BW+25', aiNext: '4×5 @ BW+25', status: 'SLIGHT LAG' },
-//   { week: 'W1', movement: 'Overhead Press', target: '4×6 @ 115 lbs', actual: '4×6 @ 120 lbs', aiNext: '4×6 @ 125 lbs', status: 'AHEAD' },
-//   { week: 'W2', movement: 'Romanian Deadlift', target: '4×8 @ 155 lbs', actual: '4×8 @ 155 lbs', aiNext: '4×8 @ 165 lbs', status: 'ON TARGET' },
-//   { week: 'W2', movement: 'Cable Lateral Raise', target: '4×15 @ 15 lbs', actual: '4×15 @ 17.5 lbs', aiNext: '4×15 @ 20 lbs', status: 'AHEAD' },
-// ];
-
-const STATUS_COLORS: Record<string, string> = {
-  'ON TARGET': '#C8A84B',
-  AHEAD: '#4CAF50',
-  'SLIGHT LAG': 'rgba(240,180,60,0.85)',
-};
-
 export default function AboutPage() {
-  const [activeTab, setActiveTab] = useState<'curriculum' | 'dashboard'>('curriculum');
-
   return (
     <>
       {/* ── Hero ───────────────────────────────────── */}
@@ -86,7 +71,7 @@ export default function AboutPage() {
             <h1
               id="hero"
               style={{
-                fontFamily: "'Bebas Neue', sans-serif",
+                fontFamily: 'var(--font-display)',
                 fontSize: 'clamp(3.5rem, 6vw, 6rem)',
                 lineHeight: 0.95,
                 color: 'var(--cream)',
@@ -116,9 +101,12 @@ export default function AboutPage() {
               someone half his age. I built APEX to fix that. Real science, real precision, a system
               that actually respects your biology.
             </p>
-            <a className="btn-gold" href="/pricing">
-              Start Your Protocol →
-            </a>
+            <Button asChild variant="unstyled">
+              <a className="btn-gold" href="/pricing">
+                Start Your Protocol{' '}
+                <ArrowRight size={16} className="inline-block align-middle" aria-hidden="true" />
+              </a>
+            </Button>
           </div>
 
           {/* Stat card column */}
@@ -129,9 +117,7 @@ export default function AboutPage() {
                 label: 'Years Coaching Men 40–70',
                 sub: 'Exclusively NYC-based clientele',
               },
-              // { val: '2,400+', label: 'APEX Members Transformed', sub: '97% program completion rate' },
               { val: '22 lbs', label: 'Average Fat Loss', sub: 'Across 90-day program cohort' },
-              // { val: '+34%', label: 'Testosterone Improvement', sub: 'From 90-day bloodwork comparisons' },
             ].map((s, i) => (
               <div
                 key={i}
@@ -146,7 +132,7 @@ export default function AboutPage() {
               >
                 <div
                   style={{
-                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontFamily: 'var(--font-display)',
                     fontSize: '2.5rem',
                     color: 'var(--gold)',
                     lineHeight: 1,
@@ -158,7 +144,7 @@ export default function AboutPage() {
                 <div>
                   <div
                     style={{
-                      fontFamily: "'Barlow Condensed', sans-serif",
+                      fontFamily: 'var(--font-condensed)',
                       fontWeight: 700,
                       letterSpacing: '0.08em',
                       textTransform: 'uppercase',
@@ -205,7 +191,7 @@ export default function AboutPage() {
               >
                 <span
                   style={{
-                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontFamily: 'var(--font-display)',
                     fontSize: '2.5rem',
                     color: 'var(--gold)',
                     opacity: 0.6,
@@ -217,7 +203,7 @@ export default function AboutPage() {
                 <div>
                   <h3
                     style={{
-                      fontFamily: "'Barlow Condensed', sans-serif",
+                      fontFamily: 'var(--font-condensed)',
                       fontWeight: 700,
                       fontSize: '1.1rem',
                       letterSpacing: '0.06em',
@@ -259,7 +245,8 @@ export default function AboutPage() {
             }}
           >
             {PHILOSOPHY.map((p, i) => (
-              <div
+              <Card
+                unstyled
                 key={i}
                 style={{
                   background: 'var(--card)',
@@ -267,10 +254,10 @@ export default function AboutPage() {
                   padding: '2.5rem 2rem',
                 }}
               >
-                <div style={{ fontSize: '2rem', marginBottom: '1.25rem' }}>{p.icon}</div>
+                <p.icon size={32} className="mb-5 text-gold" aria-hidden="true" />
                 <h3
                   style={{
-                    fontFamily: "'Barlow Condensed', sans-serif",
+                    fontFamily: 'var(--font-condensed)',
                     fontWeight: 700,
                     fontSize: '1.05rem',
                     letterSpacing: '0.08em',
@@ -284,7 +271,7 @@ export default function AboutPage() {
                 <p style={{ color: 'var(--muted)', lineHeight: 1.7, fontSize: '0.92rem' }}>
                   {p.body}
                 </p>
-              </div>
+              </Card>
             ))}
           </div>
         </div>
@@ -292,18 +279,13 @@ export default function AboutPage() {
 
       {/* ── Agentic AI Training Dashboard ──────────── */}
       <section className="section">
-        <div className="section-inner">
-          {/* <div className="section-label">Agentic AI Engine</div> */}
-          {/* <h2 className="section-h2">Your Training,<br />Optimized By AI.</h2> */}
-          <p className="section-sub" style={{ marginBottom: '3rem' }}>
-            {/* The APEX  Engine is not a chatbot. It is a performance data synthesizer — analyzing your logged sets, reps, and weight trajectories to automatically generate your next optimized training block. No coach necessary. No guesswork. */}
-          </p>
-
+        <div className="section-inner" style={{ paddingTop: '3rem' }}>
           {/* Dashboard toggle */}
           <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '2.5rem' }}>
-            <button
+            <Button
+              variant="unstyled"
               style={{
-                fontFamily: "'Barlow Condensed', sans-serif",
+                fontFamily: 'var(--font-condensed)',
                 fontWeight: 700,
                 letterSpacing: '0.12em',
                 textTransform: 'uppercase',
@@ -317,160 +299,75 @@ export default function AboutPage() {
               }}
             >
               Curriculum View
-            </button>
+            </Button>
           </div>
 
-          {activeTab === 'curriculum' && (
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-                gap: '1.5rem',
-              }}
-            >
-              {[
-                {
-                  phase: 'Month 1 — Foundation',
-                  focus: 'Joint Prep & Baseline Strength',
-                  detail:
-                    'Machine-based compound lifts, controlled eccentrics, 3×10 rep ranges. Building the armor before loading the cannon.',
-                },
-                {
-                  phase: 'Month 2 — Accelerate',
-                  focus: 'MetCon & Hormonal Output',
-                  detail:
-                    'Trap bar strength + sprint metabolic conditioning. Assault bike, sled, and rowing ergo work to spike testosterone naturally.',
-                },
-                {
-                  phase: 'Month 3 — Peak',
-                  focus: 'Max Output & Longevity',
-                  detail:
-                    'Heavy tension loads, eccentric control techniques, and a Functional Output day that proves the system worked from Day 1.',
-                },
-              ].map((block, i) => (
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+              gap: '1.5rem',
+            }}
+          >
+            {[
+              {
+                phase: 'Month 1 — Foundation',
+                focus: 'Joint Prep & Baseline Strength',
+                detail:
+                  'Machine-based compound lifts, controlled eccentrics, 3×10 rep ranges. Building the armor before loading the cannon.',
+              },
+              {
+                phase: 'Month 2 — Accelerate',
+                focus: 'MetCon & Hormonal Output',
+                detail:
+                  'Trap bar strength + sprint metabolic conditioning. Assault bike, sled, and rowing ergo work to spike testosterone naturally.',
+              },
+              {
+                phase: 'Month 3 — Peak',
+                focus: 'Max Output & Longevity',
+                detail:
+                  'Heavy tension loads, eccentric control techniques, and a Functional Output day that proves the system worked from Day 1.',
+              },
+            ].map((block, i) => (
+              <div
+                key={i}
+                style={{
+                  background: 'var(--charcoal)',
+                  border: '1px solid var(--border)',
+                  padding: '2rem',
+                }}
+              >
                 <div
-                  key={i}
                   style={{
-                    background: 'var(--charcoal)',
-                    border: '1px solid var(--border)',
-                    padding: '2rem',
+                    fontFamily: 'var(--font-condensed)',
+                    fontSize: '0.72rem',
+                    letterSpacing: '0.22em',
+                    textTransform: 'uppercase',
+                    color: 'var(--gold)',
+                    marginBottom: '0.5rem',
                   }}
                 >
-                  <div
-                    style={{
-                      fontFamily: "'Barlow Condensed', sans-serif",
-                      fontSize: '0.72rem',
-                      letterSpacing: '0.22em',
-                      textTransform: 'uppercase',
-                      color: 'var(--gold)',
-                      marginBottom: '0.5rem',
-                    }}
-                  >
-                    {block.phase}
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: "'Barlow Condensed', sans-serif",
-                      fontWeight: 700,
-                      fontSize: '1rem',
-                      color: 'var(--cream)',
-                      marginBottom: '1rem',
-                      letterSpacing: '0.04em',
-                      lineHeight: 1.3,
-                    }}
-                  >
-                    {block.focus}
-                  </div>
-                  <p style={{ color: 'var(--muted)', fontSize: '0.88rem', lineHeight: 1.7 }}>
-                    {block.detail}
-                  </p>
+                  {block.phase}
                 </div>
-              ))}
-            </div>
-          )}
-
-          {activeTab === 'dashboard' && (
-            <div>
-              {/* Neural Link Header */}
-              {/* <div style={{ background: 'var(--charcoal)', border: '1px solid var(--gold)', padding: '1.25rem 2rem', marginBottom: '1px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#4CAF50', boxShadow: '0 0 8px #4CAF50', animation: 'pulse 2s infinite' }} />
-                  <span style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', fontSize: '0.82rem', color: 'var(--gold)' }}>
-                    Neural Link — Alpha Protocol Active
-                  </span>
-                </div>
-                <span style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: '0.75rem', color: 'var(--muted)', letterSpacing: '0.1em' }}>
-                 ENGINE v1.0 · SYNCED
-                </span>
-              </div> */}
-
-              {/* Data matrix table */}
-              {/* <div style={{ overflowX: 'auto', background: 'var(--charcoal)', border: '1px solid var(--border)', borderTop: 'none' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: "'Barlow Condensed', sans-serif" }}>
-                  <thead>
-                    <tr style={{ background: 'rgba(200,168,75,0.05)' }}>
-                      {['Week', 'Movement', 'Alpha Protocol Target', 'Your Execution', 'AI Next Rec.', 'Status'].map((h) => (
-                        <th key={h} style={{ padding: '1rem 1.25rem', textAlign: 'left', fontSize: '0.72rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--muted)', borderBottom: '1px solid var(--border)', fontWeight: 700 }}>{h}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {NEURAL_MATRIX.map((row, i) => (
-                      <tr key={i} style={{ borderBottom: '1px solid var(--border)' }}>
-                        <td style={{ padding: '1rem 1.25rem', color: 'var(--gold)', fontSize: '0.85rem', fontWeight: 700 }}>{row.week}</td>
-                        <td style={{ padding: '1rem 1.25rem', color: 'var(--cream)', fontSize: '0.9rem', fontWeight: 700 }}>{row.movement}</td>
-                        <td style={{ padding: '1rem 1.25rem', color: 'var(--muted)', fontSize: '0.88rem' }}>{row.target}</td>
-                        <td style={{ padding: '1rem 1.25rem', color: 'var(--muted)', fontSize: '0.88rem' }}>{row.actual}</td>
-                        <td style={{ padding: '1rem 1.25rem', color: 'var(--gold)', fontSize: '0.88rem', fontWeight: 700 }}>{row.aiNext}</td>
-                        <td style={{ padding: '1rem 1.25rem' }}>
-                          <span style={{
-                            fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700,
-                            fontSize: '0.7rem', letterSpacing: '0.15em',
-                            color: STATUS_COLORS[row.status] ?? 'var(--muted)',
-                            background: `${STATUS_COLORS[row.status] ?? 'var(--muted)'}18`,
-                            padding: '0.25rem 0.75rem',
-                          }}>
-                            {row.status}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div> */}
-
-              {/* Synthesize button */}
-              {/* <div style={{ marginTop: '1.5rem', display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-                <button
+                <div
                   style={{
-                    fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, letterSpacing: '0.15em',
-                    textTransform: 'uppercase', fontSize: '0.9rem', padding: '1rem 2.5rem',
-                    background: 'var(--gold)', color: 'var(--black)', border: 'none', cursor: 'pointer', transition: 'opacity 0.2s',
+                    fontFamily: 'var(--font-condensed)',
+                    fontWeight: 700,
+                    fontSize: '1rem',
+                    color: 'var(--cream)',
+                    marginBottom: '1rem',
+                    letterSpacing: '0.04em',
+                    lineHeight: 1.3,
                   }}
-                  onMouseOver={(e) => (e.currentTarget.style.opacity = '0.88')}
-                  onMouseOut={(e) => (e.currentTarget.style.opacity = '1')}
                 >
-                  ⚡ Synthesize Next Week
-                </button>
-                <span style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: '0.8rem', color: 'var(--muted)', letterSpacing: '0.08em' }}>
-                  AI will generate a Target Optimized training block based on your logged data
-                </span>
-              </div> */}
-
-              {/* Nutrition auto-regulate callout */}
-              {/* <div style={{ marginTop: '2rem', background: 'rgba(200,168,75,0.06)', border: '1px solid rgba(200,168,75,0.25)', padding: '1.5rem 2rem', display: 'flex', alignItems: 'flex-start', gap: '1.5rem' }}>
-                <span style={{ fontSize: '1.5rem', lineHeight: 1 }}>🧬</span>
-                <div>
-                  <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--gold)', fontSize: '0.82rem', marginBottom: '0.4rem' }}>
-                    Auto-Regulated Nutrition Active
-                  </div>
-                  <p style={{ color: 'var(--muted)', fontSize: '0.88rem', lineHeight: 1.6 }}>
-                    Macro targets are being calculated from your current bodyweight trajectory. A stalled weight-loss input will trigger a caloric reduction mapped precisely to your 7-Day Nutrition Protocol — no manual adjustments required.
-                  </p>
+                  {block.focus}
                 </div>
-              </div> */}
-            </div>
-          )}
+                <p style={{ color: 'var(--muted)', fontSize: '0.88rem', lineHeight: 1.7 }}>
+                  {block.detail}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -495,12 +392,17 @@ export default function AboutPage() {
             regardless.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a className="btn-gold" href="/pricing">
-              Choose Your Protocol →
-            </a>
-            <a className="btn-outline" href="/">
-              See The Method
-            </a>
+            <Button asChild variant="unstyled">
+              <a className="btn-gold" href="/pricing">
+                Choose Your Protocol{' '}
+                <ArrowRight size={16} className="inline-block align-middle" aria-hidden="true" />
+              </a>
+            </Button>
+            <Button asChild variant="unstyled">
+              <a className="btn-outline" href="/">
+                See The Method
+              </a>
+            </Button>
           </div>
         </div>
       </section>

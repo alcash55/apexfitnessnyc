@@ -5,7 +5,7 @@ const maybeSingleMock = vi.fn();
 const selectAfterUpdateMock = vi.fn(() => ({ maybeSingle: maybeSingleMock }));
 const eqMock = vi.fn(() => ({ maybeSingle: maybeSingleMock, select: selectAfterUpdateMock }));
 const selectMock = vi.fn(() => ({ eq: eqMock }));
-const updateMock = vi.fn(() => ({ eq: eqMock }));
+const updateMock = vi.fn((_data: unknown) => ({ eq: eqMock }));
 const fromMock = vi.fn(() => ({ select: selectMock, update: updateMock }));
 
 vi.mock('@/lib/supabaseAdmin', () => ({

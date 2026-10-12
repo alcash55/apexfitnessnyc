@@ -3,6 +3,10 @@ import type { NextConfig } from 'next';
 const isStaticExport = process.env.STATIC_EXPORT === 'true';
 
 const nextConfig: NextConfig = {
+  ...(process.env.PLAYWRIGHT_TEST === 'true' && {
+    distDir: '.next-playwright',
+    devIndicators: false,
+  }),
   ...(isStaticExport && {
     output: 'export',
     basePath: '/apexfitnessnyc',

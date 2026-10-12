@@ -82,7 +82,7 @@ export default async function CheckoutSuccessPage({
             >
               <h3
                 style={{
-                  fontFamily: "'Barlow Condensed', sans-serif",
+                  fontFamily: 'var(--font-condensed)',
                   letterSpacing: '0.15em',
                   textTransform: 'uppercase',
                   color: 'var(--gold)',

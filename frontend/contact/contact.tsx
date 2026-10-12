@@ -1,6 +1,8 @@
 'use client';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
-import styles from './contact.module.css';
 import useContact from './useContact';
 
 export default function ContactPage() {
@@ -24,7 +26,7 @@ export default function ContactPage() {
   return (
     <div className="section" style={{ minHeight: 'calc(100vh - 72px)' }}>
       <div className="section-inner">
-        <div className={styles.header}>
+        <div className="max-w-[600px] mb-16">
           <div className="section-label">Contact</div>
           <h2 className="section-h2">Get In Touch</h2>
           <p className="section-sub">
@@ -33,75 +35,95 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <form className={styles.form} noValidate onSubmit={handleSubmit}>
-          <div className={styles.row}>
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="firstName">
+        <form className="max-w-[860px] flex flex-col gap-8" noValidate onSubmit={handleSubmit}>
+          <div className="grid grid-cols-[1fr_1fr] gap-8 mobile-down:grid-cols-[1fr] mobile-down:gap-6">
+            <div className="flex flex-col gap-2">
+              <Label
+                unstyled
+                className="font-condensed text-[0.75rem] tracking-label uppercase text-gold"
+                htmlFor="firstName"
+              >
                 First Name
-              </label>
-              <input
+              </Label>
+              <Input
+                unstyled
                 id="firstName"
                 name="firstName"
                 type="text"
                 placeholder="FIRST NAME"
                 value={form.firstName}
                 onChange={handleChange}
-                className={styles.input}
+                className="bg-charcoal [border:1px_solid_var(--border)] text-cream py-4 px-5 font-condensed text-[0.95rem] tracking-[0.05em] w-full [transition:border-color_0.2s] placeholder:text-muted focus:[outline:none] focus:border-gold"
                 required
               />
             </div>
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="lastName">
+            <div className="flex flex-col gap-2">
+              <Label
+                unstyled
+                className="font-condensed text-[0.75rem] tracking-label uppercase text-gold"
+                htmlFor="lastName"
+              >
                 Last Name
-              </label>
-              <input
+              </Label>
+              <Input
+                unstyled
                 id="lastName"
                 name="lastName"
                 type="text"
                 placeholder="LAST NAME"
                 value={form.lastName}
                 onChange={handleChange}
-                className={styles.input}
+                className="bg-charcoal [border:1px_solid_var(--border)] text-cream py-4 px-5 font-condensed text-[0.95rem] tracking-[0.05em] w-full [transition:border-color_0.2s] placeholder:text-muted focus:[outline:none] focus:border-gold"
                 required
               />
             </div>
           </div>
 
-          <div className={styles.row}>
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="phone">
+          <div className="grid grid-cols-[1fr_1fr] gap-8 mobile-down:grid-cols-[1fr] mobile-down:gap-6">
+            <div className="flex flex-col gap-2">
+              <Label
+                unstyled
+                className="font-condensed text-[0.75rem] tracking-label uppercase text-gold"
+                htmlFor="phone"
+              >
                 Phone Number
-              </label>
-              <input
+              </Label>
+              <Input
+                unstyled
                 id="phone"
                 name="phone"
                 type="tel"
                 placeholder="PHONE NUMBER"
                 value={form.phone}
                 onChange={handleChange}
-                className={styles.input}
+                className="bg-charcoal [border:1px_solid_var(--border)] text-cream py-4 px-5 font-condensed text-[0.95rem] tracking-[0.05em] w-full [transition:border-color_0.2s] placeholder:text-muted focus:[outline:none] focus:border-gold"
               />
             </div>
-            <div className={styles.field}>
-              <label className={styles.label} htmlFor="email">
+            <div className="flex flex-col gap-2">
+              <Label
+                unstyled
+                className="font-condensed text-[0.75rem] tracking-label uppercase text-gold"
+                htmlFor="email"
+              >
                 Email Address
-              </label>
-              <input
+              </Label>
+              <Input
+                unstyled
                 id="email"
                 name="email"
                 type="email"
                 placeholder="EMAIL ADDRESS"
                 value={form.email}
                 onChange={handleChange}
-                className={styles.input}
+                className="bg-charcoal [border:1px_solid_var(--border)] text-cream py-4 px-5 font-condensed text-[0.95rem] tracking-[0.05em] w-full [transition:border-color_0.2s] placeholder:text-muted focus:[outline:none] focus:border-gold"
                 required
               />
             </div>
           </div>
 
-          <button type="submit" className="btn-gold">
+          <Button variant="unstyled" type="submit" className="btn-gold">
             Submit
-          </button>
+          </Button>
         </form>
       </div>
     </div>

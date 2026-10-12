@@ -20,7 +20,7 @@ export default function PrivacyPage() {
           style={{ marginTop: '3rem', color: 'var(--muted)', fontSize: '0.95rem', lineHeight: 1.8 }}
         >
           <p>
-            [COMPANY NAME] (&quot;APEX,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;)
+            APEX Fitness (&quot;APEX,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;)
             operates this website and the coaching services offered through it (the
             &quot;Service&quot;). This Privacy Policy explains what personal information we collect,
             how we use and protect it, and the choices and rights available to you. By using the
@@ -192,7 +192,7 @@ export default function PrivacyPage() {
 
 const sectionHeading: React.CSSProperties = {
   color: 'var(--cream)',
-  fontFamily: "'Barlow Condensed', sans-serif",
+  fontFamily: 'var(--font-condensed)',
   letterSpacing: '0.04em',
   fontSize: '1.15rem',
   marginTop: '2.5rem',
