@@ -21,22 +21,24 @@ const FOUNDER_TIMELINE = [
   },
 ];
 
-
 const TRAINING_BLOCKS = [
   {
     phase: 'Month 1',
     title: 'Foundation and Joint Prep',
-    detail: 'Controlled eccentrics, machine-supported compound work, and baseline movement quality build resilience before heavier loading begins.',
+    detail:
+      'Controlled eccentrics, machine-supported compound work, and baseline movement quality build resilience before heavier loading begins.',
   },
   {
     phase: 'Month 2',
     title: 'Acceleration and Hormonal Output',
-    detail: 'Trap bar strength, sled work, rowing, and sprint intervals raise work capacity while preserving joints and recovery bandwidth.',
+    detail:
+      'Trap bar strength, sled work, rowing, and sprint intervals raise work capacity while preserving joints and recovery bandwidth.',
   },
   {
     phase: 'Month 3',
     title: 'Peak Output and Longevity',
-    detail: 'Heavier tension, strategic carries, and mobility-focused support work turn the previous eight weeks into visible performance change.',
+    detail:
+      'Heavier tension, strategic carries, and mobility-focused support work turn the previous eight weeks into visible performance change.',
   },
 ];
 
@@ -189,7 +191,9 @@ export default function AboutMePage() {
       <section className="section" style={{ background: 'var(--charcoal)' }}>
         <div className="section-inner">
           <div className="section-label">Founder Timeline</div>
-          <h2 id="founder-timeline" className="section-h2">How The System Took Shape.</h2>
+          <h2 id="founder-timeline" className="section-h2">
+            How The System Took Shape.
+          </h2>
           <p className="section-sub" style={{ marginBottom: '3rem' }}>
             The coaching model came first. The software layer came later. Both came from the same
             frustration: older men were doing serious work with tools that were not built for them.
@@ -240,7 +244,9 @@ export default function AboutMePage() {
       <section className="section">
         <div className="section-inner">
           <div className="section-label">Client Stories</div>
-          <h2 id="results" className="section-h2">Real Results From Real Men.</h2>
+          <h2 id="results" className="section-h2">
+            Real Results From Real Men.
+          </h2>
           <p className="section-sub" style={{ marginBottom: '3rem' }}>
             The proof is in the people. Here is what two of our clients have to say about their
             experience with the APEX system.
@@ -314,9 +320,9 @@ export default function AboutMePage() {
                   marginBottom: '1.25rem',
                 }}
               >
-                &ldquo;I have always been a taller individual so it is hard for me to understand
-                how to perform complex movements in the right way. Apex has helped me learn how to
-                train the right way for someone my size and I love the way my body looks.&rdquo;
+                &ldquo;I have always been a taller individual so it is hard for me to understand how
+                to perform complex movements in the right way. Apex has helped me learn how to train
+                the right way for someone my size and I love the way my body looks.&rdquo;
               </p>
             </div>
           </div>
@@ -326,7 +332,9 @@ export default function AboutMePage() {
       <section className="section" style={{ background: 'var(--charcoal)' }}>
         <div className="section-inner">
           <div className="section-label">Training + AI</div>
-          <h2 id="training-logic" className="section-h2">The Program Logic Behind The Dashboard.</h2>
+          <h2 id="training-logic" className="section-h2">
+            The Program Logic Behind The Dashboard.
+          </h2>
           <p className="section-sub" style={{ marginBottom: '3rem' }}>
             Three phases, twelve weeks, one system. Every block builds on the last to produce
             measurable body-composition change without destroying your joints.
@@ -462,9 +470,9 @@ export default function AboutMePage() {
                     </td>
                   </tr>
                 ))} */}
-              {/* </tbody>
+          {/* </tbody>
             </table>
-          </div> */ }
+          </div> */}
         </div>
       </section>
 

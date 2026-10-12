@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
   if (!claims.client_id) {
     return NextResponse.json(
       { error: 'No client profile is linked to this account. Contact us to get set up.' },
-      { status: 403 }
+      { status: 403 },
     );
   }
 
@@ -88,7 +88,7 @@ export async function POST(request: NextRequest) {
     console.error('[payments/checkout] session creation failed:', err);
     return NextResponse.json(
       { error: 'We could not start checkout. Please try again or contact us.' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

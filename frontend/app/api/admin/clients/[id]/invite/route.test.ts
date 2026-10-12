@@ -87,7 +87,7 @@ describe('POST /api/admin/clients/[id]/invite', () => {
       'client@example.com',
       expect.objectContaining({
         redirectTo: 'https://apexfitnessnyc.com/auth/callback?next=/account/set-password',
-      })
+      }),
     );
     expect(updateMock).toHaveBeenCalledWith({
       email: 'client@example.com',

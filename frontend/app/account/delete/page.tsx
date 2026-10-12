@@ -15,9 +15,12 @@ export default function DeleteAccountPage() {
           <h3>What happens</h3>
           <p>You will be signed out immediately and will no longer be able to log in.</p>
           <p>
-            Your payment history and health/training records are <strong>not deleted</strong> —
-            they stay on file, consistent with our{' '}
-            <a href="/privacy" style={{ color: 'var(--gold)' }}>Privacy Policy</a>.
+            Your payment history and health/training records are <strong>not deleted</strong> — they
+            stay on file, consistent with our{' '}
+            <a href="/privacy" style={{ color: 'var(--gold)' }}>
+              Privacy Policy
+            </a>
+            .
           </p>
           <p>If you want access again, your coach will need to send you a new invite.</p>
         </div>

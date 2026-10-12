@@ -80,7 +80,9 @@ export async function verifyIsAdmin(authUserId: string): Promise<boolean> {
  * intact — clients.auth_user_id clears itself via the column's
  * "on delete set null" foreign key, no manual null-out needed.
  */
-export async function deactivateClientAccount(authUserId: string): Promise<{ error: string | null }> {
+export async function deactivateClientAccount(
+  authUserId: string,
+): Promise<{ error: string | null }> {
   const { error } = await getDb().auth.admin.deleteUser(authUserId);
   return { error: error?.message ?? null };
 }
@@ -94,7 +96,7 @@ export async function deactivateClientAccount(authUserId: string): Promise<{ err
  */
 export async function purgeClientAccount(
   clientId: string,
-  authUserId: string | null
+  authUserId: string | null,
 ): Promise<{ error: string | null }> {
   const { error: dbError } = await getDb().from('clients').delete().eq('id', clientId);
   if (dbError) return { error: dbError.message };

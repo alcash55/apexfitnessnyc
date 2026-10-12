@@ -53,32 +53,54 @@ export default async function CheckoutSuccessPage({
       <div className="section-inner" style={{ maxWidth: 720, textAlign: 'center' }}>
         {paid ? (
           <>
-            <div className="section-label" style={{ justifyContent: 'center' }}>Confirmed</div>
-            <h2 className="section-h2" style={{ margin: '0.5rem 0 1.5rem' }}>You&apos;re In</h2>
+            <div className="section-label" style={{ justifyContent: 'center' }}>
+              Confirmed
+            </div>
+            <h2 className="section-h2" style={{ margin: '0.5rem 0 1.5rem' }}>
+              You&apos;re In
+            </h2>
 
             <p className="section-sub" style={{ marginBottom: '2.5rem' }}>
               Payment received{amount && ` — ${amount}`}
               {planName && ` for the ${planName}`}.
               {email && (
                 <>
-                  {' '}A receipt is on its way to <strong style={{ color: 'var(--cream)' }}>{email}</strong>.
+                  {' '}
+                  A receipt is on its way to{' '}
+                  <strong style={{ color: 'var(--cream)' }}>{email}</strong>.
                 </>
               )}
             </p>
 
-            <div style={{
-              background: 'var(--charcoal)', border: '1px solid var(--border)',
-              padding: '2.5rem', textAlign: 'left',
-            }}>
-              <h3 style={{
-                fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: '0.15em',
-                textTransform: 'uppercase', color: 'var(--gold)', fontSize: '0.9rem',
-                marginBottom: '1.5rem',
-              }}>
+            <div
+              style={{
+                background: 'var(--charcoal)',
+                border: '1px solid var(--border)',
+                padding: '2.5rem',
+                textAlign: 'left',
+              }}
+            >
+              <h3
+                style={{
+                  fontFamily: "'Barlow Condensed', sans-serif",
+                  letterSpacing: '0.15em',
+                  textTransform: 'uppercase',
+                  color: 'var(--gold)',
+                  fontSize: '0.9rem',
+                  marginBottom: '1.5rem',
+                }}
+              >
                 What happens next
               </h3>
 
-              <ol style={{ color: 'var(--cream)', fontSize: '0.95rem', lineHeight: 2, paddingLeft: '1.2rem' }}>
+              <ol
+                style={{
+                  color: 'var(--cream)',
+                  fontSize: '0.95rem',
+                  lineHeight: 2,
+                  paddingLeft: '1.2rem',
+                }}
+              >
                 <li>You&apos;ll get a payment receipt from Stripe by email.</li>
                 <li>
                   A coach will contact you within 24 hours to collect your intake details and
@@ -89,7 +111,12 @@ export default async function CheckoutSuccessPage({
                     {bookingUrl ? (
                       <>
                         Book your first session here:{' '}
-                        <a href={bookingUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--gold)' }}>
+                        <a
+                          href={bookingUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ color: 'var(--gold)' }}
+                        >
                           choose a time
                         </a>
                         .
@@ -103,20 +130,37 @@ export default async function CheckoutSuccessPage({
               </ol>
             </div>
 
-            <p style={{ marginTop: '2rem', color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.7 }}>
-              Questions before then? <Link href="/contact" style={{ color: 'var(--gold)' }}>Get in touch</Link>.
+            <p
+              style={{
+                marginTop: '2rem',
+                color: 'var(--muted)',
+                fontSize: '0.85rem',
+                lineHeight: 1.7,
+              }}
+            >
+              Questions before then?{' '}
+              <Link href="/contact" style={{ color: 'var(--gold)' }}>
+                Get in touch
+              </Link>
+              .
             </p>
           </>
         ) : (
           <>
-            <div className="section-label" style={{ justifyContent: 'center' }}>Pending</div>
-            <h2 className="section-h2" style={{ margin: '0.5rem 0 1.5rem' }}>We couldn&apos;t confirm this payment</h2>
+            <div className="section-label" style={{ justifyContent: 'center' }}>
+              Pending
+            </div>
+            <h2 className="section-h2" style={{ margin: '0.5rem 0 1.5rem' }}>
+              We couldn&apos;t confirm this payment
+            </h2>
             <p className="section-sub" style={{ marginBottom: '2rem' }}>
               If you just paid, your bank may still be processing it and your receipt will arrive
-              shortly. If you were charged and don&apos;t hear from us within an hour, contact us and
-              we&apos;ll sort it out straight away.
+              shortly. If you were charged and don&apos;t hear from us within an hour, contact us
+              and we&apos;ll sort it out straight away.
             </p>
-            <Link href="/contact" className="btn-gold">Contact Us</Link>
+            <Link href="/contact" className="btn-gold">
+              Contact Us
+            </Link>
           </>
         )}
       </div>

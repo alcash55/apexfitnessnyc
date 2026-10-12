@@ -78,7 +78,9 @@ export default function AccountForm({ profile }: { profile: Profile }) {
     <form className={styles.form} noValidate onSubmit={handleSubmit}>
       <div className={styles.row}>
         <div className={styles.field}>
-          <label className={styles.label} htmlFor="firstName">First Name</label>
+          <label className={styles.label} htmlFor="firstName">
+            First Name
+          </label>
           <input
             id="firstName"
             name="firstName"
@@ -92,7 +94,9 @@ export default function AccountForm({ profile }: { profile: Profile }) {
           {fieldErrors.firstName && <FieldError text={fieldErrors.firstName} />}
         </div>
         <div className={styles.field}>
-          <label className={styles.label} htmlFor="lastName">Last Name</label>
+          <label className={styles.label} htmlFor="lastName">
+            Last Name
+          </label>
           <input
             id="lastName"
             name="lastName"
@@ -109,7 +113,9 @@ export default function AccountForm({ profile }: { profile: Profile }) {
 
       <div className={styles.row}>
         <div className={styles.field}>
-          <label className={styles.label} htmlFor="phone">Phone Number</label>
+          <label className={styles.label} htmlFor="phone">
+            Phone Number
+          </label>
           <input
             id="phone"
             name="phone"
@@ -122,7 +128,9 @@ export default function AccountForm({ profile }: { profile: Profile }) {
           {fieldErrors.phone && <FieldError text={fieldErrors.phone} />}
         </div>
         <div className={styles.field}>
-          <label className={styles.label} htmlFor="email">Email Address</label>
+          <label className={styles.label} htmlFor="email">
+            Email Address
+          </label>
           <input
             id="email"
             name="email"
@@ -137,7 +145,9 @@ export default function AccountForm({ profile }: { profile: Profile }) {
       </div>
 
       <div className={styles.field}>
-        <label className={styles.label} htmlFor="address">Address</label>
+        <label className={styles.label} htmlFor="address">
+          Address
+        </label>
         <input
           id="address"
           name="address"

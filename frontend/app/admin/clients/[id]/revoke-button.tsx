@@ -12,7 +12,7 @@ export default function RevokeButton({ clientId }: { clientId: string }) {
   async function handleRevoke() {
     if (
       !window.confirm(
-        "Deactivate this client's portal login? They will no longer be able to sign in until re-invited."
+        "Deactivate this client's portal login? They will no longer be able to sign in until re-invited.",
       )
     ) {
       return;

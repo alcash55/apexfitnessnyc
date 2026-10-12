@@ -1,4 +1,4 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const isStaticExport = process.env.STATIC_EXPORT === 'true';
 

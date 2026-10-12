@@ -81,7 +81,7 @@ export default async function AdminClientDetailPage({
     db
       .from('health_metrics')
       .select(
-        'id,recorded_date,weight,body_fat_percent,testosterone_level,blood_oxygenation,dietary_restrictions'
+        'id,recorded_date,weight,body_fat_percent,testosterone_level,blood_oxygenation,dietary_restrictions',
       )
       .eq('client_id', id)
       .order('recorded_date', { ascending: false }),
@@ -147,9 +147,7 @@ export default async function AdminClientDetailPage({
         </div>
 
         <div className={styles.actions}>
-          {!client.auth_user_id && (
-            <InviteForm clientId={client.id} initialEmail={client.email} />
-          )}
+          {!client.auth_user_id && <InviteForm clientId={client.id} initialEmail={client.email} />}
           {client.auth_user_id && <RevokeButton clientId={client.id} />}
           <PurgeForm clientId={client.id} />
         </div>

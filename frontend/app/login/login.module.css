@@ -30,7 +30,9 @@
   width: 100%;
   transition: border-color 0.2s;
 }
-.input::placeholder { color: var(--muted); }
+.input::placeholder {
+  color: var(--muted);
+}
 .input:focus {
   outline: none;
   border-color: var(--gold);
@@ -48,4 +50,6 @@
   cursor: pointer;
   transition: color 0.2s;
 }
-.forgot:hover { color: var(--gold); }
+.forgot:hover {
+  color: var(--gold);
+}

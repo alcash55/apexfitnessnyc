@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "vitest run --passWithNoTests"
+    "test": "vitest run --passWithNoTests",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
@@ -23,6 +24,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "jsdom": "^30.0.1",
+    "prettier": "3.9.10",
     "typescript": "^5",
     "vite": "^8.2.2",
     "vitest": "^5.0.0"

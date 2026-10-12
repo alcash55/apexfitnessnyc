@@ -4,11 +4,7 @@ import styles from './contact.module.css';
 import useContact from './useContact';
 
 export default function ContactPage() {
-  const {
-    form,
-    setForm,
-    submit
-  } = useContact();
+  const { form, setForm, submit } = useContact();
 
   // Generic handler to update any field in the form state dynamically
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,14 +28,17 @@ export default function ContactPage() {
           <div className="section-label">Contact</div>
           <h2 className="section-h2">Get In Touch</h2>
           <p className="section-sub">
-            Ready to start your transformation? Fill out your details and a coach will reach out within 24 hours.
+            Ready to start your transformation? Fill out your details and a coach will reach out
+            within 24 hours.
           </p>
         </div>
 
         <form className={styles.form} noValidate onSubmit={handleSubmit}>
           <div className={styles.row}>
             <div className={styles.field}>
-              <label className={styles.label} htmlFor="firstName">First Name</label>
+              <label className={styles.label} htmlFor="firstName">
+                First Name
+              </label>
               <input
                 id="firstName"
                 name="firstName"
@@ -52,7 +51,9 @@ export default function ContactPage() {
               />
             </div>
             <div className={styles.field}>
-              <label className={styles.label} htmlFor="lastName">Last Name</label>
+              <label className={styles.label} htmlFor="lastName">
+                Last Name
+              </label>
               <input
                 id="lastName"
                 name="lastName"
@@ -68,7 +69,9 @@ export default function ContactPage() {
 
           <div className={styles.row}>
             <div className={styles.field}>
-              <label className={styles.label} htmlFor="phone">Phone Number</label>
+              <label className={styles.label} htmlFor="phone">
+                Phone Number
+              </label>
               <input
                 id="phone"
                 name="phone"
@@ -80,7 +83,9 @@ export default function ContactPage() {
               />
             </div>
             <div className={styles.field}>
-              <label className={styles.label} htmlFor="email">Email Address</label>
+              <label className={styles.label} htmlFor="email">
+                Email Address
+              </label>
               <input
                 id="email"
                 name="email"

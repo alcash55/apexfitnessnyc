@@ -20,13 +20,13 @@ const TRAINING_PHASES = [
 ];
 
 const SAMPLE_WEEK = [
-  { day: 'Monday', focus: 'Lower Power', },
-  { day: 'Tuesday', focus: 'Upper Push', },
-  { day: 'Wednesday', focus: 'Active Recovery', },
-  { day: 'Thursday', focus: 'Upper Pull', },
-  { day: 'Friday', focus: 'MetCon', },
-  { day: 'Saturday', focus: 'Accessory', },
-  { day: 'Sunday', focus: 'Rest', },
+  { day: 'Monday', focus: 'Lower Power' },
+  { day: 'Tuesday', focus: 'Upper Push' },
+  { day: 'Wednesday', focus: 'Active Recovery' },
+  { day: 'Thursday', focus: 'Upper Pull' },
+  { day: 'Friday', focus: 'MetCon' },
+  { day: 'Saturday', focus: 'Accessory' },
+  { day: 'Sunday', focus: 'Rest' },
 ];
 
 export default function TrainingPage() {
@@ -65,8 +65,8 @@ export default function TrainingPage() {
               marginBottom: '2.5rem',
             }}
           >
-            The APEX training system is a 3-month, phase-based protocol engineered around male
-            aging physiology. Every session accounts for your hormones, joint health, and recovery
+            The APEX training system is a 3-month, phase-based protocol engineered around male aging
+            physiology. Every session accounts for your hormones, joint health, and recovery
             capacity. It's built for your body, not an athlete half your age.
           </p>
           <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
@@ -84,7 +84,9 @@ export default function TrainingPage() {
       <section className="section" style={{ background: 'var(--charcoal)' }}>
         <div className="section-inner">
           <div className="section-label">The System</div>
-          <h2 id="three-phases" className="section-h2">Three Phases. One Protocol.</h2>
+          <h2 id="three-phases" className="section-h2">
+            Three Phases. One Protocol.
+          </h2>
           <p className="section-sub" style={{ marginBottom: '3rem' }}>
             Each phase builds directly on the last. There is no skipping ahead and no wasted weeks.
           </p>

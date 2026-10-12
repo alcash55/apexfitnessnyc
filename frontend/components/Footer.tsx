@@ -7,12 +7,23 @@ export default function Footer() {
       <div className={styles.footerGrid}>
         {/* Brand */}
         <div>
-          <Link className="nav-logo" style={{ marginBottom: '1rem', display: 'inline-flex' }} href="/">
+          <Link
+            className="nav-logo"
+            style={{ marginBottom: '1rem', display: 'inline-flex' }}
+            href="/"
+          >
             APE<span style={{ color: 'var(--cream)' }}>X</span>
           </Link>
-          <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.6, marginTop: '1rem' }}>
-            In-person coaching in New York City, online coaching nationwide.
-            Built for men 40 and up.
+          <p
+            style={{
+              color: 'var(--muted)',
+              fontSize: '0.85rem',
+              lineHeight: 1.6,
+              marginTop: '1rem',
+            }}
+          >
+            In-person coaching in New York City, online coaching nationwide. Built for men 40 and
+            up.
           </p>
         </div>
 
@@ -20,11 +31,21 @@ export default function Footer() {
         <div>
           <h4 className={styles.footerH4}>Site Map</h4>
           <ul className={styles.footerLinks}>
-            <li><Link href="/">Home</Link></li>
-            <li><Link href="/about-me">About Me</Link></li>
-            <li><Link href="/training">Training</Link></li>
-            <li><Link href="/pricing">Pricing</Link></li>
-            <li><Link href="/contact">Contact</Link></li>
+            <li>
+              <Link href="/">Home</Link>
+            </li>
+            <li>
+              <Link href="/about-me">About Me</Link>
+            </li>
+            <li>
+              <Link href="/training">Training</Link>
+            </li>
+            <li>
+              <Link href="/pricing">Pricing</Link>
+            </li>
+            <li>
+              <Link href="/contact">Contact</Link>
+            </li>
           </ul>
         </div>
 
@@ -32,9 +53,15 @@ export default function Footer() {
         <div>
           <h4 className={styles.footerH4}>Programs</h4>
           <ul className={styles.footerLinks}>
-            <li><Link href="/training">1-on-1 Private Training</Link></li>
-            <li><Link href="/training">Online Coaching</Link></li>
-            <li><Link href="/pricing">View Pricing</Link></li>
+            <li>
+              <Link href="/training">1-on-1 Private Training</Link>
+            </li>
+            <li>
+              <Link href="/training">Online Coaching</Link>
+            </li>
+            <li>
+              <Link href="/pricing">View Pricing</Link>
+            </li>
           </ul>
         </div>
 
@@ -47,7 +74,11 @@ export default function Footer() {
               <Link href="/contact">Send a Message</Link>
             </li>
             <li>
-              <a href="https://www.instagram.com/apex.fitnessnyc" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://www.instagram.com/apex.fitnessnyc"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Instagram
               </a>
             </li>

@@ -36,7 +36,10 @@ export default function DeleteAccountForm() {
 
   return (
     <div>
-      <label className={styles.field} style={{ flexDirection: 'row', alignItems: 'flex-start', gap: '0.75rem', maxWidth: 600 }}>
+      <label
+        className={styles.field}
+        style={{ flexDirection: 'row', alignItems: 'flex-start', gap: '0.75rem', maxWidth: 600 }}
+      >
         <input
           type="checkbox"
           checked={confirmed}
@@ -44,8 +47,8 @@ export default function DeleteAccountForm() {
           style={{ marginTop: '0.2rem', accentColor: 'var(--gold)' }}
         />
         <span style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.6 }}>
-          I understand this will permanently remove my ability to log in, and that a coach
-          will need to re-invite me if I want access again.
+          I understand this will permanently remove my ability to log in, and that a coach will need
+          to re-invite me if I want access again.
         </span>
       </label>
 
@@ -60,7 +63,11 @@ export default function DeleteAccountForm() {
         </button>
 
         {message && (
-          <p role="status" aria-live="polite" style={{ fontSize: '0.9rem', lineHeight: 1.6, color: '#f87171' }}>
+          <p
+            role="status"
+            aria-live="polite"
+            style={{ fontSize: '0.9rem', lineHeight: 1.6, color: '#f87171' }}
+          >
             {message}
           </p>
         )}

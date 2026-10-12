@@ -28,7 +28,7 @@ describe('POST /api/account/delete', () => {
     expect(deactivateClientAccountMock).not.toHaveBeenCalled();
   });
 
-  it('deactivates the caller\'s own auth user id (claims.sub), never a body-supplied id', async () => {
+  it("deactivates the caller's own auth user id (claims.sub), never a body-supplied id", async () => {
     getSessionClaimsMock.mockResolvedValue({
       sub: 'auth-user-1',
       is_admin: false,

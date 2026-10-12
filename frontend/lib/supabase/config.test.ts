@@ -12,7 +12,10 @@ describe('Supabase auth config', () => {
   it('returns the URL and anon key when both are set', () => {
     vi.stubEnv('NEXT_PUBLIC_SUPABASE_URL', 'https://example.supabase.co');
     vi.stubEnv('NEXT_PUBLIC_SUPABASE_ANON_KEY', 'anon');
-    expect(getSupabaseAuthConfig()).toEqual({ url: 'https://example.supabase.co', anonKey: 'anon' });
+    expect(getSupabaseAuthConfig()).toEqual({
+      url: 'https://example.supabase.co',
+      anonKey: 'anon',
+    });
   });
 
   it.each([

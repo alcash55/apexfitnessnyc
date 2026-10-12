@@ -16,7 +16,9 @@
   letter-spacing: 0.05em;
   min-width: 280px;
 }
-.searchInput::placeholder { color: var(--muted); }
+.searchInput::placeholder {
+  color: var(--muted);
+}
 .searchInput:focus {
   outline: none;
   border-color: var(--gold);
@@ -28,7 +30,9 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
-.clearLink:hover { color: var(--gold); }
+.clearLink:hover {
+  color: var(--gold);
+}
 
 .errorText {
   color: #f87171;
@@ -63,16 +67,23 @@
   color: var(--text);
   white-space: nowrap;
 }
-.table tr:last-child td { border-bottom: none; }
-.table tr:hover td { background: rgba(200, 168, 75, 0.04); }
+.table tr:last-child td {
+  border-bottom: none;
+}
+.table tr:hover td {
+  background: rgba(200, 168, 75, 0.04);
+}
 
 .rowLink {
   color: var(--cream);
   font-weight: 500;
 }
-.rowLink:hover { color: var(--gold); }
+.rowLink:hover {
+  color: var(--gold);
+}
 
-.badgeLinked, .badgeUnlinked {
+.badgeLinked,
+.badgeUnlinked {
   display: inline-block;
   padding: 0.25rem 0.75rem;
   font-size: 0.75rem;
@@ -80,9 +91,18 @@
   text-transform: uppercase;
   font-family: 'Barlow Condensed', sans-serif;
 }
-.badgeLinked { color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.3); }
-.badgeUnlinked { color: var(--muted); border: 1px solid var(--border); }
+.badgeLinked {
+  color: #4ade80;
+  border: 1px solid rgba(74, 222, 128, 0.3);
+}
+.badgeUnlinked {
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
 
 @media (max-width: 700px) {
-  .searchInput { min-width: 0; width: 100%; }
+  .searchInput {
+    min-width: 0;
+    width: 100%;
+  }
 }

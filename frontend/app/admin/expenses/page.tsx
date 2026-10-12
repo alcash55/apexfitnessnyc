@@ -42,8 +42,8 @@ export default async function ExpensesPage() {
           <div className="section-label">Admin</div>
           <h2 className="section-h2">Business Expenses</h2>
           <p className="section-sub">
-            Track rent, equipment, and supplies. This is business overhead, separate from
-            client billing.
+            Track rent, equipment, and supplies. This is business overhead, separate from client
+            billing.
           </p>
         </div>
 
@@ -51,7 +51,9 @@ export default async function ExpensesPage() {
 
         <div className={styles.tableWrap}>
           {error ? (
-            <div className={styles.empty}>We couldn&apos;t load expenses right now. Please try again shortly.</div>
+            <div className={styles.empty}>
+              We couldn&apos;t load expenses right now. Please try again shortly.
+            </div>
           ) : !expenses || expenses.length === 0 ? (
             <div className={styles.empty}>No expenses recorded yet.</div>
           ) : (

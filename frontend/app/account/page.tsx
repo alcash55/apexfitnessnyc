@@ -31,8 +31,8 @@ export default async function AccountPage() {
           <div className="section-label">Account</div>
           <h2 className="section-h2">Account Not Linked</h2>
           <p className="section-sub">
-            Your login isn&apos;t linked to a client profile yet. Please contact your coach
-            so we can get this connected.
+            Your login isn&apos;t linked to a client profile yet. Please contact your coach so we
+            can get this connected.
           </p>
         </div>
       </div>
@@ -77,10 +77,14 @@ export default async function AccountPage() {
         <div className={styles.dangerBox}>
           <h3>Delete Account</h3>
           <p>
-            Deleting your account removes your ability to log in. Your payment and health
-            history are kept — this does not erase your records.
+            Deleting your account removes your ability to log in. Your payment and health history
+            are kept — this does not erase your records.
           </p>
-          <Link href="/account/delete" className={styles.btnDanger} style={{ textDecoration: 'none' }}>
+          <Link
+            href="/account/delete"
+            className={styles.btnDanger}
+            style={{ textDecoration: 'none' }}
+          >
             Delete Account
           </Link>
         </div>

@@ -64,7 +64,9 @@ export default function PasswordForm({ redirectTo }: { redirectTo: string }) {
   return (
     <form className={styles.form} noValidate onSubmit={handleSubmit}>
       <div className={styles.field}>
-        <label className={styles.label} htmlFor="password">New Password</label>
+        <label className={styles.label} htmlFor="password">
+          New Password
+        </label>
         <input
           id="password"
           name="password"
@@ -78,7 +80,9 @@ export default function PasswordForm({ redirectTo }: { redirectTo: string }) {
       </div>
 
       <div className={styles.field}>
-        <label className={styles.label} htmlFor="confirmPassword">Confirm Password</label>
+        <label className={styles.label} htmlFor="confirmPassword">
+          Confirm Password
+        </label>
         <input
           id="confirmPassword"
           name="confirmPassword"

@@ -80,7 +80,7 @@ describe('POST /api/account/update', () => {
     expect(fromMock).not.toHaveBeenCalled();
   });
 
-  it('updates only the caller\'s own row, using server-derived client_id (never a body-supplied one)', async () => {
+  it("updates only the caller's own row, using server-derived client_id (never a body-supplied one)", async () => {
     getSessionClaimsMock.mockResolvedValue({
       sub: 'user-1',
       is_admin: false,
@@ -95,7 +95,7 @@ describe('POST /api/account/update', () => {
         phone: '555-0100',
         address: '123 Main St',
         client_id: 'someone-elses-id',
-      })
+      }),
     );
     const data = await res.json();
 

@@ -2,9 +2,18 @@ import Link from 'next/link';
 
 export default function LinksPage() {
   return (
-    <div className="section" style={{ minHeight: 'calc(100vh - 72px)', display: 'flex', alignItems: 'center' }}>
-      <div className="section-inner" style={{ maxWidth: 480, margin: '0 auto', width: '100%', textAlign: 'center' }}>
-        <div className="nav-logo" style={{ display: 'inline-flex', marginBottom: '1.5rem', fontSize: '2.5rem' }}>
+    <div
+      className="section"
+      style={{ minHeight: 'calc(100vh - 72px)', display: 'flex', alignItems: 'center' }}
+    >
+      <div
+        className="section-inner"
+        style={{ maxWidth: 480, margin: '0 auto', width: '100%', textAlign: 'center' }}
+      >
+        <div
+          className="nav-logo"
+          style={{ display: 'inline-flex', marginBottom: '1.5rem', fontSize: '2.5rem' }}
+        >
           APE<span style={{ color: 'var(--cream)' }}>X</span>
         </div>
         <p className="section-sub" style={{ margin: '0 auto 3rem', textAlign: 'center' }}>

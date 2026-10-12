@@ -64,7 +64,7 @@ describe('LoginForm', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Sign In' }));
 
     expect((await screen.findByText('Invalid login credentials')).textContent).toBe(
-      'Invalid login credentials'
+      'Invalid login credentials',
     );
     expect(push).not.toHaveBeenCalled();
     expect(refresh).not.toHaveBeenCalled();
@@ -85,15 +85,15 @@ describe('LoginForm', () => {
         'client@example.com',
         expect.objectContaining({
           redirectTo: expect.stringContaining('/auth/callback?next=/account/set-password'),
-        })
+        }),
       );
     });
 
     const successMessage = await screen.findByText(
-      "If that email has an account, we've sent a password reset link."
+      "If that email has an account, we've sent a password reset link.",
     );
     expect(successMessage.textContent).toBe(
-      "If that email has an account, we've sent a password reset link."
+      "If that email has an account, we've sent a password reset link.",
     );
   });
 });

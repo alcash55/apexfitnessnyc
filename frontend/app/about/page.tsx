@@ -58,8 +58,8 @@ const PHILOSOPHY = [
 
 const STATUS_COLORS: Record<string, string> = {
   'ON TARGET': '#C8A84B',
-  'AHEAD':     '#4CAF50',
-  'SLIGHT LAG':'rgba(240,180,60,0.85)',
+  AHEAD: '#4CAF50',
+  'SLIGHT LAG': 'rgba(240,180,60,0.85)',
 };
 
 export default function AboutPage() {
@@ -68,32 +68,109 @@ export default function AboutPage() {
   return (
     <>
       {/* ── Hero ───────────────────────────────────── */}
-      <section className="section" style={{ minHeight: 'calc(100vh - 72px)', display: 'flex', alignItems: 'center' }}>
-        <div className="section-inner" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', alignItems: 'center' }}>
+      <section
+        className="section"
+        style={{ minHeight: 'calc(100vh - 72px)', display: 'flex', alignItems: 'center' }}
+      >
+        <div
+          className="section-inner"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: '6rem',
+            alignItems: 'center',
+          }}
+        >
           <div>
             <div className="section-label">The Founder</div>
-            <h1 id="hero" style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(3.5rem, 6vw, 6rem)', lineHeight: 0.95, color: 'var(--cream)', letterSpacing: '0.02em', marginBottom: '2rem' }}>
-              BUILT THIS<br />FOR YOU.<br /><span style={{ color: 'var(--gold)' }}>BECAUSE</span><br />I LIVED IT.
+            <h1
+              id="hero"
+              style={{
+                fontFamily: "'Bebas Neue', sans-serif",
+                fontSize: 'clamp(3.5rem, 6vw, 6rem)',
+                lineHeight: 0.95,
+                color: 'var(--cream)',
+                letterSpacing: '0.02em',
+                marginBottom: '2rem',
+              }}
+            >
+              BUILT THIS
+              <br />
+              FOR YOU.
+              <br />
+              <span style={{ color: 'var(--gold)' }}>BECAUSE</span>
+              <br />I LIVED IT.
             </h1>
-            <p style={{ color: 'var(--muted)', fontSize: '1rem', lineHeight: 1.8, maxWidth: 480, marginBottom: '2.5rem' }}>
-              I spent years watching the fitness industry ignore the men who needed it most: the 50-year-old banker with bad knees, the 62-year-old executive who hadn&apos;t trained in a decade, the 48-year-old who kept getting hurt following programs designed for someone half his age. I built APEX to fix that. Real science, real precision, a system that actually respects your biology.
+            <p
+              style={{
+                color: 'var(--muted)',
+                fontSize: '1rem',
+                lineHeight: 1.8,
+                maxWidth: 480,
+                marginBottom: '2.5rem',
+              }}
+            >
+              I spent years watching the fitness industry ignore the men who needed it most: the
+              50-year-old banker with bad knees, the 62-year-old executive who hadn&apos;t trained
+              in a decade, the 48-year-old who kept getting hurt following programs designed for
+              someone half his age. I built APEX to fix that. Real science, real precision, a system
+              that actually respects your biology.
             </p>
-            <a className="btn-gold" href="/pricing">Start Your Protocol →</a>
+            <a className="btn-gold" href="/pricing">
+              Start Your Protocol →
+            </a>
           </div>
 
           {/* Stat card column */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {[
-              { val: '10+', label: 'Years Coaching Men 40–70', sub: 'Exclusively NYC-based clientele' },
+              {
+                val: '10+',
+                label: 'Years Coaching Men 40–70',
+                sub: 'Exclusively NYC-based clientele',
+              },
               // { val: '2,400+', label: 'APEX Members Transformed', sub: '97% program completion rate' },
               { val: '22 lbs', label: 'Average Fat Loss', sub: 'Across 90-day program cohort' },
               // { val: '+34%', label: 'Testosterone Improvement', sub: 'From 90-day bloodwork comparisons' },
             ].map((s, i) => (
-              <div key={i} style={{ background: 'var(--charcoal)', border: '1px solid var(--border)', padding: '1.5rem 2rem', display: 'flex', alignItems: 'center', gap: '2rem' }}>
-                <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '2.5rem', color: 'var(--gold)', lineHeight: 1, minWidth: '5rem' }}>{s.val}</div>
+              <div
+                key={i}
+                style={{
+                  background: 'var(--charcoal)',
+                  border: '1px solid var(--border)',
+                  padding: '1.5rem 2rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '2rem',
+                }}
+              >
+                <div
+                  style={{
+                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontSize: '2.5rem',
+                    color: 'var(--gold)',
+                    lineHeight: 1,
+                    minWidth: '5rem',
+                  }}
+                >
+                  {s.val}
+                </div>
                 <div>
-                  <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--cream)', fontSize: '0.88rem' }}>{s.label}</div>
-                  <div style={{ color: 'var(--muted)', fontSize: '0.78rem', marginTop: '0.2rem' }}>{s.sub}</div>
+                  <div
+                    style={{
+                      fontFamily: "'Barlow Condensed', sans-serif",
+                      fontWeight: 700,
+                      letterSpacing: '0.08em',
+                      textTransform: 'uppercase',
+                      color: 'var(--cream)',
+                      fontSize: '0.88rem',
+                    }}
+                  >
+                    {s.label}
+                  </div>
+                  <div style={{ color: 'var(--muted)', fontSize: '0.78rem', marginTop: '0.2rem' }}>
+                    {s.sub}
+                  </div>
                 </div>
               </div>
             ))}
@@ -105,17 +182,55 @@ export default function AboutPage() {
       <section className="section">
         <div className="section-inner">
           <div className="section-label">Credentials</div>
-          <h2 id="credentials" className="section-h2">The Expertise Behind<br />The System.</h2>
+          <h2 id="credentials" className="section-h2">
+            The Expertise Behind
+            <br />
+            The System.
+          </h2>
           <p className="section-sub" style={{ marginBottom: '4rem' }}>
-            APEX is not built on gym hustle mythology. It&apos;s built on accredited science, clinical research, and over a decade of measured outcomes with real men.
+            APEX is not built on gym hustle mythology. It&apos;s built on accredited science,
+            clinical research, and over a decade of measured outcomes with real men.
           </p>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             {CREDENTIALS.map((c) => (
-              <div key={c.num} style={{ display: 'grid', gridTemplateColumns: '80px 1fr', gap: '2rem', padding: '2.5rem 0', borderBottom: '1px solid var(--border)' }}>
-                <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '2.5rem', color: 'var(--gold)', opacity: 0.6, lineHeight: 1 }}>{c.num}</span>
+              <div
+                key={c.num}
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '80px 1fr',
+                  gap: '2rem',
+                  padding: '2.5rem 0',
+                  borderBottom: '1px solid var(--border)',
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "'Bebas Neue', sans-serif",
+                    fontSize: '2.5rem',
+                    color: 'var(--gold)',
+                    opacity: 0.6,
+                    lineHeight: 1,
+                  }}
+                >
+                  {c.num}
+                </span>
                 <div>
-                  <h3 style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: '1.1rem', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--cream)', marginBottom: '0.75rem' }}>{c.title}</h3>
-                  <p style={{ color: 'var(--muted)', lineHeight: 1.7, fontSize: '0.95rem' }}>{c.body}</p>
+                  <h3
+                    style={{
+                      fontFamily: "'Barlow Condensed', sans-serif",
+                      fontWeight: 700,
+                      fontSize: '1.1rem',
+                      letterSpacing: '0.06em',
+                      textTransform: 'uppercase',
+                      color: 'var(--cream)',
+                      marginBottom: '0.75rem',
+                    }}
+                  >
+                    {c.title}
+                  </h3>
+                  <p style={{ color: 'var(--muted)', lineHeight: 1.7, fontSize: '0.95rem' }}>
+                    {c.body}
+                  </p>
                 </div>
               </div>
             ))}
@@ -127,16 +242,48 @@ export default function AboutPage() {
       <section className="section" style={{ background: 'var(--charcoal)' }}>
         <div className="section-inner">
           <div className="section-label">The Method</div>
-          <h2 id="philosophy" className="section-h2">The Four Pillars<br />of APEX.</h2>
+          <h2 id="philosophy" className="section-h2">
+            The Four Pillars
+            <br />
+            of APEX.
+          </h2>
           <p className="section-sub" style={{ marginBottom: '4rem' }}>
-            Every decision in APEX training traces back to one of four core principles. No fluff. No filler. Just the mechanics of lasting physical transformation.
+            Every decision in APEX training traces back to one of four core principles. No fluff. No
+            filler. Just the mechanics of lasting physical transformation.
           </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '2rem',
+            }}
+          >
             {PHILOSOPHY.map((p, i) => (
-              <div key={i} style={{ background: 'var(--card)', border: '1px solid var(--border)', padding: '2.5rem 2rem' }}>
+              <div
+                key={i}
+                style={{
+                  background: 'var(--card)',
+                  border: '1px solid var(--border)',
+                  padding: '2.5rem 2rem',
+                }}
+              >
                 <div style={{ fontSize: '2rem', marginBottom: '1.25rem' }}>{p.icon}</div>
-                <h3 style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: '1.05rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--cream)', marginBottom: '1rem' }}>{p.title}</h3>
-                <p style={{ color: 'var(--muted)', lineHeight: 1.7, fontSize: '0.92rem' }}>{p.body}</p>
+                <h3
+                  style={{
+                    fontFamily: "'Barlow Condensed', sans-serif",
+                    fontWeight: 700,
+                    fontSize: '1.05rem',
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                    color: 'var(--cream)',
+                    marginBottom: '1rem',
+                  }}
+                >
+                  {p.title}
+                </h3>
+                <p style={{ color: 'var(--muted)', lineHeight: 1.7, fontSize: '0.92rem' }}>
+                  {p.body}
+                </p>
               </div>
             ))}
           </div>
@@ -154,35 +301,89 @@ export default function AboutPage() {
 
           {/* Dashboard toggle */}
           <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '2.5rem' }}>
-        
-              <button
-                
-                style={{
-                  fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, letterSpacing: '0.12em',
-                  textTransform: 'uppercase', fontSize: '0.82rem', padding: '0.65rem 1.75rem',
-                  border: '2px solid var(--gold)' ,
-                  background:  'var(--gold-dim)' ,
-                  color:  'var(--gold)' ,
-                  cursor: 'pointer',
-                  transition: 'all 0.2s',
-                }}
-              >
-                Curriculum View
-              </button>
-       
+            <button
+              style={{
+                fontFamily: "'Barlow Condensed', sans-serif",
+                fontWeight: 700,
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                fontSize: '0.82rem',
+                padding: '0.65rem 1.75rem',
+                border: '2px solid var(--gold)',
+                background: 'var(--gold-dim)',
+                color: 'var(--gold)',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+              }}
+            >
+              Curriculum View
+            </button>
           </div>
 
           {activeTab === 'curriculum' && (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem' }}>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+                gap: '1.5rem',
+              }}
+            >
               {[
-                { phase: 'Month 1 — Foundation', focus: 'Joint Prep & Baseline Strength', detail: 'Machine-based compound lifts, controlled eccentrics, 3×10 rep ranges. Building the armor before loading the cannon.' },
-                { phase: 'Month 2 — Accelerate', focus: 'MetCon & Hormonal Output', detail: 'Trap bar strength + sprint metabolic conditioning. Assault bike, sled, and rowing ergo work to spike testosterone naturally.' },
-                { phase: 'Month 3 — Peak', focus: 'Max Output & Longevity', detail: 'Heavy tension loads, eccentric control techniques, and a Functional Output day that proves the system worked from Day 1.' },
+                {
+                  phase: 'Month 1 — Foundation',
+                  focus: 'Joint Prep & Baseline Strength',
+                  detail:
+                    'Machine-based compound lifts, controlled eccentrics, 3×10 rep ranges. Building the armor before loading the cannon.',
+                },
+                {
+                  phase: 'Month 2 — Accelerate',
+                  focus: 'MetCon & Hormonal Output',
+                  detail:
+                    'Trap bar strength + sprint metabolic conditioning. Assault bike, sled, and rowing ergo work to spike testosterone naturally.',
+                },
+                {
+                  phase: 'Month 3 — Peak',
+                  focus: 'Max Output & Longevity',
+                  detail:
+                    'Heavy tension loads, eccentric control techniques, and a Functional Output day that proves the system worked from Day 1.',
+                },
               ].map((block, i) => (
-                <div key={i} style={{ background: 'var(--charcoal)', border: '1px solid var(--border)', padding: '2rem' }}>
-                  <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: '0.72rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: '0.5rem' }}>{block.phase}</div>
-                  <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: '1rem', color: 'var(--cream)', marginBottom: '1rem', letterSpacing: '0.04em', lineHeight: 1.3 }}>{block.focus}</div>
-                  <p style={{ color: 'var(--muted)', fontSize: '0.88rem', lineHeight: 1.7 }}>{block.detail}</p>
+                <div
+                  key={i}
+                  style={{
+                    background: 'var(--charcoal)',
+                    border: '1px solid var(--border)',
+                    padding: '2rem',
+                  }}
+                >
+                  <div
+                    style={{
+                      fontFamily: "'Barlow Condensed', sans-serif",
+                      fontSize: '0.72rem',
+                      letterSpacing: '0.22em',
+                      textTransform: 'uppercase',
+                      color: 'var(--gold)',
+                      marginBottom: '0.5rem',
+                    }}
+                  >
+                    {block.phase}
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: "'Barlow Condensed', sans-serif",
+                      fontWeight: 700,
+                      fontSize: '1rem',
+                      color: 'var(--cream)',
+                      marginBottom: '1rem',
+                      letterSpacing: '0.04em',
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {block.focus}
+                  </div>
+                  <p style={{ color: 'var(--muted)', fontSize: '0.88rem', lineHeight: 1.7 }}>
+                    {block.detail}
+                  </p>
                 </div>
               ))}
             </div>
@@ -275,15 +476,31 @@ export default function AboutPage() {
 
       {/* ── CTA ────────────────────────────────────── */}
       <section className="section" style={{ background: 'var(--charcoal)' }}>
-        <div className="section-inner" style={{ textAlign: 'center', maxWidth: 700, margin: '0 auto' }}>
-          <div className="section-label" style={{ justifyContent: 'center' }}>Ready to Start?</div>
-          <h2 id="cta" className="section-h2" style={{ marginBottom: '1.5rem' }}>If Not Now, When?</h2>
-          <p className="section-sub" style={{ margin: '0 auto 3rem', textAlign: 'center', maxWidth: 520 }}>
-            You&apos;ve read the science. You&apos;ve seen the system. The only question is whether you&apos;re going to do something about it. The next 90 days are going to pass regardless.
+        <div
+          className="section-inner"
+          style={{ textAlign: 'center', maxWidth: 700, margin: '0 auto' }}
+        >
+          <div className="section-label" style={{ justifyContent: 'center' }}>
+            Ready to Start?
+          </div>
+          <h2 id="cta" className="section-h2" style={{ marginBottom: '1.5rem' }}>
+            If Not Now, When?
+          </h2>
+          <p
+            className="section-sub"
+            style={{ margin: '0 auto 3rem', textAlign: 'center', maxWidth: 520 }}
+          >
+            You&apos;ve read the science. You&apos;ve seen the system. The only question is whether
+            you&apos;re going to do something about it. The next 90 days are going to pass
+            regardless.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a className="btn-gold" href="/pricing">Choose Your Protocol →</a>
-            <a className="btn-outline" href="/">See The Method</a>
+            <a className="btn-gold" href="/pricing">
+              Choose Your Protocol →
+            </a>
+            <a className="btn-outline" href="/">
+              See The Method
+            </a>
           </div>
         </div>
       </section>

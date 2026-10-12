@@ -6,7 +6,10 @@ import styles from './library.module.css';
 
 /** Display grouping for the movement-pattern board; every pattern appears once. */
 const PATTERN_FAMILIES: { name: string; patterns: string[] }[] = [
-  { name: 'Push & pull', patterns: ['Horizontal Push', 'Vertical Push', 'Horizontal Pull', 'Vertical Pull'] },
+  {
+    name: 'Push & pull',
+    patterns: ['Horizontal Push', 'Vertical Push', 'Horizontal Pull', 'Vertical Pull'],
+  },
   { name: 'Lower body', patterns: ['Squat', 'Hinge', 'Lunge', 'Carry'] },
   { name: 'Core', patterns: ['Core Flexion', 'Core Stability', 'Rotation'] },
   { name: 'Accessory & conditioning', patterns: ['Isolation', 'Power', 'Cardio', 'Mobility'] },
@@ -43,7 +46,7 @@ export default function ExerciseLibrary({
       category: countBy(exercises, (e) => e.category),
       equipment: countBy(exercises, (e) => e.equipment),
     }),
-    [exercises]
+    [exercises],
   );
 
   const visible = useMemo(() => {
@@ -54,11 +57,12 @@ export default function ExerciseLibrary({
         (!filters.bodyPart || e.bodyPart === filters.bodyPart) &&
         (!filters.category || e.category === filters.category) &&
         (!filters.equipment || e.equipment === filters.equipment) &&
-        (!q || e.name.toLowerCase().includes(q) || e.target.toLowerCase().includes(q))
+        (!q || e.name.toLowerCase().includes(q) || e.target.toLowerCase().includes(q)),
     );
   }, [exercises, filters, deferredQuery]);
 
-  const setFilter = (key: keyof Filters, value: string) => setFilters((f) => ({ ...f, [key]: value }));
+  const setFilter = (key: keyof Filters, value: string) =>
+    setFilters((f) => ({ ...f, [key]: value }));
 
   const select = (key: Exclude<keyof Filters, 'pattern'>, id: string, label: string) => (
     <select
@@ -90,15 +94,25 @@ export default function ExerciseLibrary({
           instructions.
         </p>
         <div className={styles.totals}>
-          <span><b>{exercises.length.toLocaleString()}</b>exercises</span>
-          <span><b>{counts.bodyPart.size}</b>body parts</span>
-          <span><b>{counts.category.size}</b>categories</span>
-          <span><b>{counts.pattern.size}</b>movement patterns</span>
+          <span>
+            <b>{exercises.length.toLocaleString()}</b>exercises
+          </span>
+          <span>
+            <b>{counts.bodyPart.size}</b>body parts
+          </span>
+          <span>
+            <b>{counts.category.size}</b>categories
+          </span>
+          <span>
+            <b>{counts.pattern.size}</b>movement patterns
+          </span>
         </div>
       </header>
 
       <section aria-labelledby="patterns-heading">
-        <h2 id="patterns-heading" className={styles.heading}>Movement patterns</h2>
+        <h2 id="patterns-heading" className={styles.heading}>
+          Movement patterns
+        </h2>
         <div className={styles.families}>
           {PATTERN_FAMILIES.map((family) => (
             <div key={family.name} className={styles.family}>
@@ -153,7 +167,8 @@ export default function ExerciseLibrary({
 
         <div className={styles.status}>
           <span>
-            <strong>{visible.length.toLocaleString()}</strong> of {exercises.length.toLocaleString()} exercises
+            <strong>{visible.length.toLocaleString()}</strong> of{' '}
+            {exercises.length.toLocaleString()} exercises
           </span>
           <span>Select a row to see instructions</span>
         </div>
@@ -192,13 +207,19 @@ export default function ExerciseLibrary({
                       <td className={styles.cap}>{e.bodyPart}</td>
                       <td className={styles.cap}>{e.target}</td>
                       <td>{e.category ?? <span className={styles.none}>None</span>}</td>
-                      <td><span className={styles.tag}>{e.pattern}</span></td>
+                      <td>
+                        <span className={styles.tag}>{e.pattern}</span>
+                      </td>
                       <td className={styles.cap}>{e.equipment}</td>
                     </tr>
                     {isOpen && (
                       <tr className={styles.detail}>
                         <td colSpan={6}>
-                          <p>{e.instructions ?? <span className={styles.none}>No instructions yet.</span>}</p>
+                          <p>
+                            {e.instructions ?? (
+                              <span className={styles.none}>No instructions yet.</span>
+                            )}
+                          </p>
                           {e.secondary.length > 0 && (
                             <p>
                               <span className={styles.detailKey}>Also works</span>

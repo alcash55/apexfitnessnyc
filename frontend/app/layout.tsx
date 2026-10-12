@@ -56,7 +56,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const isAdmin = claims?.is_admin === true;
 
   return (
-    <html lang="en" className={`${bebasNeue.variable} ${barlowCondensed.variable} ${inter.variable}`}>
+    <html
+      lang="en"
+      className={`${bebasNeue.variable} ${barlowCondensed.variable} ${inter.variable}`}
+    >
       <body>
         <script
           type="application/ld+json"
@@ -68,7 +71,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
         <Nav isAuthenticated={isAuthenticated} isAdmin={isAdmin} />
 
-        <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', position: 'relative', zIndex: 1 }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            minHeight: '100vh',
+            position: 'relative',
+            zIndex: 1,
+          }}
+        >
           <main style={{ flex: 1, paddingTop: '72px' }}>{children}</main>
           <Footer />
         </div>
@@ -79,8 +90,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
           </svg>
         </button> */}
-
-        
       </body>
     </html>
   );

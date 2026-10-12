@@ -48,7 +48,7 @@ export async function GET() {
     console.error('[admin/expenses] list failed:', err);
     return NextResponse.json(
       { success: false, error: 'Something went wrong on our end. Please try again shortly.' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -70,10 +70,7 @@ export async function POST(request: NextRequest) {
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json(
-      { success: false, error: 'Invalid request body.' },
-      { status: 400 }
-    );
+    return NextResponse.json({ success: false, error: 'Invalid request body.' }, { status: 400 });
   }
 
   const expenseDate = clean(body.expense_date, 10);
@@ -86,18 +83,14 @@ export async function POST(request: NextRequest) {
   if (!expenseDate) fieldErrors.expense_date = 'Date is required.';
   else if (!isValidDateString(expenseDate)) fieldErrors.expense_date = 'Enter a valid date.';
 
-  if (
-    typeof amountCents !== 'number' ||
-    !Number.isInteger(amountCents) ||
-    amountCents <= 0
-  ) {
+  if (typeof amountCents !== 'number' || !Number.isInteger(amountCents) || amountCents <= 0) {
     fieldErrors.amount_cents = 'Amount must be a positive number.';
   }
 
   if (Object.keys(fieldErrors).length > 0) {
     return NextResponse.json(
       { success: false, error: 'Please check the highlighted fields.', fieldErrors },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -120,7 +113,7 @@ export async function POST(request: NextRequest) {
     console.error('[admin/expenses] insert failed:', err);
     return NextResponse.json(
       { success: false, error: 'Something went wrong on our end. Please try again shortly.' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

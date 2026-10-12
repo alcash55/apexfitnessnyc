@@ -57,7 +57,9 @@
   width: 100%;
   transition: border-color 0.2s;
 }
-.input::placeholder { color: var(--muted); }
+.input::placeholder {
+  color: var(--muted);
+}
 .input:focus {
   outline: none;
   border-color: var(--gold);
@@ -126,7 +128,9 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
 }
 .btnDelete:hover:not(:disabled) {
   background: #f87171;
@@ -138,5 +142,8 @@
 }
 
 @media (max-width: 600px) {
-  .row { grid-template-columns: 1fr; gap: 1rem; }
+  .row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }

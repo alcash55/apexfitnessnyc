@@ -40,9 +40,7 @@ describe('POST /api/contact', () => {
   });
 
   it('rejects an invalid email', async () => {
-    const res = await POST(
-      makeRequest({ firstName: 'Ada', lastName: 'Lovelace', email: 'nope' })
-    );
+    const res = await POST(makeRequest({ firstName: 'Ada', lastName: 'Lovelace', email: 'nope' }));
     const data = await res.json();
 
     expect(res.status).toBe(400);
@@ -51,7 +49,7 @@ describe('POST /api/contact', () => {
 
   it('silently accepts (200, no db write) when the honeypot field is filled', async () => {
     const res = await POST(
-      makeRequest({ firstName: '', lastName: '', email: '', company: 'bot filled this' })
+      makeRequest({ firstName: '', lastName: '', email: '', company: 'bot filled this' }),
     );
     const data = await res.json();
 
@@ -69,7 +67,7 @@ describe('POST /api/contact', () => {
         lastName: '  Lovelace  ',
         email: '  ADA@Example.com  ',
         phone: '555-0100',
-      })
+      }),
     );
     const data = await res.json();
 
@@ -88,7 +86,7 @@ describe('POST /api/contact', () => {
     insertMock.mockResolvedValue({ error: { message: 'connection refused: internal-host:5432' } });
 
     const res = await POST(
-      makeRequest({ firstName: 'Ada', lastName: 'Lovelace', email: 'ada@example.com' })
+      makeRequest({ firstName: 'Ada', lastName: 'Lovelace', email: 'ada@example.com' }),
     );
     const data = await res.json();
 

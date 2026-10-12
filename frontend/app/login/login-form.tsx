@@ -77,7 +77,9 @@ export default function LoginForm({ next }: { next: string }) {
     return (
       <form className={styles.form} noValidate onSubmit={handleForgot}>
         <div className={styles.field}>
-          <label className={styles.label} htmlFor="forgot-email">Email Address</label>
+          <label className={styles.label} htmlFor="forgot-email">
+            Email Address
+          </label>
           <input
             id="forgot-email"
             name="email"
@@ -126,7 +128,9 @@ export default function LoginForm({ next }: { next: string }) {
   return (
     <form className={styles.form} noValidate onSubmit={handleLogin}>
       <div className={styles.field}>
-        <label className={styles.label} htmlFor="email">Email Address</label>
+        <label className={styles.label} htmlFor="email">
+          Email Address
+        </label>
         <input
           id="email"
           name="email"
@@ -141,7 +145,9 @@ export default function LoginForm({ next }: { next: string }) {
       </div>
 
       <div className={styles.field}>
-        <label className={styles.label} htmlFor="password">Password</label>
+        <label className={styles.label} htmlFor="password">
+          Password
+        </label>
         <input
           id="password"
           name="password"

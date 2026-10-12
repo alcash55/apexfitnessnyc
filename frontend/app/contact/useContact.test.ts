@@ -94,10 +94,7 @@ describe('useContact submit() validation', () => {
     });
 
     expect(result.current.fieldErrors).toEqual({});
-    expect(fetch).toHaveBeenCalledWith(
-      '/api/contact',
-      expect.objectContaining({ method: 'POST' })
-    );
+    expect(fetch).toHaveBeenCalledWith('/api/contact', expect.objectContaining({ method: 'POST' }));
     expect(result.current.status).toBe('success');
     // Form resets to empty after a successful submit.
     expect(result.current.form.firstName).toBe('');

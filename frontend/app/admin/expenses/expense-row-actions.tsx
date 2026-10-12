@@ -34,16 +34,14 @@ export default function ExpenseRowActions({ id }: { id: string }) {
 
   return (
     <>
-      <button
-        type="button"
-        className={styles.btnDelete}
-        onClick={handleDelete}
-        disabled={deleting}
-      >
+      <button type="button" className={styles.btnDelete} onClick={handleDelete} disabled={deleting}>
         {deleting ? 'Deleting…' : 'Delete'}
       </button>
       {error && (
-        <span role="alert" style={{ color: '#f87171', fontSize: '0.75rem', display: 'block', marginTop: '0.35rem' }}>
+        <span
+          role="alert"
+          style={{ color: '#f87171', fontSize: '0.75rem', display: 'block', marginTop: '0.35rem' }}
+        >
           {error}
         </span>
       )}

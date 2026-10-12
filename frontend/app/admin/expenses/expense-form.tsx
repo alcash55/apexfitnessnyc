@@ -92,7 +92,9 @@ export default function ExpenseForm() {
       <form className={styles.form} noValidate onSubmit={handleSubmit}>
         <div className={styles.row}>
           <div className={styles.field}>
-            <label className={styles.label} htmlFor="expenseDate">Date</label>
+            <label className={styles.label} htmlFor="expenseDate">
+              Date
+            </label>
             <input
               id="expenseDate"
               name="expenseDate"
@@ -106,7 +108,9 @@ export default function ExpenseForm() {
             {fieldErrors.expense_date && <FieldError text={fieldErrors.expense_date} />}
           </div>
           <div className={styles.field}>
-            <label className={styles.label} htmlFor="amount">Amount (USD)</label>
+            <label className={styles.label} htmlFor="amount">
+              Amount (USD)
+            </label>
             <input
               id="amount"
               name="amount"
@@ -126,7 +130,9 @@ export default function ExpenseForm() {
 
         <div className={styles.row}>
           <div className={styles.field}>
-            <label className={styles.label} htmlFor="category">Category</label>
+            <label className={styles.label} htmlFor="category">
+              Category
+            </label>
             <input
               id="category"
               name="category"
@@ -138,7 +144,9 @@ export default function ExpenseForm() {
             />
           </div>
           <div className={styles.field}>
-            <label className={styles.label} htmlFor="description">Description</label>
+            <label className={styles.label} htmlFor="description">
+              Description
+            </label>
             <input
               id="description"
               name="description"

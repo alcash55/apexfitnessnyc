@@ -36,7 +36,7 @@ export default async function AdminClientsPage({
   let clientsQuery = getDb()
     .from('clients')
     .select(
-      'id,first_name,last_name,email,auth_user_id,offerings:current_offering_id(name),nutrition_plans:current_nutrition_plan_id(name)'
+      'id,first_name,last_name,email,auth_user_id,offerings:current_offering_id(name),nutrition_plans:current_nutrition_plan_id(name)',
     );
 
   if (query) {
@@ -44,7 +44,7 @@ export default async function AdminClientsPage({
     // ilike/or filter string so a search term can't break out of it.
     const escaped = query.replace(/[%,()]/g, '');
     clientsQuery = clientsQuery.or(
-      `first_name.ilike.%${escaped}%,last_name.ilike.%${escaped}%,email.ilike.%${escaped}%`
+      `first_name.ilike.%${escaped}%,last_name.ilike.%${escaped}%,email.ilike.%${escaped}%`,
     );
   }
 
@@ -68,9 +68,13 @@ export default async function AdminClientsPage({
             placeholder="Search by name or email…"
             className={styles.searchInput}
           />
-          <button type="submit" className="btn-outline">Search</button>
+          <button type="submit" className="btn-outline">
+            Search
+          </button>
           {query && (
-            <Link href="/admin" className={styles.clearLink}>Clear</Link>
+            <Link href="/admin" className={styles.clearLink}>
+              Clear
+            </Link>
           )}
         </form>
 
