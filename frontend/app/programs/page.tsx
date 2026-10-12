@@ -1,5 +1,5 @@
 import { pageMetadata } from '@/lib/metadata';
-import PricingPage from './pricing';
+import ProgramsPage from './programs';
 
 export const metadata = pageMetadata({
   title: 'Pricing | ApexFitnessNYC',
@@ -8,4 +8,4 @@ export const metadata = pageMetadata({
   path: '/pricing',
 });
 
-export default PricingPage;
+export default ProgramsPage;
