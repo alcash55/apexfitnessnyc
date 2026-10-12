@@ -41,7 +41,7 @@ export async function getExercises(): Promise<Exercise[]> {
     const { data, error } = await getDb()
       .from('exercise_catalog')
       .select(
-        'id, name, body_part, target_muscle, secondary_muscles, category, movement_pattern, equipment, instructions'
+        'id, name, body_part, target_muscle, secondary_muscles, category, movement_pattern, equipment, instructions',
       )
       .order('name')
       .order('id')

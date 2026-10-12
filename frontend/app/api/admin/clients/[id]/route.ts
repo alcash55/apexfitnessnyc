@@ -13,10 +13,7 @@ function clean(value: unknown, max: number): string {
 }
 
 /** Full client record for the admin detail page. */
-export async function GET(
-  _request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
+export async function GET(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const claims = await getSessionClaims();
 
   if (!claims || !(await verifyIsAdmin(claims.sub))) {
@@ -29,7 +26,7 @@ export async function GET(
     const { data, error } = await getDb()
       .from('clients')
       .select(
-        'id,first_name,last_name,email,phone,address,created_at,auth_user_id,current_offering_id,current_nutrition_plan_id'
+        'id,first_name,last_name,email,phone,address,created_at,auth_user_id,current_offering_id,current_nutrition_plan_id',
       )
       .eq('id', id)
       .maybeSingle();
@@ -42,7 +39,7 @@ export async function GET(
     console.error('[admin/clients/[id]] get failed:', err);
     return NextResponse.json(
       { error: 'Something went wrong on our end. Please try again shortly.' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -55,10 +52,7 @@ export async function GET(
  * not read from the request body at all, so there is nothing a caller could
  * smuggle in to touch them.
  */
-export async function PATCH(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
+export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const claims = await getSessionClaims();
 
   if (!claims || !(await verifyIsAdmin(claims.sub))) {
@@ -89,7 +83,7 @@ export async function PATCH(
   if (Object.keys(fieldErrors).length > 0) {
     return NextResponse.json(
       { error: 'Please check the highlighted fields.', fieldErrors },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -115,7 +109,7 @@ export async function PATCH(
     console.error('[admin/clients/[id]] update failed:', err);
     return NextResponse.json(
       { error: 'Something went wrong on our end. Please try again shortly.' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

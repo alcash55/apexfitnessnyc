@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic';
  * their own /payments page.
  *
  * This is a SEPARATE route from /api/checkout (the public, anonymous
- * pricing-page flow) — that route must keep working exactly as-is for
+ * programs-page flow) — that route must keep working exactly as-is for
  * visitors who aren't logged in. This one additionally stamps the session's
  * metadata with client_id, resolved server-side from the verified session
  * (never trusted from the request body — same principle as never trusting a
@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
   if (!claims.client_id) {
     return NextResponse.json(
       { error: 'No client profile is linked to this account. Contact us to get set up.' },
-      { status: 403 }
+      { status: 403 },
     );
   }
 
@@ -88,7 +88,7 @@ export async function POST(request: NextRequest) {
     console.error('[payments/checkout] session creation failed:', err);
     return NextResponse.json(
       { error: 'We could not start checkout. Please try again or contact us.' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

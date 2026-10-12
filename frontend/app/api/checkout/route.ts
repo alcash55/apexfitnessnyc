@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
       billing_address_collection: 'auto',
       phone_number_collection: { enabled: true },
       success_url: `${baseUrl}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${baseUrl}/pricing?checkout=cancelled`,
+      cancel_url: `${baseUrl}/programs?checkout=cancelled`,
       metadata: {
         plan_id: plan.id,
         plan_name: plan.name,
@@ -71,7 +71,7 @@ export async function POST(request: NextRequest) {
     console.error('[checkout] session creation failed:', err);
     return NextResponse.json(
       { error: 'We could not start checkout. Please try again or contact us.' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

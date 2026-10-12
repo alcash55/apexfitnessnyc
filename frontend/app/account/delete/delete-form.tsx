@@ -1,8 +1,9 @@
 'use client';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from '../account.module.css';
 
 type Status = 'idle' | 'submitting' | 'error';
 
@@ -36,7 +37,11 @@ export default function DeleteAccountForm() {
 
   return (
     <div>
-      <label className={styles.field} style={{ flexDirection: 'row', alignItems: 'flex-start', gap: '0.75rem', maxWidth: 600 }}>
+      <Label
+        unstyled
+        className="flex flex-col gap-2"
+        style={{ flexDirection: 'row', alignItems: 'flex-start', gap: '0.75rem', maxWidth: 600 }}
+      >
         <input
           type="checkbox"
           checked={confirmed}
@@ -44,23 +49,28 @@ export default function DeleteAccountForm() {
           style={{ marginTop: '0.2rem', accentColor: 'var(--gold)' }}
         />
         <span style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.6 }}>
-          I understand this will permanently remove my ability to log in, and that a coach
-          will need to re-invite me if I want access again.
+          I understand this will permanently remove my ability to log in, and that a coach will need
+          to re-invite me if I want access again.
         </span>
-      </label>
+      </Label>
 
-      <div className={styles.actions} style={{ marginTop: '2rem' }}>
-        <button
+      <div className="flex items-center gap-6" style={{ marginTop: '2rem' }}>
+        <Button
+          variant="unstyled"
           type="button"
-          className={styles.btnDanger}
+          className="inline-block [background:transparent] [border:1px_solid_var(--color-error)] text-error py-[0.9rem] px-8 font-condensed text-[0.85rem] tracking-[0.1em] uppercase cursor-pointer [transition:background-color_0.2s,_color_0.2s] [&:hover:not(:disabled)]:bg-error [&:hover:not(:disabled)]:text-black disabled:opacity-[0.5] disabled:cursor-not-allowed"
           disabled={!confirmed || status === 'submitting'}
           onClick={handleDelete}
         >
           {status === 'submitting' ? 'Deleting…' : 'Permanently Delete My Login'}
-        </button>
+        </Button>
 
         {message && (
-          <p role="status" aria-live="polite" style={{ fontSize: '0.9rem', lineHeight: 1.6, color: '#f87171' }}>
+          <p
+            role="status"
+            aria-live="polite"
+            style={{ fontSize: '0.9rem', lineHeight: 1.6, color: 'var(--color-error)' }}
+          >
             {message}
           </p>
         )}

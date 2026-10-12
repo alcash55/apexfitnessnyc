@@ -1,4 +1,12 @@
+import { pageMetadata } from '@/lib/metadata';
 import PasswordForm from '../password-form';
+
+export const metadata = pageMetadata({
+  title: 'Set Your Password | ApexFitnessNYC',
+  description: 'Set your password to finish setting up or recovering your APEX account.',
+  path: '/account/set-password',
+  privatePage: true,
+});
 
 /**
  * Landing page after an invite/recovery email link. By the time this

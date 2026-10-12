@@ -1,0 +1,107 @@
+/* Import after Tailwind's default theme to reuse the APEX design system. */
+@theme static {
+  --color-gold: #c8a84b;
+  --color-gold-dim: rgba(200, 168, 75, 0.15);
+  --color-black: #050810;
+  --color-charcoal: #0e1520;
+  --color-card: #111827;
+  --color-border: rgba(255, 255, 255, 0.07);
+  --color-cream: #f0ebe0;
+  --color-muted: rgba(240, 235, 224, 0.58);
+  --color-text: rgba(240, 235, 224, 0.85);
+  --color-error: #f87171;
+  --color-success: #4ade80;
+
+  --spacing-section: 7rem;
+  --spacing-gutter: 5vw;
+  --spacing-nav: 72px;
+  --container-content: 1300px;
+  --container-copy: 560px;
+  --text-section: clamp(2.5rem, 5vw, 4rem);
+  --text-section--line-height: 1;
+  --text-section--letter-spacing: 0.03em;
+  --tracking-label: 0.2em;
+  --tracking-button: 0.15em;
+  --tracking-logo: 0.08em;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --shadow-gold: 0 4px 20px rgba(200, 168, 75, 0.4);
+  --breakpoint-mobile: 37.5rem;
+  --breakpoint-tablet: 56.25rem;
+  --animate-ticker: ticker 28s linear infinite;
+  --animate-scroll-hint: scroll-hint 2s infinite;
+
+  @keyframes ticker {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes scroll-hint {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(6px);
+    }
+  }
+}
+
+/* Resolve next/font variables on the element that uses the utility. */
+@theme inline static {
+  --color-background: var(--color-black);
+  --color-foreground: var(--color-text);
+  --color-card-foreground: var(--color-cream);
+  --color-popover: var(--color-charcoal);
+  --color-popover-foreground: var(--color-cream);
+  --color-primary: var(--color-gold);
+  --color-primary-foreground: var(--color-black);
+  --color-secondary: var(--color-charcoal);
+  --color-secondary-foreground: var(--color-cream);
+  --color-muted-foreground: var(--color-muted);
+  --color-accent: var(--color-gold-dim);
+  --color-accent-foreground: var(--color-gold);
+  --color-destructive: var(--color-error);
+  --color-input: var(--color-border);
+  --color-ring: var(--color-gold);
+  --font-sans: var(--font-inter, 'Inter'), system-ui, sans-serif;
+  --font-body: var(--font-inter, 'Inter'), system-ui, sans-serif;
+  --font-display: var(--font-bebas, 'Bebas Neue'), sans-serif;
+  --font-condensed: var(--font-barlow, 'Barlow Condensed'), sans-serif;
+}
+
+/* Preserve the former stylesheets' inclusive max-width breakpoints. */
+@custom-variant tablet-down {
+  @media (max-width: 900px) {
+    @slot;
+  }
+}
+@custom-variant compact-down {
+  @media (max-width: 700px) {
+    @slot;
+  }
+}
+@custom-variant mobile-down {
+  @media (max-width: 600px) {
+    @slot;
+  }
+}
+
+/* Existing CSS and inline styles share the same tokens as Tailwind. */
+:root {
+  --gold: var(--color-gold);
+  --gold-dim: var(--color-gold-dim);
+  --black: var(--color-black);
+  --charcoal: var(--color-charcoal);
+  --card: var(--color-card);
+  --border: var(--color-border);
+  --cream: var(--color-cream);
+  --muted: var(--color-muted);
+  --text: var(--color-text);
+}

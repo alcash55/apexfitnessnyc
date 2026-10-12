@@ -1,9 +1,11 @@
 'use client';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/browser';
-import styles from './account.module.css';
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -62,39 +64,58 @@ export default function PasswordForm({ redirectTo }: { redirectTo: string }) {
   }
 
   return (
-    <form className={styles.form} noValidate onSubmit={handleSubmit}>
-      <div className={styles.field}>
-        <label className={styles.label} htmlFor="password">New Password</label>
-        <input
+    <form className="max-w-[860px] flex flex-col gap-8" noValidate onSubmit={handleSubmit}>
+      <div className="flex flex-col gap-2">
+        <Label
+          unstyled
+          className="font-condensed text-[0.75rem] tracking-label uppercase text-gold"
+          htmlFor="password"
+        >
+          New Password
+        </Label>
+        <Input
+          unstyled
           id="password"
           name="password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className={styles.input}
+          className="bg-charcoal [border:1px_solid_var(--border)] text-cream py-4 px-5 font-condensed text-[0.95rem] tracking-[0.05em] w-full [transition:border-color_0.2s] placeholder:text-muted focus:[outline:none] focus:border-gold disabled:text-muted disabled:cursor-not-allowed"
           autoComplete="new-password"
           required
         />
       </div>
 
-      <div className={styles.field}>
-        <label className={styles.label} htmlFor="confirmPassword">Confirm Password</label>
-        <input
+      <div className="flex flex-col gap-2">
+        <Label
+          unstyled
+          className="font-condensed text-[0.75rem] tracking-label uppercase text-gold"
+          htmlFor="confirmPassword"
+        >
+          Confirm Password
+        </Label>
+        <Input
+          unstyled
           id="confirmPassword"
           name="confirmPassword"
           type="password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-          className={styles.input}
+          className="bg-charcoal [border:1px_solid_var(--border)] text-cream py-4 px-5 font-condensed text-[0.95rem] tracking-[0.05em] w-full [transition:border-color_0.2s] placeholder:text-muted focus:[outline:none] focus:border-gold disabled:text-muted disabled:cursor-not-allowed"
           autoComplete="new-password"
           required
         />
       </div>
 
-      <div className={styles.actions}>
-        <button type="submit" className="btn-gold" disabled={status === 'submitting'}>
+      <div className="flex items-center gap-6">
+        <Button
+          variant="unstyled"
+          type="submit"
+          className="btn-gold"
+          disabled={status === 'submitting'}
+        >
           {status === 'submitting' ? 'Saving…' : 'Save Password'}
-        </button>
+        </Button>
 
         {message && (
           <p
@@ -103,7 +124,7 @@ export default function PasswordForm({ redirectTo }: { redirectTo: string }) {
             style={{
               fontSize: '0.9rem',
               lineHeight: 1.6,
-              color: status === 'success' ? '#4ade80' : '#f87171',
+              color: status === 'success' ? 'var(--color-success)' : 'var(--color-error)',
             }}
           >
             {message}

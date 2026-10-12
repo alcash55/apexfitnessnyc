@@ -12,7 +12,10 @@ describe('Supabase auth config', () => {
   it('returns the URL and anon key when both are set', () => {
     vi.stubEnv('NEXT_PUBLIC_SUPABASE_URL', 'https://example.supabase.co');
     vi.stubEnv('NEXT_PUBLIC_SUPABASE_ANON_KEY', 'anon');
-    expect(getSupabaseAuthConfig()).toEqual({ url: 'https://example.supabase.co', anonKey: 'anon' });
+    expect(getSupabaseAuthConfig()).toEqual({
+      url: 'https://example.supabase.co',
+      anonKey: 'anon',
+    });
   });
 
   it.each([
@@ -30,7 +33,7 @@ describe('Supabase auth config', () => {
     vi.stubEnv('NEXT_PUBLIC_SUPABASE_ANON_KEY', '');
     vi.spyOn(console, 'error').mockImplementation(() => {});
 
-    const { response, claims } = await updateSession(new NextRequest('http://localhost/pricing'));
+    const { response, claims } = await updateSession(new NextRequest('http://localhost/programs'));
 
     expect(claims).toBeNull();
     expect(response.status).toBe(200);

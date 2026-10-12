@@ -89,7 +89,7 @@ describe('POST /api/payments/checkout', () => {
 
     // A tampered request that also tries to smuggle in its own client_id/amount.
     const res = await POST(
-      makeRequest({ planId: 'program-2-month', amount: 1, client_id: 'someone-elses-id' })
+      makeRequest({ planId: 'program-2-month', amount: 1, client_id: 'someone-elses-id' }),
     );
     const data = await res.json();
 

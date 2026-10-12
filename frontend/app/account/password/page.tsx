@@ -1,4 +1,12 @@
+import { pageMetadata } from '@/lib/metadata';
 import PasswordForm from '../password-form';
+
+export const metadata = pageMetadata({
+  title: 'Change Password | ApexFitnessNYC',
+  description: 'Change the password for your APEX account.',
+  path: '/account/password',
+  privatePage: true,
+});
 
 export default function ChangePasswordPage() {
   return (

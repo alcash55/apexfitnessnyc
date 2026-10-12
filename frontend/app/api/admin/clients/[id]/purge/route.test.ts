@@ -81,7 +81,10 @@ describe('POST /api/admin/clients/[id]/purge', () => {
   it('purges the client for a verified admin with the exact confirm phrase', async () => {
     vi.mocked(getSessionClaims).mockResolvedValue({ sub: 'a1', is_admin: true, client_id: null });
     vi.mocked(verifyIsAdmin).mockResolvedValue(true);
-    maybeSingleMock.mockResolvedValue({ data: { id: 'c1', auth_user_id: 'auth-user-1' }, error: null });
+    maybeSingleMock.mockResolvedValue({
+      data: { id: 'c1', auth_user_id: 'auth-user-1' },
+      error: null,
+    });
     vi.mocked(purgeClientAccount).mockResolvedValue({ error: null });
 
     const res = await POST(makeRequest({ confirm: 'PERMANENTLY DELETE' }), ctx);

@@ -1,8 +1,10 @@
 'use client';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from './expenses.module.css';
 
 type Form = {
   expenseDate: string;
@@ -22,7 +24,14 @@ const EMPTY: Form = {
 
 function FieldError({ text }: { text: string }) {
   return (
-    <span style={{ color: '#f87171', fontSize: '0.8rem', marginTop: '0.4rem', display: 'block' }}>
+    <span
+      style={{
+        color: 'var(--color-error)',
+        fontSize: '0.8rem',
+        marginTop: '0.4rem',
+        display: 'block',
+      }}
+    >
       {text}
     </span>
   );
@@ -87,27 +96,43 @@ export default function ExpenseForm() {
   }
 
   return (
-    <div className={styles.formCard}>
-      <div className={styles.formTitle}>Add Expense</div>
-      <form className={styles.form} noValidate onSubmit={handleSubmit}>
-        <div className={styles.row}>
-          <div className={styles.field}>
-            <label className={styles.label} htmlFor="expenseDate">Date</label>
-            <input
+    <div className="bg-card [border:1px_solid_var(--border)] p-8 mb-12 max-w-[860px]">
+      <div className="font-condensed text-[0.9rem] tracking-button uppercase text-gold mb-6">
+        Add Expense
+      </div>
+      <form className="flex flex-col gap-6" noValidate onSubmit={handleSubmit}>
+        <div className="grid grid-cols-[1fr_1fr] gap-6 mobile-down:grid-cols-[1fr] mobile-down:gap-4">
+          <div className="flex flex-col gap-2">
+            <Label
+              unstyled
+              className="font-condensed text-[0.75rem] tracking-label uppercase text-gold"
+              htmlFor="expenseDate"
+            >
+              Date
+            </Label>
+            <Input
+              unstyled
               id="expenseDate"
               name="expenseDate"
               type="date"
               value={form.expenseDate}
               onChange={handleChange}
-              className={styles.input}
+              className="bg-charcoal [border:1px_solid_var(--border)] text-cream py-[0.85rem] px-[1.1rem] font-condensed text-[0.95rem] tracking-[0.05em] w-full [transition:border-color_0.2s] placeholder:text-muted focus:[outline:none] focus:border-gold"
               aria-invalid={!!fieldErrors.expense_date}
               required
             />
             {fieldErrors.expense_date && <FieldError text={fieldErrors.expense_date} />}
           </div>
-          <div className={styles.field}>
-            <label className={styles.label} htmlFor="amount">Amount (USD)</label>
-            <input
+          <div className="flex flex-col gap-2">
+            <Label
+              unstyled
+              className="font-condensed text-[0.75rem] tracking-label uppercase text-gold"
+              htmlFor="amount"
+            >
+              Amount (USD)
+            </Label>
+            <Input
+              unstyled
               id="amount"
               name="amount"
               type="number"
@@ -116,7 +141,7 @@ export default function ExpenseForm() {
               placeholder="0.00"
               value={form.amount}
               onChange={handleChange}
-              className={styles.input}
+              className="bg-charcoal [border:1px_solid_var(--border)] text-cream py-[0.85rem] px-[1.1rem] font-condensed text-[0.95rem] tracking-[0.05em] w-full [transition:border-color_0.2s] placeholder:text-muted focus:[outline:none] focus:border-gold"
               aria-invalid={!!fieldErrors.amount_cents}
               required
             />
@@ -124,37 +149,56 @@ export default function ExpenseForm() {
           </div>
         </div>
 
-        <div className={styles.row}>
-          <div className={styles.field}>
-            <label className={styles.label} htmlFor="category">Category</label>
-            <input
+        <div className="grid grid-cols-[1fr_1fr] gap-6 mobile-down:grid-cols-[1fr] mobile-down:gap-4">
+          <div className="flex flex-col gap-2">
+            <Label
+              unstyled
+              className="font-condensed text-[0.75rem] tracking-label uppercase text-gold"
+              htmlFor="category"
+            >
+              Category
+            </Label>
+            <Input
+              unstyled
               id="category"
               name="category"
               type="text"
               placeholder="e.g. Rent, Equipment"
               value={form.category}
               onChange={handleChange}
-              className={styles.input}
+              className="bg-charcoal [border:1px_solid_var(--border)] text-cream py-[0.85rem] px-[1.1rem] font-condensed text-[0.95rem] tracking-[0.05em] w-full [transition:border-color_0.2s] placeholder:text-muted focus:[outline:none] focus:border-gold"
             />
           </div>
-          <div className={styles.field}>
-            <label className={styles.label} htmlFor="description">Description</label>
-            <input
+          <div className="flex flex-col gap-2">
+            <Label
+              unstyled
+              className="font-condensed text-[0.75rem] tracking-label uppercase text-gold"
+              htmlFor="description"
+            >
+              Description
+            </Label>
+            <Input
+              unstyled
               id="description"
               name="description"
               type="text"
               placeholder="Optional notes"
               value={form.description}
               onChange={handleChange}
-              className={styles.input}
+              className="bg-charcoal [border:1px_solid_var(--border)] text-cream py-[0.85rem] px-[1.1rem] font-condensed text-[0.95rem] tracking-[0.05em] w-full [transition:border-color_0.2s] placeholder:text-muted focus:[outline:none] focus:border-gold"
             />
           </div>
         </div>
 
-        <div className={styles.actions}>
-          <button type="submit" className="btn-gold" disabled={status === 'submitting'}>
+        <div className="flex items-center gap-6">
+          <Button
+            variant="unstyled"
+            type="submit"
+            className="btn-gold"
+            disabled={status === 'submitting'}
+          >
             {status === 'submitting' ? 'Saving…' : 'Add Expense'}
-          </button>
+          </Button>
 
           {message && (
             <p
@@ -163,7 +207,7 @@ export default function ExpenseForm() {
               style={{
                 fontSize: '0.9rem',
                 lineHeight: 1.6,
-                color: status === 'success' ? '#4ade80' : '#f87171',
+                color: status === 'success' ? 'var(--color-success)' : 'var(--color-error)',
               }}
             >
               {message}

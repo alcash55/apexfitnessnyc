@@ -97,7 +97,10 @@ describe('DELETE /api/admin/expenses/[id]', () => {
   it('returns a generic 500 and never leaks the db error when delete fails', async () => {
     getSessionClaimsMock.mockResolvedValue(ADMIN_CLAIMS);
     verifyIsAdminMock.mockResolvedValue(true);
-    maybeSingleFn.mockResolvedValue({ data: null, error: { message: 'connection refused: internal-host:5432' } });
+    maybeSingleFn.mockResolvedValue({
+      data: null,
+      error: { message: 'connection refused: internal-host:5432' },
+    });
 
     const res = await DELETE(makeRequest('exp-1'), makeContext('exp-1'));
     const data = await res.json();

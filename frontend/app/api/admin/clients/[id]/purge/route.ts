@@ -15,10 +15,7 @@ const CONFIRM_PHRASE = 'PERMANENTLY DELETE';
  * anywhere near the destructive path, by construction, not just by caller
  * discipline.
  */
-export async function POST(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
+export async function POST(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const claims = await getSessionClaims();
 
   if (!claims || !(await verifyIsAdmin(claims.sub))) {
@@ -35,7 +32,7 @@ export async function POST(
   if (body.confirm !== CONFIRM_PHRASE) {
     return NextResponse.json(
       { error: `Type "${CONFIRM_PHRASE}" exactly to confirm.` },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -59,7 +56,7 @@ export async function POST(
     console.error('[admin/clients/purge] failed:', err);
     return NextResponse.json(
       { error: 'Something went wrong on our end. Please try again shortly.' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

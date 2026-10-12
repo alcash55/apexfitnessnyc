@@ -29,7 +29,7 @@ export async function POST() {
     console.error('[account/delete] deactivation failed:', error);
     return NextResponse.json(
       { success: false, error: 'Something went wrong on our end. Please try again shortly.' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 

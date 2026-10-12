@@ -11,10 +11,7 @@ export const dynamic = 'force-dynamic';
  * is left intact — clients.auth_user_id clears itself via "on delete set
  * null", no manual null-out needed here.
  */
-export async function POST(
-  _request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
+export async function POST(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const claims = await getSessionClaims();
 
   if (!claims || !(await verifyIsAdmin(claims.sub))) {
@@ -35,7 +32,7 @@ export async function POST(
     if (!data.auth_user_id) {
       return NextResponse.json(
         { error: 'This client has no portal access to revoke.' },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -47,7 +44,7 @@ export async function POST(
     console.error('[admin/clients/revoke] failed:', err);
     return NextResponse.json(
       { error: 'Something went wrong on our end. Please try again shortly.' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

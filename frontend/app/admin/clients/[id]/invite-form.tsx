@@ -1,8 +1,9 @@
 'use client';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from './detail.module.css';
 
 export default function InviteForm({
   clientId,
@@ -44,19 +45,25 @@ export default function InviteForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className={styles.actionForm}>
-      <input
+    <form onSubmit={handleSubmit} className="flex items-center gap-3 flex-wrap">
+      <Input
+        unstyled
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="client@email.com"
-        className={styles.actionInput}
+        className="bg-charcoal [border:1px_solid_var(--border)] text-cream py-[0.85rem] px-5 font-condensed text-[0.9rem] min-w-[240px] placeholder:text-muted focus:[outline:none] focus:border-gold compact-down:min-w-0 compact-down:w-full"
         required
       />
-      <button type="submit" className="btn-gold" disabled={status === 'submitting'}>
+      <Button
+        variant="unstyled"
+        type="submit"
+        className="btn-gold"
+        disabled={status === 'submitting'}
+      >
         {status === 'submitting' ? 'Sending…' : 'Send Invite'}
-      </button>
-      {message && <span className={styles.errorText}>{message}</span>}
+      </Button>
+      {message && <span className="text-error text-[0.85rem]">{message}</span>}
     </form>
   );
 }
