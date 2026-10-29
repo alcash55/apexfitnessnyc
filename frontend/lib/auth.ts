@@ -10,20 +10,17 @@ export type SessionClaims = {
 };
 
 /**
- * Reads and verifies the current session's JWT, returning its claims —
- * including is_admin/client_id, stamped in by the Custom Access Token Hook
- * (backend/supabase/migrations/20260918000000_client_auth.sql). This is the
- * fast path: no database query, the claims come straight off the verified
- * token. getClaims() actually validates the JWT (locally via WebCrypto, or
- * against the auth server for older symmetric-secret projects) rather than
- * trusting an unverified cookie value — this is Supabase's currently
- * documented replacement for getSession()/getUser() when you need more than
- * bare identity.
+ * LEARNING A5: Read verified token identity and distinguish it from current authorization. This
+ * function checks signature/expiry but returns role/client snapshots from the token. Parse
+ * custom claim shapes rather than asserting them. Add separate server helpers that resolve
+ * current membership before privileged data access; do not mistake getClaims() for immediate
+ * revocation.
  *
- * Returns null when there is no session at all. Never throws for "not
- * logged in" — callers branch on the return value (redirect vs. 401 JSON
- * vs. 404, depending on what kind of route this is), so this function stays
- * a plain data source, not a control-flow helper.
+ * Verify: Remove a client's link while retaining its existing token; protected data and checkout
+ * must then be denied.
+ *
+ * @returns Verified token claims or null. This is not a current client/admin access grant.
+ * @see docs/learning/01-supabase-auth.md
  */
 export async function getSessionClaims(): Promise<SessionClaims | null> {
   // Auth not configured for this deployment: nobody can be signed in.
@@ -44,24 +41,32 @@ export async function getSessionClaims(): Promise<SessionClaims | null> {
 }
 
 /**
- * Fast-path admin check from the JWT claim alone. Fine for page
- * rendering/routing decisions. NOT sufficient on its own to gate a
- * destructive or sensitive write — see verifyIsAdmin() below for why.
+ * LEARNING A5: This is an optimistic UI/routing hint only. A signed is_admin flag can outlive
+ * removal from public.admins. Sensitive page reads need the current database check too, not
+ * merely destructive writes.
+ *
+ * Verify: A removed admin cannot read the roster, client health details, or expenses using an
+ * old token.
+ *
+ * @param claims - The verified token snapshot, or null.
+ * @returns Whether the token says admin, not whether the current allowlist still does.
+ * @see docs/learning/01-supabase-auth.md
  */
 export function isAdminClaims(claims: SessionClaims | null): boolean {
   return claims?.is_admin === true;
 }
 
 /**
- * Database re-check of admin status, bypassing the JWT claim entirely.
+ * LEARNING A5: Use the current allowlist at the data boundary. Extend callers to cover sensitive
+ * reads as well as writes, combine with verified identity, and define a fail-closed
+ * infrastructure-error outcome. Never accept a caller-supplied identity as the authenticated
+ * subject.
  *
- * A claim baked into a JWT only changes when that JWT refreshes (Supabase
- * access tokens default to a 1-hour lifetime) — revoking someone's admin
- * status doesn't retroactively invalidate a token they're already holding.
- * Every admin-gated *write* (inviting a client, revoke/purge, recording an
- * expense) must call this before actually executing, rather than trusting
- * the claim alone. The claim is the fast path for routing/UI; this is the
- * actual gate on anything destructive.
+ * Verify: Both ordinary and removed admins fail before any sensitive query.
+ *
+ * @param authUserId - Subject obtained from server-verified identity, never form input.
+ * @returns True only when the query finds current membership without error.
+ * @see docs/learning/01-supabase-auth.md
  */
 export async function verifyIsAdmin(authUserId: string): Promise<boolean> {
   const { data, error } = await getDb()
@@ -74,11 +79,15 @@ export async function verifyIsAdmin(authUserId: string): Promise<boolean> {
 }
 
 /**
- * Client-triggered account deletion: revokes login access only. The
- * client's clients row and all related business history (health_metrics,
- * training_payments, client_offerings, client_nutrition_plans) are left
- * intact — clients.auth_user_id clears itself via the column's
- * "on delete set null" foreign key, no manual null-out needed.
+ * LEARNING A5: Deleting an Auth user deactivates login but does not by itself revoke every
+ * already-issued JWT or erase business history. Make private callers verify the live
+ * identity/client relationship so old claims no longer authorize data or checkout.
+ *
+ * Verify: An old token cannot read or create Checkout after deactivation.
+ *
+ * @param authUserId - Verified identity being deactivated.
+ * @returns The provider operation result; callers must still enforce current authorization.
+ * @see docs/learning/01-supabase-auth.md
  */
 export async function deactivateClientAccount(
   authUserId: string,
@@ -88,11 +97,16 @@ export async function deactivateClientAccount(
 }
 
 /**
- * Admin-only full erasure: deletes the clients row (cascading through
- * health_metrics/nutrition_logs/training_payments/client_offerings/
- * client_nutrition_plans via their existing "on delete cascade" foreign
- * keys) and the auth identity. Irreversible — callers must have already
- * confirmed this is genuinely wanted, not the default delete path.
+ * LEARNING A5: Erasure spans the database and Auth and is not one transaction. The existing
+ * order can delete the client before Auth deletion fails. Define recoverable partial failure and
+ * legal retention separately from login revocation; test only synthetic records.
+ *
+ * Verify: Partial failure is detectable and retryable without erasing an unrelated identity.
+ *
+ * @param clientId - Target selected by an independently authorized admin.
+ * @param authUserId - Auth identity confirmed to belong to that client, if any.
+ * @returns The combined operation result, not proof that all external copies were deleted.
+ * @see docs/learning/01-supabase-auth.md
  */
 export async function purgeClientAccount(
   clientId: string,

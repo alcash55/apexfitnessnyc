@@ -32,11 +32,17 @@ type Expense = {
 };
 
 /**
- * Admin-only. middleware.ts already rewrites unauthenticated/non-admin
- * requests under /admin/* to a genuine 404, but this page independently
- * re-checks the fast-path claim before rendering — defense in depth against
- * a middleware matcher gap. The API routes behind the form/delete actions
- * re-verify against the database (verifyIsAdmin) before actually writing.
+ * LEARNING A5: Admin expenses. Intended access: Current admin.
+ *
+ * Financial expense data requires current admin membership before the service-role read. The
+ * form and row-action handlers must have their own authorization. Do not present a failed
+ * database read as an empty ledger.
+ *
+ * Verify: An ordinary or removed admin cannot read or mutate expenses, including by direct API
+ * calls.
+ *
+ * @see docs/learning/01-supabase-auth.md
+ * @see docs/learning/03-route-map.md
  */
 export default async function ExpensesPage() {
   const claims = await getSessionClaims();

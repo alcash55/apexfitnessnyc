@@ -10,6 +10,19 @@ export const metadata = pageMetadata({
 
 const updated = 'August 17, 2026';
 
+/**
+ * LEARNING P1: Terms. Intended access: Public.
+ *
+ * Terms must remain readable before purchase. Define the offer, total price, access duration,
+ * cancellation/refund process, and any results commitment with the owner. A future checkout
+ * exercise records the accepted version rather than treating this page visit as acceptance.
+ *
+ * Verify: A buyer can review the applicable version before payment, and a stored purchase
+ * references that version.
+ *
+ * @see docs/learning/02-payments.md
+ * @see docs/learning/03-route-map.md
+ */
 export default function TermsPage() {
   return (
     <div className="section" style={{ minHeight: 'calc(100vh - 72px)' }}>

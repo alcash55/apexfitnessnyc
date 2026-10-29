@@ -37,6 +37,16 @@ const jsonLd = {
   sameAs: ['https://www.instagram.com/apex.fitnessnyc'],
 };
 
+/**
+ * LEARNING A4: This layout reads token state for navigation. That does not authorize child data
+ * access, and shared layout reuse makes it the wrong place for the only guard. Keep
+ * secrets/private records out of client props and preserve private response/cookie cache
+ * behavior.
+ *
+ * Verify: Every sensitive child route still denies unauthorized access when called directly.
+ *
+ * @see docs/learning/01-supabase-auth.md
+ */
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   // Nav can't call getSessionClaims() itself — that's a server-only function
   // (it reads next/headers cookies()) and Nav is a 'use client' component

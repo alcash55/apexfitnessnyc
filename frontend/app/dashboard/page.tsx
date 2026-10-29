@@ -56,16 +56,24 @@ const cardStyle: CSSProperties = {
 };
 
 /**
- * Client dashboard — a server component. Everything here is fetched with
- * the service-role client (getDb()), scoped manually to the signed-in
- * client's own id, since every table has RLS-enabled-with-zero-policies by
- * design (see frontend/lib/supabaseAdmin.ts).
+ * LEARNING A5: Dashboard. Intended access: Current linked client.
+ *
+ * The dashboard currently scopes privileged reads with the JWT client_id. Use the current-client
+ * helper before program, health, and payment queries, distinguish query failure from empty
+ * history, and display only that client's data. A payment should grant only the defined
+ * enrollment.
+ *
+ * Verify: Test two clients, an unlinked user, revocation with an old token, and a failed
+ * payment-history query.
+ *
+ * @see docs/learning/01-supabase-auth.md
+ * @see docs/learning/03-route-map.md
  */
 export default async function DashboardPage() {
   const claims = await getSessionClaims();
 
-  // middleware.ts already gates /dashboard to authenticated users, so this
-  // is a defensive fallback, not the primary guard.
+  // Proxy performs an early signed-in navigation check. A5 requires this
+  // data boundary to verify the current client relationship independently.
   if (!claims) {
     return <UnlinkedNotice message="You need to be signed in to view your dashboard." />;
   }

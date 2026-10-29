@@ -23,9 +23,18 @@ const LOCKED_MESSAGES: Record<Exclude<LibraryAccess, 'allowed'>, string> = {
 };
 
 /**
- * Members-only exercise library. Hidden: not in the nav or sitemap, noindex,
- * and disallowed in robots.txt. middleware.ts requires a signed-in session;
- * lib/libraryAccess.ts then requires a current program enrollment.
+ * LEARNING A5: Exercise library. Intended access: Current client and enrollment, or current
+ * admin.
+ *
+ * getLibraryAccess checks enrollment but trusts the token's admin flag and client ID. Re-check
+ * current membership before reading the catalog. Authorization must reflect program access
+ * rules, not the mere existence of a payment or a successful redirect.
+ *
+ * Verify: Unlinking or ending enrollment denies content with an already-issued token; a removed
+ * admin is also denied.
+ *
+ * @see docs/learning/01-supabase-auth.md
+ * @see docs/learning/03-route-map.md
  */
 export default async function LibraryPage() {
   let access: LibraryAccess;

@@ -5,16 +5,16 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 /**
- * Client-triggered account deletion. Per the approved plan's policy
- * decision, this DEACTIVATES LOGIN ONLY — payment and health history are
- * kept (clients.auth_user_id clears itself via "on delete set null", no
- * manual null-out needed here). Full erasure is a separate, admin-only
- * action (lib/auth.ts's purgeClientAccount) and is not reachable from this
- * route.
+ * LEARNING A5: server entry point. Implement the hardening exercise below.
  *
- * Deleting the auth user invalidates any session tokens tied to it, so the
- * caller's session is no longer valid after this succeeds — the frontend
- * redirects to `/` on a successful response.
+ * This deletes the authenticated login, not all business records. Verify current identity and
+ * the intended recent-auth policy before deletion. Ensure data reads/writes no longer trust an
+ * old still-valid client claim after unlinking; preserve the separate privacy-request process.
+ *
+ * Verify: An old token cannot access the dashboard or create Checkout after successful
+ * deactivation.
+ *
+ * @see docs/learning/01-supabase-auth.md
  */
 export async function POST() {
   const claims = await getSessionClaims();

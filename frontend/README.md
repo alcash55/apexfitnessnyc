@@ -1,5 +1,9 @@
 # [Dev](https://derekw0803.github.io/apexfitnessnyc/)
 
+## Auth and payments learning workbook
+
+Start with the [auth-first workbook](../docs/learning/README.md). It explains the existing Supabase and Stripe code, provides exercises for you to implement, and maps every page and endpoint. Search for `LEARNING` in the TypeScript source for the corresponding JSDoc instructions. Copy `.env.example` to `.env.local` only after choosing the isolated development environment described in Lesson 1. The workbook and comments do not implement the security fixes.
+
 ## Getting Started
 
 First, run the development server:

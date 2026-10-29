@@ -20,13 +20,16 @@ function isValidDateString(value: string): boolean {
 }
 
 /**
- * Business expense tracking (rent, equipment, supplies) — unrelated to
- * client billing. Service-role only, no RLS, so both handlers gate on
- * verifyIsAdmin() as the very first thing, before any DB access.
+ * LEARNING A5: server entry point. Implement the hardening exercise below.
  *
- * The 404 (rather than 401/403) matches middleware.ts's "hidden by rule"
- * posture for /admin/* — an unauthenticated or non-admin caller cannot
- * distinguish this from a route that was never built.
+ * Expense creation/listing is private administrative work, not proof of a customer payment.
+ * Preserve current admin checks, validate amount/date/category at the boundary, and keep manual
+ * expenses separate from Stripe-derived records.
+ *
+ * Verify: Direct unauthorized requests fail and malformed amounts cannot create financial
+ * records.
+ *
+ * @see docs/learning/01-supabase-auth.md
  */
 export async function GET() {
   const claims = await getSessionClaims();

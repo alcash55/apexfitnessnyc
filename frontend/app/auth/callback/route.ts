@@ -4,11 +4,17 @@ import { createClient } from '@/lib/supabase/server';
 export const dynamic = 'force-dynamic';
 
 /**
- * Exchanges the `code` param from an invite/password-recovery email link for
- * a session, then redirects to `next` (typically /account/set-password).
- * Without this route, clicking an invite or "forgot password" link leaves
- * the visitor with a code in the URL and no session — required for the
- * admin-invite flow to work at all.
+ * LEARNING A4: server entry point. Implement the hardening exercise below.
+ *
+ * This public entry must establish a verified session before protected navigation. The existing
+ * handler accepts only code; inspect actual invite/recovery email templates and support the
+ * chosen verified exchange, including token_hash/OTP if configured. Validate internal next
+ * destinations and preserve response cookies.
+ *
+ * Verify: Expired/reused links fail safely, invite and recovery work independently, and no
+ * supplied redirect or email grants membership.
+ *
+ * @see docs/learning/01-supabase-auth.md
  */
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);

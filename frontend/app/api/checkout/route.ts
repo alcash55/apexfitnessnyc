@@ -6,14 +6,16 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 /**
- * Creates a Stripe Checkout Session and returns its hosted URL.
+ * LEARNING P1: server entry point. Implement the hardening exercise below.
  *
- * The browser sends only a plan id. The price is resolved server-side from the
- * canonical catalogue in lib/plans.ts, so a tampered request cannot change the
- * amount charged.
+ * This is the legacy anonymous route and conflicts with the requested authenticated-only design.
+ * Disable it or delegate to the same current-client checkout service as /api/payments/checkout.
+ * Do not preserve anonymous access merely because the public Programs UI no longer calls it.
  *
- * Card details are collected by Stripe on Stripe's own domain. We never see,
- * transmit, or store a card number — which is what keeps this out of PCI scope.
+ * Verify: A direct signed-out POST cannot create Stripe Checkout, and both API entry points have
+ * explicit ownership tests.
+ *
+ * @see docs/learning/02-payments.md
  */
 export async function POST(request: NextRequest) {
   let body: Record<string, unknown>;

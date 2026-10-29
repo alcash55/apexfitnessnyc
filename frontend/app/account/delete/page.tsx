@@ -8,6 +8,19 @@ export const metadata = pageMetadata({
   privatePage: true,
 });
 
+/**
+ * LEARNING A5: Delete login. Intended access: Authenticated identity.
+ *
+ * This page describes login deactivation, not erasure of financial/health records. Require a
+ * verified identity and ensure the POST route independently verifies it. Define reauthentication
+ * and revocation behavior without deleting legally retained business records.
+ *
+ * Verify: After deactivation, old tokens cannot read client data or create a payment; privacy
+ * erasure stays distinct.
+ *
+ * @see docs/learning/01-supabase-auth.md
+ * @see docs/learning/03-route-map.md
+ */
 export default function DeleteAccountPage() {
   return (
     <div className="section" style={{ minHeight: 'calc(100vh - 72px)' }}>

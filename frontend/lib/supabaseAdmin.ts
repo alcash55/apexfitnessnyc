@@ -10,6 +10,18 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js';
  */
 let client: SupabaseClient | null = null;
 
+/**
+ * LEARNING A1: This is privileged database access and bypasses RLS. Add a server-only import
+ * boundary in your implementation, verify matching project configuration, and call it for
+ * sensitive queries only after current user/admin authorization. Never attach a visitor session
+ * to this shared privileged client.
+ *
+ * Verify: A Client Component cannot import this module and no key or unrestricted row set
+ * reaches client props.
+ *
+ * @returns A server-privileged client, not a user-scoped authorization layer.
+ * @see docs/learning/01-supabase-auth.md
+ */
 export function getDb(): SupabaseClient {
   if (client) return client;
 

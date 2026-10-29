@@ -8,6 +8,19 @@ export const metadata = pageMetadata({
   path: '/links',
 });
 
+/**
+ * LEARNING P1: Links. Intended access: Public.
+ *
+ * Social links are navigation into the same public-programs/authenticated-payments funnel. They
+ * must not expose session-specific Checkout URLs, customer IDs, or payment history. A saved link
+ * is not proof of ownership.
+ *
+ * Verify: Follow all purchase-related links signed out and verify the server still requires
+ * auth.
+ *
+ * @see docs/learning/02-payments.md
+ * @see docs/learning/03-route-map.md
+ */
 export default function LinksPage() {
   return (
     <div

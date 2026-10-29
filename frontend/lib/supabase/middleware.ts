@@ -3,10 +3,18 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { getSupabaseAuthConfig } from '@/lib/supabase/config';
 
 /**
- * Refreshes the Supabase session cookie on every matched request and
- * returns both the refreshed response and the decoded user (if any) so
- * frontend/middleware.ts doesn't need a second round of cookie parsing to
- * make its allow/redirect/404 decision.
+ * LEARNING A4: This helper runs from proxy.ts, not a second framework middleware. Preserve
+ * refreshed cookies and required cache headers on the final response, including redirects; the
+ * current callback copies cookies only. Token verification supports navigation but does not
+ * replace current database authorization.
+ *
+ * Verify: An expired-token refresh followed by a protected redirect retains correct
+ * cookies/cache headers.
+ *
+ * @param request - Incoming request whose session transport is being refreshed.
+ * @returns The response carrying refresh state and the token snapshot; neither grants current
+ * business access.
+ * @see docs/learning/01-supabase-auth.md
  */
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({ request });

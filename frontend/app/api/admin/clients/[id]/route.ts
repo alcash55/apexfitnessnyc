@@ -12,7 +12,18 @@ function clean(value: unknown, max: number): string {
   return value.trim().slice(0, max);
 }
 
-/** Full client record for the admin detail page. */
+/**
+ * LEARNING A5: server entry point. Implement the hardening exercise below.
+ *
+ * GET and PATCH already re-check admin membership. Validate the target and allowed update
+ * schema. Changing the business email must not silently reassign auth identity, role,
+ * enrollment, or payment ownership; those require their explicit workflows.
+ *
+ * Verify: Unauthorized GET/PATCH fail, null/array bodies are rejected, and profile edits cannot
+ * change protected relationship fields.
+ *
+ * @see docs/learning/01-supabase-auth.md
+ */
 export async function GET(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const claims = await getSessionClaims();
 

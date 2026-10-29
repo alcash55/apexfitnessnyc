@@ -9,9 +9,17 @@ export const dynamic = 'force-dynamic';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /**
- * Admin-only: sends a Supabase Auth invite to the given email and links the
- * resulting auth identity to this client's row (auth_user_id + email are
- * only ever written together here, so they can never drift apart).
+ * LEARNING A6: server entry point. Implement the hardening exercise below.
+ *
+ * An Auth invitation and a client-link update are separate systems. Verify a real eligible
+ * client before sending, then confirm exactly one row links the intended identity. Define
+ * retry/existing-email/link-failure recovery without deleting unrelated identities or trusting
+ * profile metadata.
+ *
+ * Verify: A missing/already-linked target sends no unintended invite, and a failed linking step
+ * leaves a recoverable state with no privilege escalation.
+ *
+ * @see docs/learning/01-supabase-auth.md
  */
 export async function POST(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const claims = await getSessionClaims();

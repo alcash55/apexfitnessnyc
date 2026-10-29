@@ -16,6 +16,16 @@ import { getDb } from '@/lib/supabaseAdmin';
  */
 export type LibraryAccess = 'allowed' | 'signed-out' | 'unlinked' | 'no-program';
 
+/**
+ * LEARNING A5: Enrollment is a separate entitlement from paying or signing in. This helper
+ * currently trusts is_admin/client_id token snapshots. Check current admin/client membership
+ * before its enrollment lookup, then apply the defined access duration and revocation rules.
+ *
+ * Verify: Ending enrollment, unlinking a client, or removing an admin denies access with their
+ * existing token.
+ *
+ * @see docs/learning/01-supabase-auth.md
+ */
 export async function getLibraryAccess(claims: SessionClaims | null): Promise<LibraryAccess> {
   if (!claims) return 'signed-out';
   if (claims.is_admin) return 'allowed';

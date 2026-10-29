@@ -4,12 +4,14 @@ import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 
 /**
- * Client-side "Pay Now" trigger for an authenticated client's /payments page.
+ * LEARNING P3: The button sends a plan ID and redirects to hosted Checkout. Add a retry-stable
+ * checkout-attempt ID and validate the server response. Loading/disabled state prevents
+ * accidental clicks but is not authorization, price enforcement, or payment idempotency.
  *
- * Mirrors app/programs/programs.tsx's startCheckout: POST the plan id, redirect
- * to the Stripe-hosted URL we get back, surface a loading state and any
- * error inline. This one posts to /api/payments/checkout (authenticated)
- * instead of /api/checkout (anonymous) so the session carries client_id.
+ * Verify: Network retry reuses the intended attempt while a deliberate new purchase creates a
+ * new attempt.
+ *
+ * @see docs/learning/02-payments.md
  */
 export default function PayButton({
   planId,

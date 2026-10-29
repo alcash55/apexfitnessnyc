@@ -82,6 +82,20 @@ export const PLANS: Plan[] = [
   },
 ];
 
+/**
+ * LEARNING P3: Resolve the plan on the server for every checkout. Browser displays are not
+ * authoritative. Decide whether IDs represent full programs or installments, preserve
+ * purchase-time price/version for webhooks, and keep integer cents/currency under server
+ * control.
+ *
+ * Verify: Tampered client prices cannot change charges, and a catalog edit does not invalidate a
+ * legitimate earlier purchase.
+ *
+ * @param id - Untrusted external identifier that must resolve to an allowed server catalog
+ * entry.
+ * @returns The catalog entry, or undefined; callers must reject unknown IDs.
+ * @see docs/learning/02-payments.md
+ */
 export function getPlan(id: string): Plan | undefined {
   return PLANS.find((p) => p.id === id);
 }

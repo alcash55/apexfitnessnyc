@@ -4,6 +4,18 @@ import { updateSession } from '@/lib/supabase/middleware';
 const PROTECTED_PREFIXES = ['/dashboard', '/account', '/payments', '/library'];
 const ADMIN_PREFIX = '/admin';
 
+/**
+ * LEARNING A5: Use early session/route checks for navigation while keeping final authorization
+ * in every page/API data boundary. Protected API paths are not covered by the page-prefix
+ * checks. Preserve refreshed response state on redirects and leave signed Stripe webhooks
+ * reachable without customer cookies.
+ *
+ * Verify: Direct protected API requests are denied independently, and valid Stripe events never
+ * redirect to Login.
+ *
+ * @param request - The incoming Next.js request.
+ * @see docs/learning/01-supabase-auth.md
+ */
 export async function proxy(request: NextRequest) {
   const { response, claims } = await updateSession(request);
   const path = request.nextUrl.pathname;
@@ -22,11 +34,9 @@ export async function proxy(request: NextRequest) {
   }
 
   if (isAdminRoute) {
-    // JWT claim only — fast path for routing. Every /admin page and
-    // /api/admin route independently re-checks (and every admin-gated
-    // write re-verifies against the database), so a stale claim here can
-    // only ever be too permissive for page *rendering*, never for an
-    // actual write — see lib/auth.ts's verifyIsAdmin().
+    // Token snapshot only. Admin APIs re-check membership, but the current
+    // admin pages still trust this claim before sensitive reads. A5 asks you
+    // to add current authorization there; this redirect is not that guard.
     const isAdmin = (claims as Record<string, unknown>).is_admin === true;
 
     if (!isAdmin) {

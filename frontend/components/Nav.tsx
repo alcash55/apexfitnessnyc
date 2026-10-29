@@ -23,6 +23,15 @@ function LogoutForm({ className, onSubmit }: { className?: string; onSubmit?: ()
   );
 }
 
+/**
+ * LEARNING A5: Session-aware links are presentation only. Hide/show controls for convenience,
+ * but require current authorization in destination pages and APIs. Keep login and callback
+ * reachable and do not infer payment/enrollment from a displayed menu item.
+ *
+ * Verify: Typing a protected URL or replaying its API directly cannot bypass server checks.
+ *
+ * @see docs/learning/01-supabase-auth.md
+ */
 export default function Nav({ isAuthenticated, isAdmin }: NavProps) {
   const [open, setOpen] = useState(false);
 

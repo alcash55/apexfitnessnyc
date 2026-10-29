@@ -22,11 +22,16 @@ type ClientProfile = {
 };
 
 /**
- * Server component. middleware.ts already guarantees a session exists for
- * anything under /account, but a logged-in auth identity is not guaranteed
- * to be linked to a clients row yet (e.g. an admin-only account, or a client
- * invited before the linking step ran) — client_id can still be null here,
- * so that case is handled with a message rather than assumed away.
+ * LEARNING A5: Account. Intended access: Current linked client.
+ *
+ * This page reads clients by the JWT client_id today. Resolve the current client from the
+ * verified auth identity before the privileged query, then return only the displayed profile
+ * fields. Handle an unlinked account separately from a database error.
+ *
+ * Verify: Client A cannot view B, and A's old token cannot view the profile after unlinking.
+ *
+ * @see docs/learning/01-supabase-auth.md
+ * @see docs/learning/03-route-map.md
  */
 export default async function AccountPage() {
   const claims = await getSessionClaims();

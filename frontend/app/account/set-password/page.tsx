@@ -9,10 +9,17 @@ export const metadata = pageMetadata({
 });
 
 /**
- * Landing page after an invite/recovery email link. By the time this
- * renders, app/auth/callback/route.ts has already exchanged the email
- * link's code for a valid session, so this reuses the same password form as
- * app/account/password/page.tsx.
+ * LEARNING A4: Set password. Intended access: Verified invite/recovery session.
+ *
+ * The current comment assumes a callback already established a session; prove that assumption
+ * for the actual email template. Check identity here and handle expired/reused links explicitly.
+ * Setting a password does not establish client/admin membership by itself.
+ *
+ * Verify: Test invite and recovery links separately, including opening an invite in a fresh
+ * browser.
+ *
+ * @see docs/learning/01-supabase-auth.md
+ * @see docs/learning/03-route-map.md
  */
 export default function SetPasswordPage() {
   return (

@@ -7,6 +7,16 @@ import { useRouter } from 'next/navigation';
 
 type Status = 'idle' | 'submitting' | 'error';
 
+/**
+ * LEARNING A5: A checked confirmation expresses intent, not authorization. Keep server
+ * identity/recent-auth checks on the POST route, distinguish login deactivation from erasure,
+ * and display completion only after the server confirms the intended operation.
+ *
+ * Verify: Direct API calls cannot bypass identity checks, and failed deletion does not claim
+ * success.
+ *
+ * @see docs/learning/01-supabase-auth.md
+ */
 export default function DeleteAccountForm() {
   const router = useRouter();
   const [confirmed, setConfirmed] = useState(false);
