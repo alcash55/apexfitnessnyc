@@ -5,6 +5,15 @@ import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+/**
+ * LEARNING A6: clientId and email from this form are untrusted target input. The API must verify
+ * current admin membership and the existing client before inviting, then recover safely from
+ * link failures. Do not show tokens or privileged keys in client errors.
+ *
+ * Verify: An ordinary user cannot send invitations by replaying this form's request.
+ *
+ * @see docs/learning/01-supabase-auth.md
+ */
 export default function InviteForm({
   clientId,
   initialEmail,

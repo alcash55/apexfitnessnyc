@@ -9,6 +9,19 @@ export const metadata = pageMetadata({
   privatePage: true,
 });
 
+/**
+ * LEARNING P7: Checkout cancelled. Intended access: Current client for private purchase details.
+ *
+ * A generic cancellation page can be public only if it reveals no purchase details. For the
+ * authenticated flow, guard private context and route back to Payments. A cancel URL visit
+ * cannot prove no charge occurred in another tab, so verify any financial assertion.
+ *
+ * Verify: Opening the URL directly changes no payment/access state and makes no unsupported
+ * no-charge promise.
+ *
+ * @see docs/learning/02-payments.md
+ * @see docs/learning/03-route-map.md
+ */
 export default function CheckoutCancelledPage() {
   return (
     <div className="section" style={{ minHeight: 'calc(100vh - 72px)' }}>

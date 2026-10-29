@@ -8,4 +8,16 @@ export const metadata = pageMetadata({
   path: '/apexway',
 });
 
+/**
+ * LEARNING P1: The Apex Way. Intended access: Public.
+ *
+ * Explain the service publicly, but do not imply that browsing this page grants program access.
+ * Its CTA must join the same authenticated purchase path; advertised AI and performance claims
+ * do not establish implemented entitlements.
+ *
+ * Verify: Its CTA cannot bypass the current-client check at payment creation.
+ *
+ * @see docs/learning/02-payments.md
+ * @see docs/learning/03-route-map.md
+ */
 export default ApexWayPage;

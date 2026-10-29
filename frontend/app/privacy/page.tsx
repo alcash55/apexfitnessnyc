@@ -8,6 +8,18 @@ export const metadata = pageMetadata({
 });
 const updated = 'June 23, 2026';
 
+/**
+ * LEARNING P1: Privacy. Intended access: Public.
+ *
+ * Keep this notice available before Login and Checkout. Describe actual Supabase, Stripe, and
+ * notification data flows, access/deletion procedures, and retention. Authenticated payment
+ * features must not introduce undeclared health-data sharing or tracking.
+ *
+ * Verify: The notice is reachable signed out and its statements match the implemented flows.
+ *
+ * @see docs/learning/02-payments.md
+ * @see docs/learning/03-route-map.md
+ */
 export default function PrivacyPage() {
   return (
     <div className="section" style={{ minHeight: 'calc(100vh - 72px)' }}>

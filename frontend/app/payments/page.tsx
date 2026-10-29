@@ -38,12 +38,17 @@ const labelStyle: React.CSSProperties = {
 };
 
 /**
- * Authenticated client payments page: current program, a "Pay Now" flow
- * against the same plan catalogue as the public /programs page, and this
- * client's payment history. Protected by middleware.ts (any authenticated
- * user reaches here), but a signed-in account without a linked client
- * profile (claims.client_id === null) gets a clear message instead of a
- * crash — that's a real, expected state (e.g. an admin-only account).
+ * LEARNING P7: Payments. Intended access: Current linked client.
+ *
+ * This page has a session check but reads history using the token client_id and trusts paid=1
+ * for confirmation. Use current-client authorization, scope every purchase lookup, and render
+ * verified pending/paid/refunded/error states. A browser flag must not claim payment success.
+ *
+ * Verify: Client A cannot view B's purchase, and adding paid=1 cannot confirm or create any
+ * payment.
+ *
+ * @see docs/learning/02-payments.md
+ * @see docs/learning/03-route-map.md
  */
 export default async function PaymentsPage({
   searchParams,

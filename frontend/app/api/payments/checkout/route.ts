@@ -7,16 +7,17 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 /**
- * Creates a Stripe Checkout Session for an authenticated client paying from
- * their own /payments page.
+ * LEARNING P3: server entry point. Implement the hardening exercise below.
  *
- * This is a SEPARATE route from /api/checkout (the public, anonymous
- * programs-page flow) — that route must keep working exactly as-is for
- * visitors who aren't logged in. This one additionally stamps the session's
- * metadata with client_id, resolved server-side from the verified session
- * (never trusted from the request body — same principle as never trusting a
- * client-supplied price), so the webhook can attribute the payment to the
- * right client in training_payments.
+ * Current checks cover a signed token and a client_id claim, not the live client link. Resolve
+ * current ownership before Stripe, validate JSON as unknown, price from getPlan, and persist one
+ * recoverable checkout attempt with a stable Stripe idempotency key. Derive metadata and return
+ * URLs on the server.
+ *
+ * Verify: Signed-out/revoked clients cause zero Stripe calls; a retried attempt creates one
+ * session and tampered price/client fields never control the charge.
+ *
+ * @see docs/learning/02-payments.md
  */
 export async function POST(request: NextRequest) {
   const claims = await getSessionClaims();

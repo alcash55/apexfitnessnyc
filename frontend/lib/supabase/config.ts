@@ -1,11 +1,13 @@
 /**
- * Supabase Auth's public URL and anon key, or null when either is unset.
+ * LEARNING A1: Missing local config currently produces a signed-out application. Add clear
+ * environment validation for auth/payment operations and ensure the public and privileged URLs
+ * identify the same chosen project. A public key is not a user credential.
  *
- * middleware.ts and the root layout check the session on every request, so
- * a deployment missing these (e.g. before scripts/wire-up-supabase-anon-key-prod.sh
- * has been run for that environment) must degrade to "nobody is signed in"
- * rather than throwing: a throw there takes down every page, public ones
- * included. Protected routes still redirect to /login, so this fails closed.
+ * Verify: Missing/mismatched configuration cannot accidentally authorize or write to another
+ * environment.
+ *
+ * @returns Public auth configuration, or null when currently unset.
+ * @see docs/learning/01-supabase-auth.md
  */
 export function getSupabaseAuthConfig(): { url: string; anonKey: string } | null {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;

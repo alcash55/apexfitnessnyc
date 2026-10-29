@@ -72,9 +72,17 @@ function fmtDate(value: string): string {
 }
 
 /**
- * Admin client detail. Same independent admin re-check as app/admin/page.tsx
- * — middleware.ts hides /admin/* by rule, but every page under this scope
- * re-verifies before rendering, per the "defense in depth" requirement.
+ * LEARNING A6: Admin client detail. Intended access: Current admin.
+ *
+ * This page reads health, contacts, payments, and enrollment after only a JWT admin check.
+ * Re-check current admin membership first. Validate the target client for invite/revoke actions
+ * and keep those API handlers independently guarded; a hidden button grants no protection.
+ *
+ * Verify: Test removed-admin access to a known client URL and invite failures without sending
+ * real invitations.
+ *
+ * @see docs/learning/01-supabase-auth.md
+ * @see docs/learning/03-route-map.md
  */
 export default async function AdminClientDetailPage({
   params,

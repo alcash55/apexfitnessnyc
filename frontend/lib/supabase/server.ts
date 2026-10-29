@@ -2,17 +2,15 @@ import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
 /**
- * Server Component / Route Handler Supabase client. Reads/writes the auth
- * session cookie via next/headers. Like lib/supabase/browser.ts, this is
- * for Auth endpoints only (getUser, signOut) — real data access stays on
- * lib/supabaseAdmin.ts's service-role client.
+ * LEARNING A4: Create a request-scoped Auth client using cookies. Keep cookie persistence in
+ * supported server contexts and compare the installed SSR cookie/header callback with official
+ * guidance. Do not reuse one user's Auth client globally or cache private responses across
+ * users.
  *
- * A Server Component can't actually write cookies (Next.js throws if you
- * try outside a Server Action / Route Handler) — the try/catch below is not
- * error-hiding, it's the documented way to let a session-refresh write
- * silently no-op there, since middleware.ts is what actually persists a
- * refreshed session on every request. See Supabase's own Next.js App
- * Router guidance for this exact pattern.
+ * Verify: Refresh and callback responses preserve the intended session without sharing cookies
+ * through caches.
+ *
+ * @see docs/learning/01-supabase-auth.md
  */
 export async function createClient() {
   const cookieStore = await cookies();
@@ -31,8 +29,8 @@ export async function createClient() {
               cookieStore.set(name, value, options),
             );
           } catch {
-            // Called from a Server Component — middleware.ts refreshes the
-            // session on the next request instead.
+            // A Server Component cannot persist these writes. The Proxy's
+            // session-refresh response must carry cookies/headers instead.
           }
         },
       },

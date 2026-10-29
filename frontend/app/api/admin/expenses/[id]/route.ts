@@ -6,13 +6,16 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 /**
- * Deletes a single business expense.
+ * LEARNING A5: server entry point. Implement the hardening exercise below.
  *
- * Same admin-gate-first posture as the collection route: the 404 returned
- * for "not signed in" and "signed in but not an admin" is indistinguishable
- * on the wire from the 404 returned for "no expense with this id" — that's
- * intentional (hidden-by-rule), tests just verify the DB call was never
- * reached for the first two cases.
+ * Every update/delete must independently verify current admin membership and the target record.
+ * Validate allowed fields and record operational failures clearly. UI row controls and noindex
+ * tags do not authorize mutations.
+ *
+ * Verify: A removed admin cannot alter an expense and invalid targets produce controlled
+ * outcomes.
+ *
+ * @see docs/learning/01-supabase-auth.md
  */
 export async function DELETE(
   _request: NextRequest,

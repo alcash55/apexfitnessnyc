@@ -13,11 +13,17 @@ export const metadata = pageMetadata({
 export const dynamic = 'force-dynamic';
 
 /**
- * Server component: decides whether to even show the form. There is
- * deliberately no signup link or form anywhere on this page — account
- * creation is admin-invite-only (see AGENTS.md plan), so an already-signed-in
- * visitor is bounced straight to `next` (or /dashboard) rather than being
- * shown a login screen they don't need.
+ * LEARNING A4: Login. Intended access: Public entry.
+ *
+ * The login form and server redirect already exist. Validate the untrusted next destination
+ * before both the already-signed-in redirect and browser navigation. Use current authorization
+ * on the destination page; a valid login alone does not prove a client link.
+ *
+ * Verify: Test internal return paths, external/protocol-relative next values, wrong credentials,
+ * and missing config.
+ *
+ * @see docs/learning/01-supabase-auth.md
+ * @see docs/learning/03-route-map.md
  */
 export default async function LoginPage({
   searchParams,

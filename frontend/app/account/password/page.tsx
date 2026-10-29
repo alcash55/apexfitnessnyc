@@ -8,6 +8,19 @@ export const metadata = pageMetadata({
   privatePage: true,
 });
 
+/**
+ * LEARNING A4: Change password. Intended access: Authenticated identity.
+ *
+ * Proxy currently provides the navigation guard. Add/verify a server identity check on this
+ * entry point and use Supabase Auth for the password change, never a custom password column.
+ * Require suitable recent authentication according to the chosen Auth settings.
+ *
+ * Verify: A signed-out request cannot use the password form; a valid user can change and
+ * reauthenticate.
+ *
+ * @see docs/learning/01-supabase-auth.md
+ * @see docs/learning/03-route-map.md
+ */
 export default function ChangePasswordPage() {
   return (
     <div className="section" style={{ minHeight: 'calc(100vh - 72px)' }}>

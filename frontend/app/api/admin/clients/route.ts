@@ -6,10 +6,15 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 /**
- * Admin-only client roster (JSON). middleware.ts already hides /admin/* and
- * /api/admin/* behind a genuine 404 for non-admins based on the JWT claim,
- * but this route independently re-verifies admin status against the
- * database before touching anything — see lib/auth.ts's verifyIsAdmin().
+ * LEARNING A5: server entry point. Implement the hardening exercise below.
+ *
+ * The API already re-checks database admin membership. Preserve that independent guard even if
+ * Proxy and admin pages are protected, and handle infrastructure failure without returning
+ * customer data. Keep the response minimal for the roster.
+ *
+ * Verify: A direct GET from an ordinary or removed admin receives no client list.
+ *
+ * @see docs/learning/01-supabase-auth.md
  */
 export async function GET() {
   const claims = await getSessionClaims();

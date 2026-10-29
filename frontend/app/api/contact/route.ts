@@ -14,14 +14,16 @@ function clean(value: unknown, max: number): string {
 }
 
 /**
- * Lead capture. Replaces the old standalone Express backend, which could not
- * run on Vercel (it only called listen() outside production and exported no
- * serverless handler) — so every submission from the live site was failing
- * against the visitor's own localhost.
+ * LEARNING A1: server entry point. Implement the hardening exercise below.
  *
- * Note there is deliberately no GET here. The previous Express router exposed
- * GET /all, which returned every lead's name, email and phone with no
- * authentication at all.
+ * Public inquiries intentionally remain outside member auth. Keep server validation, minimize
+ * data sent to notifications, enforce any relied-on consent at the server, and bound abuse. Do
+ * not connect an inquiry email to an existing client's billing authority.
+ *
+ * Verify: A synthetic lead cannot read records, become an admin, create a linked account, or
+ * change payment state.
+ *
+ * @see docs/learning/01-supabase-auth.md
  */
 export async function POST(request: NextRequest) {
   let body: Record<string, unknown>;

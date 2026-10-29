@@ -12,11 +12,18 @@ export const metadata = pageMetadata({
 export const dynamic = 'force-dynamic';
 
 /**
- * Post-checkout confirmation.
+ * LEARNING P7: Checkout success. Intended access: Current purchase owner.
  *
- * We re-fetch the session from Stripe rather than trusting query params, so
- * this page cannot be spoofed by visiting the URL with a made-up session id.
- * Fulfillment itself still happens in the webhook — this page is only display.
+ * This legacy page retrieves a Stripe session from session_id without viewer ownership. Require
+ * current auth and resolve the purchase through the client's server-owned records before
+ * displaying details. Success rendering must never create a payment or enrollment; the webhook
+ * can arrive later.
+ *
+ * Verify: Changing session_id cannot reveal another client's email/amount; arriving before the
+ * webhook renders pending.
+ *
+ * @see docs/learning/02-payments.md
+ * @see docs/learning/03-route-map.md
  */
 export default async function CheckoutSuccessPage({
   searchParams,

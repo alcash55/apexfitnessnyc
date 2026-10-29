@@ -7,14 +7,17 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 /**
- * Stripe webhook receiver.
+ * LEARNING P5: server entry point. Implement the hardening exercise below.
  *
- * This is the ONLY trustworthy signal that a payment succeeded. The browser
- * being redirected to /checkout/success proves nothing — anyone can visit that
- * URL directly. Fulfillment must hang off this endpoint.
+ * Stripe authenticates with its signature, not a customer's cookie. Preserve raw-body
+ * verification. The order upsert is replay-safe only for that table; the training_payments
+ * insert can duplicate. Validate the stored purchase association and use an atomic, uniquely
+ * constrained financial write before durable acknowledgement.
  *
- * We read the raw request body with request.text(); parsing it first would
- * break signature verification.
+ * Verify: Invalid signature writes nothing; duplicate/concurrent events, partial failures, and
+ * refunds produce one correct ledger effect without depending on delivery order.
+ *
+ * @see docs/learning/02-payments.md
  */
 export async function POST(request: NextRequest) {
   const secret = process.env.STRIPE_WEBHOOK_SECRET;

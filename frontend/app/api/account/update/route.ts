@@ -12,14 +12,16 @@ function clean(value: unknown, max: number): string {
 }
 
 /**
- * Updates the signed-in client's own profile fields. Email is deliberately
- * excluded — changing a login email is a separate, higher-stakes flow and is
- * out of scope here (see app/account/account-form.tsx, which renders email
- * read-only).
+ * LEARNING A5: server entry point. Implement the hardening exercise below.
  *
- * client_id is re-derived server-side from the verified session on every
- * request, never taken from the request body, so a client can only ever
- * update their own row.
+ * Current ownership comes from the JWT client_id. Verify the current auth-user-to-client link,
+ * validate object-shaped JSON and allowed profile fields, and enforce the relationship again in
+ * the write query. Never accept auth_user_id, role, or another client ID from the form.
+ *
+ * Verify: Old/revoked tokens and cross-client fields cannot mutate records; invalid JSON returns
+ * a controlled client error.
+ *
+ * @see docs/learning/01-supabase-auth.md
  */
 export async function POST(request: NextRequest) {
   const claims = await getSessionClaims();

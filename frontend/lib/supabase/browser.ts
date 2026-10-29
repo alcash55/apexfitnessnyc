@@ -1,15 +1,14 @@
 import { createBrowserClient } from '@supabase/ssr';
 
 /**
- * Client-component Supabase client, authenticated with the public anon key.
+ * LEARNING A1: This browser client calls Auth with a public key. It must never receive the
+ * privileged server key. Keep business-table writes on guarded server code in this architecture;
+ * inspect errors when config is absent rather than assuming non-null assertions initialize it.
  *
- * This is used ONLY to call Supabase Auth endpoints (sign in, sign out,
- * update password) from 'use client' components — never to read/write
- * public-schema tables. Every table in this project has RLS enabled with no
- * anon/authenticated policies (see backend/supabase/migrations/), so a
- * query through this client against public.* would just get an empty
- * result — all real data access goes through server-side code using
- * lib/supabaseAdmin.ts's service-role client instead.
+ * Verify: The browser bundle/network contains no privileged key, and unauthenticated table reads
+ * are denied.
+ *
+ * @see docs/learning/01-supabase-auth.md
  */
 export function createClient() {
   return createBrowserClient(

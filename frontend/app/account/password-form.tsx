@@ -10,13 +10,15 @@ import { createClient } from '@/lib/supabase/browser';
 type Status = 'idle' | 'submitting' | 'success' | 'error';
 
 /**
- * Shared by app/account/password/page.tsx (an already-signed-in client
- * changing their password) and app/account/set-password/page.tsx (landing
- * after an invite/recovery email link, per auth/callback/route.ts). Both
- * cases already hold a valid Supabase Auth session by the time this
- * renders, so this is a direct client-side auth.updateUser() call — a
- * Supabase Auth operation, not a data write, so the browser client (anon
- * key only, never touches public.* tables) is the correct client here.
+ * LEARNING A4: This form calls Supabase Auth updateUser, not a profile-table write. Verify a
+ * real session at its page boundary, match password requirements to the Auth configuration, and
+ * confirm the chosen recent-auth/recovery policy. Do not assume the page URL proves recovery
+ * succeeded.
+ *
+ * Verify: Signed-out/expired-recovery attempts fail, and a valid password update allows
+ * reauthentication.
+ *
+ * @see docs/learning/01-supabase-auth.md
  */
 export default function PasswordForm({ redirectTo }: { redirectTo: string }) {
   const router = useRouter();

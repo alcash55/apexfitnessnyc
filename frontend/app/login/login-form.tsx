@@ -26,13 +26,15 @@ type Mode = 'login' | 'forgot';
 type Status = 'idle' | 'submitting' | 'error' | 'success';
 
 /**
- * There is no signup form here — account creation is admin-invite-only (see
- * the approved auth plan). This component only ever signs an existing user
- * in, or kicks off Supabase's password-recovery email.
+ * LEARNING A4: Use the public-key client for login and password recovery only. Validate the
+ * internal return destination on both client/server paths, handle missing configuration and
+ * provider errors, and verify real email delivery in the isolated project. Browser login must
+ * not assign roles or client links.
  *
- * Both actions call lib/supabase/browser.ts's Auth-only client directly, no
- * API route: Supabase Auth itself sets the session cookie via @supabase/ssr,
- * and middleware.ts is what actually persists/refreshes it on navigation.
+ * Verify: Wrong credentials and external next values fail safely; recovery establishes only the
+ * verified user's session.
+ *
+ * @see docs/learning/01-supabase-auth.md
  */
 export default function LoginForm({ next }: { next: string }) {
   const router = useRouter();

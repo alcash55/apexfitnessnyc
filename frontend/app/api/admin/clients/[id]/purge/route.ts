@@ -8,12 +8,16 @@ export const dynamic = 'force-dynamic';
 const CONFIRM_PHRASE = 'PERMANENTLY DELETE';
 
 /**
- * Admin-only, irreversible: erases the clients row (cascading through
- * health_metrics/training_payments/client_offerings/client_nutrition_plans)
- * and the auth identity. The confirm phrase is checked BEFORE any DB lookup
- * or call to purgeClientAccount — a missing/wrong confirm never gets
- * anywhere near the destructive path, by construction, not just by caller
- * discipline.
+ * LEARNING A5: server entry point. Implement the hardening exercise below.
+ *
+ * This irreversible erasure path differs from revoking login. Keep admin authorization and
+ * explicit confirmation, review retention rules, and account for the database-delete/Auth-delete
+ * partial failure. Never test on a real client or assume all external copies are deleted.
+ *
+ * Verify: Only a current admin can purge a synthetic client; failures are recoverable and
+ * retained financial obligations are handled explicitly.
+ *
+ * @see docs/learning/01-supabase-auth.md
  */
 export async function POST(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const claims = await getSessionClaims();

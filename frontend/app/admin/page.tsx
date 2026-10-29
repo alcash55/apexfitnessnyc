@@ -34,10 +34,17 @@ type ClientRow = {
 };
 
 /**
- * Admin client roster. middleware.ts already rewrites unauthenticated/
- * non-admin requests under /admin/* to a genuine 404 based on the JWT
- * claim, but this page independently re-checks (defense in depth against
- * middleware matcher gaps) before rendering anything.
+ * LEARNING A5: Client roster. Intended access: Current admin.
+ *
+ * isAdminClaims is only a token snapshot. Perform a current database admin check before the
+ * service-role roster query. Do not leak customer names, contacts, or search results before
+ * authorization, and make database failure visible without exposing internals.
+ *
+ * Verify: A removed admin's existing token cannot read the roster; an ordinary client cannot
+ * enumerate customers.
+ *
+ * @see docs/learning/01-supabase-auth.md
+ * @see docs/learning/03-route-map.md
  */
 export default async function AdminClientsPage({
   searchParams,

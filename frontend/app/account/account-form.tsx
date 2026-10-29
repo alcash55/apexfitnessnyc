@@ -37,6 +37,16 @@ function FieldError({ text }: { text: string }) {
   );
 }
 
+/**
+ * LEARNING A5: Treat this form's profile and edited fields as presentation/input only. The
+ * update handler derives current ownership and validates allowed fields; it must not trust the
+ * browser to preserve another client's ID or protected relationship fields.
+ *
+ * Verify: Editing a payload cannot change auth identity, role, client ownership, or billing
+ * history.
+ *
+ * @see docs/learning/01-supabase-auth.md
+ */
 export default function AccountForm({ profile }: { profile: Profile }) {
   const [form, setForm] = useState<Form>({
     firstName: profile.first_name ?? '',

@@ -6,10 +6,16 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 /**
- * Admin-only: revokes a client's portal login only. History
- * (health_metrics/training_payments/client_offerings/client_nutrition_plans)
- * is left intact — clients.auth_user_id clears itself via "on delete set
- * null", no manual null-out needed here.
+ * LEARNING A5: server entry point. Implement the hardening exercise below.
+ *
+ * This removes portal login while retaining business history. Keep the current database admin
+ * guard and verify that subsequent private routes check the live relationship. Deleting Auth
+ * state alone does not make every issued JWT immediately disappear.
+ *
+ * Verify: Using an existing client token after revocation cannot read data or create a purchase;
+ * payment history remains retained.
+ *
+ * @see docs/learning/01-supabase-auth.md
  */
 export async function POST(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const claims = await getSessionClaims();
